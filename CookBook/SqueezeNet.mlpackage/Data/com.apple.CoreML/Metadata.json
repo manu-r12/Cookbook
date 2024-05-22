@@ -1,0 +1,11 @@
+{
+  "MLModelVersionStringKey" : "--",
+  "MLModelDescriptionKey" : "Detects the dominant objects present in an image from a set of 1000 categories such as trees, animals, food, vehicles, person etc. SqueezeNet: AlexNet-level accuracy with 50x fewer parameters https:\/\/github.com\/DeepScale\/SqueezeNet",
+  "MLModelCreatorDefinedKey" : {
+    "com.apple.developer.machine-learning.models.version" : "1.0.1",
+    "com.apple.developer.machine-learning.models.name" : "SqueezeNet.mlmodel",
+    "com.apple.developer.machine-learning.models.category" : "image"
+  },
+  "MLModelAuthorKey" : "Forrest N. Iandola and Song Han and Matthew W. Moskewicz and Khalid Ashraf and William J.",
+  "MLModelLicenseKey" : "Please see https:\/\/github.com\/DeepScale\/SqueezeNet for license information."
+}
