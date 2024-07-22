@@ -10,6 +10,11 @@ import FirebaseAuth
 import Firebase
 
 
+struct RecipeItems: Codable{
+    let recipesArray: [RecipeModel]
+}
+
+
 class RecipeBookViewModel: ObservableObject {
     
     
@@ -40,12 +45,16 @@ class RecipeBookViewModel: ObservableObject {
         
         
         let docRef = db.collection("recipes").document(user.uid)
+    
         
         
         do {
+
             print("Fetching")
-            let recipeItems = try await docRef.getDocument(as: RecipeModel.self)
-            print("Here si the fetched data ", recipeItems)
+            let recipeItems = try await docRef.getDocument()
+            let data = try recipeItems.data(as: RecipeItems.self)
+
+            print("Here si the fetched data ", data)
         }catch{
             print("Oops error in fetching ", error.localizedDescription)
         }

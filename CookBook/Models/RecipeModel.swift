@@ -2,12 +2,15 @@
 import Foundation
 
 
+
+
+
 struct Ingredients: Codable, Hashable{
     let quantity: String
     let nameOfIngredient: String
 }
 
-struct RecipeModel: Codable, Identifiable{
+struct RecipeModel: Codable, Identifiable, Hashable {
     
     let id: UUID
     let name: String
