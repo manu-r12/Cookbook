@@ -15,14 +15,14 @@ struct AddInstructionsSheetView: View {
         VStack{
             HStack {
                 Text("Add Instrcutions")
-                    .font(.custom("NotoSans-SemiBold", size: 25))
+                    .font(.custom("Poppins-SemiBold", size: 25))
                     .foregroundStyle(.akGreen)
                 Spacer()
                 Button(action: {
                     dismissSheet()
                 }, label: {
                     Text("Done")
-                        .font(.custom("NotoSans-Medium", size: 18))
+                        .font(.custom("Poppins-Medium", size: 18))
                         .foregroundStyle(.white)
                 })
                 

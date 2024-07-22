@@ -146,11 +146,23 @@ class AddRecipeViewModel: ObservableObject, AddRecipePhotoDelegate {
         
         guard let recipeData = try? Firestore.Encoder().encode(recipe) else {return}
         
+        do{
+            try await Firestore
+                .firestore()
+                .collection("recipes")
+                .document(uid)
+                .updateData(["recipesArray": FieldValue.arrayUnion([recipeData])])
+            
+            isLoading = false
+            print("Done...")
+        }catch{
+            print(
+                "Oops error in uploading the recipe",
+                error.localizedDescription
+            )
+        }
         
-        try await Firestore.firestore().collection("recipes").document(uid).setData(["recipesArray": recipeData])
-        
-        isLoading = false
-        print("Done...")
+      
         
         
         

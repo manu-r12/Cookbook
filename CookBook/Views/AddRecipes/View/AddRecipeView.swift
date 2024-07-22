@@ -20,7 +20,7 @@ struct AddRecipeView: View {
                         VStack(alignment: .leading, spacing: 15){
                             
                             Text("Add a Recipe")
-                                .font(.custom("NotoSans-SemiBold", size: 25))
+                                .font(.custom("Poppins-SemiBold", size: 25))
                                 
                         }
                         Spacer()

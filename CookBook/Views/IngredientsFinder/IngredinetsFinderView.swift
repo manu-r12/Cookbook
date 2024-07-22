@@ -21,7 +21,7 @@ struct IngredinetsFinderView: View {
                         VStack(alignment: .leading, spacing: 15){
                             
                             Text("Find recipes with what you have left")
-                                .font(.custom("NotoSans-SemiBold", size: 25))
+                                .font(.custom("Poppins-SemiBold", size: 25))
                                 .frame(width: 250)
                         }
                         VStack{
@@ -43,7 +43,7 @@ struct IngredinetsFinderView: View {
                 VStack{
                     VStack {
                         Text("Recent Discoveries")
-                            .font(.custom("NotoSans-Medium", size: 19))
+                            .font(.custom("Poppins-Medium", size: 19))
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
@@ -58,9 +58,9 @@ struct IngredinetsFinderView: View {
                                 HStack{
                                     VStack(alignment: .leading){
                                         Text(food.name)
-                                            .font(.custom("NotoSans-Medium", size: 17))
+                                            .font(.custom("Poppins-Medium", size: 17))
                                         Text("Matches 4 ingredients")
-                                            .font(.custom("NotoSans-Medium", size: 15))
+                                            .font(.custom("Poppins-Medium", size: 15))
                                     }
                                 }
                             }

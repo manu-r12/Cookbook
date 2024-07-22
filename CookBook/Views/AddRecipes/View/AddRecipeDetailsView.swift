@@ -52,13 +52,13 @@ struct AddRecipeDetailsView: View {
                         HStack{
                             Button(action: { dismissView() }, label: {
                                 Text("Cancel")
-                                    .font(.custom("NotoSans-Medium", size: 18))
+                                    .font(.custom("Poppins-Medium", size: 18))
                                     .foregroundStyle(Color(.white))
                                 
                             })
                             Spacer()
                             Text("Add A Recipe")
-                                .font(.custom("NotoSans-SemiBold", size: 20))
+                                .font(.custom("Poppins-SemiBold", size: 20))
                                 .foregroundStyle(.akGreen)
                             
                             Spacer()
@@ -78,7 +78,7 @@ struct AddRecipeDetailsView: View {
                                 
                             }, label: {
                                 Text("Add")
-                                    .font(.custom("NotoSans-Medium", size: 18))
+                                    .font(.custom("Poppins-Medium", size: 18))
                                     .foregroundStyle(Color(.white))
                                 
                             })
@@ -121,7 +121,7 @@ struct AddRecipeDetailsView: View {
                                                     Image(systemName: "photo")
                                                         .foregroundStyle(.akGreen)
                                                     Text("Photos Library")
-                                                        .font(.custom("NotoSans-Regular", size: 18))
+                                                        .font(.custom("Poppins-Regular", size: 18))
                                                         .foregroundStyle(.white)
                                                     
                                                 }
@@ -134,7 +134,7 @@ struct AddRecipeDetailsView: View {
                                                     Image(systemName: "camera")
                                                         .foregroundStyle(.akGreen)
                                                     Text("Open Camera")
-                                                        .font(.custom("NotoSans-Regular", size: 18))
+                                                        .font(.custom("Poppins-Regular", size: 18))
                                                         .foregroundStyle(.white)
                                                 }
                                                 
@@ -155,10 +155,10 @@ struct AddRecipeDetailsView: View {
                                     .clipShape(Circle())
                                     VStack(alignment: .leading){
                                         Text("Title or Name")
-                                            .font(.custom("NotoSans-Regular", size: 18))
+                                            .font(.custom("Poppins-Regular", size: 18))
                                         TextField(text: $title) {
                                             Text("Add a title")
-                                                .font(.custom("NotoSans-Regular", size: 21))
+                                                .font(.custom("Poppins-Regular", size: 21))
                                         }
                                     }
                                 }
@@ -168,7 +168,7 @@ struct AddRecipeDetailsView: View {
                             // Add iN
                             VStack(alignment: .leading, spacing: 15){
                                 Text("Add Ingredients")
-                                    .font(.custom("NotoSans-Regular", size: 18))
+                                    .font(.custom("Poppins-Regular", size: 18))
                                 
                                 if !ingredients.isEmpty {
                                     
@@ -192,11 +192,11 @@ struct AddRecipeDetailsView: View {
                                                     HStack(alignment: .center){
                                                         VStack(alignment: .leading){
                                                             Text("\(ing.quantity)")
-                                                                .font(.custom("NotoSans-Regular", size: 18))
+                                                                .font(.custom("Poppins-Regular", size: 18))
                                                             
                                                             
                                                             Text(ing.nameOfIngredient)
-                                                                .font(.custom("NotoSans-Regular", size: 18))
+                                                                .font(.custom("Poppins-Regular", size: 18))
                                                         }
                                                         
                                                         Spacer()
@@ -252,11 +252,11 @@ struct AddRecipeDetailsView: View {
                                         VStack(alignment: .leading){
                                             TextField(text: $quantity) {
                                                 Text("Quantity")
-                                                    .font(.custom("NotoSans-Regular", size: 18))
+                                                    .font(.custom("Poppins-Regular", size: 18))
                                             }
                                             TextField(text: $nameOfIngredient) {
                                                 Text("Name of the Ingredien")
-                                                    .font(.custom("NotoSans-Regular", size: 18))
+                                                    .font(.custom("Poppins-Regular", size: 18))
                                             }
                                         }
                                         
@@ -269,11 +269,11 @@ struct AddRecipeDetailsView: View {
                             // Add Instructions
                             VStack(alignment: .leading, spacing: 15){
                                 Text("Add Instructions")
-                                    .font(.custom("NotoSans-Regular", size: 18))
+                                    .font(.custom("Poppins-Regular", size: 18))
                                 
                                 
                                 Text("Tap to add instructions..")
-                                    .font(.custom("NotoSans-Regular", size: 18))
+                                    .font(.custom("Poppins-Regular", size: 18))
                                     .padding()
                                     .foregroundStyle(Color(.systemGray2))
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -290,14 +290,14 @@ struct AddRecipeDetailsView: View {
                             //Add Catogories
                             VStack(alignment: .leading, spacing: 15){
                                 Text("Add Category")
-                                    .font(.custom("NotoSans-Regular", size: 18))
+                                    .font(.custom("Poppins-Regular", size: 18))
                                 // display categories list
                                 if !category.isEmpty {
                                     HStack{
                                         ForEach(category , id: \.self){catg in
                                             Text(catg)
                                                 .padding(9)
-                                                .font(.custom("NotoSans-Medium", size: 16))
+                                                .font(.custom("Poppins-Medium", size: 16))
                                                 .background(.akGreen)
                                                 .foregroundStyle(.white)
                                                 .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -318,7 +318,7 @@ struct AddRecipeDetailsView: View {
                                 
                                 TextField(text: $categoryInput) {
                                     Text("Dinner ")
-                                        .font(.custom("NotoSans-Regular", size: 18))
+                                        .font(.custom("Poppins-Regular", size: 18))
                                 }
                                 .onChange(of: categoryInput) { newValue in
                                     if newValue.last == " " {
@@ -341,16 +341,16 @@ struct AddRecipeDetailsView: View {
                             
                             VStack(alignment: .leading, spacing: 15){
                                 Text("Add Durations")
-                                    .font(.custom("NotoSans-Regular", size: 18))
+                                    .font(.custom("Poppins-Regular", size: 18))
                                 // prepration time picker(menu)
                                 VStack{
                                     HStack {
                                         Text("Prepration Time")
-                                            .font(.custom("NotoSans-Regular", size: 17))
+                                            .font(.custom("Poppins-Regular", size: 17))
                                         Spacer()
                                         TextField(text: $preprationTime) {
                                             Text("20")
-                                                .font(.custom("NotoSans-Regular", size: 16))
+                                                .font(.custom("Poppins-Regular", size: 16))
                                             
                                         }
                                         .frame(width: 40)
@@ -358,7 +358,7 @@ struct AddRecipeDetailsView: View {
                                         Picker("Select Time Unit", selection: $timeUnit) {
                                             ForEach(TimeUnit.allCases, id: \.self) {
                                                 Text($0.rawValue)
-                                                    .font(.custom("NotoSans-Regular", size: 16))
+                                                    .font(.custom("Poppins-Regular", size: 16))
                                                     .foregroundStyle(.black)
                                             }
                                         }
@@ -374,11 +374,11 @@ struct AddRecipeDetailsView: View {
                                 VStack{
                                     HStack {
                                         Text("Cooking Time")
-                                            .font(.custom("NotoSans-Regular", size: 17))
+                                            .font(.custom("Poppins-Regular", size: 17))
                                         Spacer()
                                         TextField(text: $cookingTime) {
                                             Text("20")
-                                                .font(.custom("NotoSans-Regular", size: 16))
+                                                .font(.custom("Poppins-Regular", size: 16))
                                             
                                         }
                                         .frame(width: 40)
@@ -386,7 +386,7 @@ struct AddRecipeDetailsView: View {
                                         Picker("Select Time Unit", selection: $timeUnit) {
                                             ForEach(TimeUnit.allCases, id: \.self) {
                                                 Text($0.rawValue)
-                                                    .font(.custom("NotoSans-Regular", size: 16))
+                                                    .font(.custom("Poppins-Regular", size: 16))
                                                     .foregroundStyle(.black)
                                             }
                                         }
@@ -438,7 +438,7 @@ struct AddRecipeDetailsView: View {
                         .foregroundStyle(.akGreen)
                     
                     Text("Please while we are uploading your recipe 🙃")
-                        .font(.custom("NotoSans-Medium", size: 17))
+                        .font(.custom("Poppins-Medium", size: 17))
                         .frame(width: 300)
                         .multilineTextAlignment(.center)
                     
