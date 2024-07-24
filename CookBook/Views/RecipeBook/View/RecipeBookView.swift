@@ -23,7 +23,7 @@ struct RecipeBookView: View {
                 VStack{
                     HStack(spacing: 20){
                         VStack(alignment: .leading, spacing: 15){
-                            Text("Hello Anne")
+                            Text("Hello \(vm.user?.username ?? "Loading..")")
                                 .font(.custom("Poppins-Medium", size: 17))
                                 .foregroundStyle(Color(.gray))
                             
@@ -34,11 +34,12 @@ struct RecipeBookView: View {
                                 }
                         }
                         VStack{
-                            Image("cook2")
-                                .resizable()
-                                .frame(width: 55, height: 55)
-                                .clipShape(Circle())
+                            UserCirclePFP(imageUrl: vm.user?.profileImage ?? "")
                         }
+                        .frame(width: 55, height: 55)
+                        .clipShape(Circle())
+
+    
                     }
                 }
                 .padding(.top, 60)
@@ -116,7 +117,7 @@ struct RecipeBookView: View {
                                                 }
                                                 HStack(spacing: 6){
                                                     Image(systemName: "clock")
-                                                    Text("15min")
+                                                    Text(data.cookingTime)
                                                         .font(.custom("Poppins-Regular", size: 15))
                                                         .kerning(1)
                                                 }
@@ -134,7 +135,11 @@ struct RecipeBookView: View {
                                                     .foregroundStyle(Color(.systemGray))
                                                 
                                             }
-                                            .frame(width: 320, height: 100)
+                                            .frame(
+                                                width: 320,
+                                                height: 100,
+                                                alignment: .leading
+                                            )
                                             
                                             
                                             VStack{

@@ -37,6 +37,7 @@
 		329309312BD143B40049B532 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 329309302BD143B40049B532 /* FirebaseStorageCombine-Community */; };
 		329309332BD14AC50049B532 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 329309322BD14AC50049B532 /* GoogleService-Info.plist */; };
 		32A516032C517123006791BD /* RecipeImage-Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A516022C517123006791BD /* RecipeImage-Async.swift */; };
+		32A516052C5182DF006791BD /* UserPFP-Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A516042C5182DF006791BD /* UserPFP-Async.swift */; };
 		32BE8DB62BD24610006798B5 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE8DB52BD24610006798B5 /* TabbarView.swift */; };
 		32E1AA2F2C01961F0043EAA4 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1AA2E2C01961F0043EAA4 /* RegisterView.swift */; };
 		32E1AA322C01DE0D0043EAA4 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1AA312C01DE0C0043EAA4 /* ImageUploader.swift */; };
@@ -76,6 +77,7 @@
 		3292835B2BD1501200C90DB4 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		329309322BD14AC50049B532 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		32A516022C517123006791BD /* RecipeImage-Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeImage-Async.swift"; sourceTree = "<group>"; };
+		32A516042C5182DF006791BD /* UserPFP-Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserPFP-Async.swift"; sourceTree = "<group>"; };
 		32BE8DB52BD24610006798B5 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
 		32E1AA2E2C01961F0043EAA4 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		32E1AA312C01DE0C0043EAA4 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
@@ -351,18 +353,19 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		32A516012C517104006791BD /* RecipeImage */ = {
+		32A516012C517104006791BD /* AsyncImages */ = {
 			isa = PBXGroup;
 			children = (
 				32A516022C517123006791BD /* RecipeImage-Async.swift */,
+				32A516042C5182DF006791BD /* UserPFP-Async.swift */,
 			);
-			path = RecipeImage;
+			path = AsyncImages;
 			sourceTree = "<group>";
 		};
 		32BE8DB12BD23ECC006798B5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				32A516012C517104006791BD /* RecipeImage */,
+				32A516012C517104006791BD /* AsyncImages */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				3259080B2C0ED8EF00506CD9 /* AuthenticationDelegate.swift in Sources */,
 				323FE2DB2BD0EF4D0064A99A /* CookBookApp.swift in Sources */,
 				32E1AA362C01E0E30043EAA4 /* RegisterUser.swift in Sources */,
+				32A516052C5182DF006791BD /* UserPFP-Async.swift in Sources */,
 				322579292BD4E7DD00EC6A37 /* AddRecipeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

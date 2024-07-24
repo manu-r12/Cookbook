@@ -23,7 +23,7 @@ class AuthenticationManager: ObservableObject, AuthenticationDelegate {
     @Published var userSession : FirebaseAuth.User?
     @Published var isSigningUp : Bool = false
     @Published var isSignedUp  : Bool = false
-    @Published var user        : User?
+    @Published var user        : User? = nil
     
     init() {
         self.userSession = Auth.auth().currentUser
@@ -60,12 +60,13 @@ class AuthenticationManager: ObservableObject, AuthenticationDelegate {
                 print("Error found during singing up", errorOccured.localizedDescription)
                 return
             }
-            if let authResult = authResult  {
+            if let data = authResult  {
                 print("SuccessFully Logged In ✅")
-                print("Here are the details => ",authResult.user)
+                print("Here are the details => ", data.user)
+                self.user = data.user
                 self.isSigningUp = false
                 self.isSignedUp = true
-                self.user = authResult.user
+              
            
             }else{
                 self.isSigningUp = false

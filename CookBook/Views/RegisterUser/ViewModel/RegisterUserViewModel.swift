@@ -35,7 +35,8 @@ class RegisterUserViewModel: ObservableObject {
     
     
     init(){
-        setUpSubscribers()
+        setUpSubsriberForUserSession()
+        setUpSubsriberForUserData()
     }
     
     
@@ -83,7 +84,7 @@ class RegisterUserViewModel: ObservableObject {
             return
         }
         
-        let user = RegisterUserStruct(uid: userData.uid, 
+        let user = UserModel(uid: userData.uid, 
                                       username: username,
                                       email: emailInput,
                                       profileImage: imageUrl
@@ -99,8 +100,8 @@ class RegisterUserViewModel: ObservableObject {
         AuthenticationManager.shared.signUp(withEmail: emailInput, withPassword: password)
         
     }
-    
-    private func uploadUserData(userData: RegisterUserStruct ) async {
+    @MainActor
+    private func uploadUserData(userData: UserModel ) async {
         
         guard let encodedData = try? Firestore.Encoder().encode(userData) else {return}
         do {
@@ -132,7 +133,7 @@ class RegisterUserViewModel: ObservableObject {
     
     private func setUpSubsriberForUserData() {
         
-        AuthenticationManager.shared.$userSession.sink { user in
+        AuthenticationManager.shared.$user.sink { user in
             
             print("Combine: Got the user data", user ?? "no user data (from optional)")
             self.user = user

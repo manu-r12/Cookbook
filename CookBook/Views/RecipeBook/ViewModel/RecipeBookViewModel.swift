@@ -22,51 +22,78 @@ class RecipeBookViewModel: ObservableObject {
     
     @Published var recipeItems: [RecipeModel]?
     @Published var isFetchingRecipes: Bool = false
-
-
-
+    @Published var user: UserModel?
+    
+    
+    
     init(){
         Task{
             await fetchRecipeItems()
+            await fetchUserDetails()
         }
     }
     
-    
-    
-    
-    func fetchRecipeItems() async  {
+    @MainActor
+    func fetchUserDetails() async {
         
-        
-
         guard let user = Auth.auth().currentUser else {
             print("Found No Current User Darling ")
             return
         }
         
-        let docRef = db.collection("recipes").document(user.uid)
-    
-        
+        let docRef = db.collection("users").document(user.uid)
         
         do {
-            isFetchingRecipes = true
-            print("Fetching")
+            print("Fetching User Details....")
             let res = try await docRef.getDocument()
-            let data = try res.data(as: RecipeItems.self)
+            let data = try res.data(as: UserModel.self)
+            self.user = data
+            
+            print("Got the registerd user data", data)
 
-            print("Here si the fetched data ", data)
-            recipeItems = data.recipesArray
-        
-            isFetchingRecipes = false
+            
         }catch{
-            print("Oops error in fetching ", error.localizedDescription)
+            print("Oops error in fetching User Details", error.localizedDescription)
+
         }
-   
-        }
-        
-        
-        
         
     }
     
     
+    
+    
+    
+    @MainActor
+    func fetchRecipeItems() async  {
+        
+        
+        
+        guard let user = Auth.auth().currentUser else {
+            print("Found No Current User Darling ")
+            return
+        }
+
+        
+        let docRef = db.collection("recipes").document(user.uid)
+        
+        
+        do {
+            isFetchingRecipes = true
+            let res = try await docRef.getDocument()
+            let data = try res.data(as: RecipeItems.self)
+            recipeItems = data.recipesArray
+            isFetchingRecipes = false
+        }catch{
+            print("Oops error in fetching ", error.localizedDescription)
+            isFetchingRecipes = false
+        }
+        
+    }
+    
+    
+    
+    
+}
+
+
 

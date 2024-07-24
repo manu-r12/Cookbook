@@ -5,7 +5,7 @@ import FirebaseFirestore
 
 struct RegisterUser {
     
-    static func registerUser(user: RegisterUserStruct) async throws {
+    static func registerUser(user: UserModel) async throws {
 
         guard let userData = try? Firestore.Encoder().encode(user) else {return}
         

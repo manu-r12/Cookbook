@@ -1,6 +1,6 @@
 
 
-struct RegisterUserStruct: Codable {
+struct UserModel: Codable {
     let uid: String
     let username: String
     let email: String
