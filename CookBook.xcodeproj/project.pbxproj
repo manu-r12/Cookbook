@@ -36,6 +36,7 @@
 		3293092F2BD143B40049B532 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3293092E2BD143B40049B532 /* FirebaseStorage */; };
 		329309312BD143B40049B532 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 329309302BD143B40049B532 /* FirebaseStorageCombine-Community */; };
 		329309332BD14AC50049B532 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 329309322BD14AC50049B532 /* GoogleService-Info.plist */; };
+		32A516032C517123006791BD /* RecipeImage-Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A516022C517123006791BD /* RecipeImage-Async.swift */; };
 		32BE8DB62BD24610006798B5 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE8DB52BD24610006798B5 /* TabbarView.swift */; };
 		32E1AA2F2C01961F0043EAA4 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1AA2E2C01961F0043EAA4 /* RegisterView.swift */; };
 		32E1AA322C01DE0D0043EAA4 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1AA312C01DE0C0043EAA4 /* ImageUploader.swift */; };
@@ -74,6 +75,7 @@
 		32753BAD2BF54442008AA139 /* RegisterUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserViewModel.swift; sourceTree = "<group>"; };
 		3292835B2BD1501200C90DB4 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		329309322BD14AC50049B532 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		32A516022C517123006791BD /* RecipeImage-Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeImage-Async.swift"; sourceTree = "<group>"; };
 		32BE8DB52BD24610006798B5 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
 		32E1AA2E2C01961F0043EAA4 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		32E1AA312C01DE0C0043EAA4 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		32A516002C5170F8006791BD /* New Folder */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "New Folder"; sourceTree = "<group>"; };
 		32A9B0DA2C46D518005A41DD /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (32A9B0DF2C46D530005A41DD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
 		32A9B0DB2C46D520005A41DD /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (32A9B0DC2C46D524005A41DD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -217,6 +220,7 @@
 		323FE2D92BD0EF4D0064A99A /* CookBook */ = {
 			isa = PBXGroup;
 			children = (
+				32A516002C5170F8006791BD /* New Folder */,
 				32E1AA302C01DDF90043EAA4 /* Utils */,
 				3225792C2BD649A700EC6A37 /* Models */,
 				320032EC2BD3937E00B8CB41 /* DummyData */,
@@ -347,9 +351,18 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		32A516012C517104006791BD /* RecipeImage */ = {
+			isa = PBXGroup;
+			children = (
+				32A516022C517123006791BD /* RecipeImage-Async.swift */,
+			);
+			path = RecipeImage;
+			sourceTree = "<group>";
+		};
 		32BE8DB12BD23ECC006798B5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				32A516012C517104006791BD /* RecipeImage */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -481,6 +494,7 @@
 				32753BA92BF543FB008AA139 /* RegisterUserNameView.swift in Sources */,
 				320033032BD3ED9300B8CB41 /* AddInstructionsSheetView.swift in Sources */,
 				320032F52BD3A54700B8CB41 /* IngredientsFinderWithCameraViewController.swift in Sources */,
+				32A516032C517123006791BD /* RecipeImage-Async.swift in Sources */,
 				3225792B2BD4E95D00EC6A37 /* AddRecipePhotoDelegate.swift in Sources */,
 				3259080B2C0ED8EF00506CD9 /* AuthenticationDelegate.swift in Sources */,
 				323FE2DB2BD0EF4D0064A99A /* CookBookApp.swift in Sources */,

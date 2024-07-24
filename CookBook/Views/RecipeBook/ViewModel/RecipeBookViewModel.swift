@@ -50,10 +50,12 @@ class RecipeBookViewModel: ObservableObject {
         do {
             isFetchingRecipes = true
             print("Fetching")
-            let recipeItems = try await docRef.getDocument()
-            let data = try recipeItems.data(as: RecipeItems.self)
+            let res = try await docRef.getDocument()
+            let data = try res.data(as: RecipeItems.self)
 
             print("Here si the fetched data ", data)
+            recipeItems = data.recipesArray
+        
             isFetchingRecipes = false
         }catch{
             print("Oops error in fetching ", error.localizedDescription)

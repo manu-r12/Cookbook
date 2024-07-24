@@ -62,113 +62,115 @@ struct RecipeBookView: View {
                 
                 //Recipe Items
                 if !vm.isFetchingRecipes{
-                    VStack{
+                    if let recipeData = vm.recipeItems {
                         VStack{
-                            VStack(alignment: .leading){
-                                Text("Your Recipies")
-                                    .font(.custom("Poppins-Medium", size: 19))
-                                    .padding(.leading)
-                                
-                                
-                                ScrollView(.horizontal){
-                                    HStack(spacing: 10){
-                                        ForEach(DummyData().catogories, id: \.self){catg in
-                                            HStack(spacing: 7){
-                                                Text(catg.emoji)
-                                                    .font(.system(size: 20))
-                                                Text(catg.name)
-                                            }
-                                            .padding(.horizontal, 16)
-                                            .font(.custom("Poppins-Medium", size: 14))
-                                            .foregroundColor(selectedCatg == catg.name ? .white : .secondary)
-                                            .frame(height: 38)
-                                            .background(selectedCatg == catg.name ? .akGreen: .akBg)
-                                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                                            .onTapGesture {
-                                                withAnimation(.snappy) {
-                                                    selectedCatg = catg.name
+                            VStack{
+                                VStack(alignment: .leading){
+                                    Text("Your Recipies")
+                                        .font(.custom("Poppins-Medium", size: 19))
+                                        .padding(.leading)
+                                    
+                                    
+                                    ScrollView(.horizontal){
+                                        HStack(spacing: 10){
+                                            ForEach(DummyData().catogories, id: \.self){catg in
+                                                HStack(spacing: 7){
+                                                    Text(catg.emoji)
+                                                        .font(.system(size: 20))
+                                                    Text(catg.name)
+                                                }
+                                                .padding(.horizontal, 16)
+                                                .font(.custom("Poppins-Medium", size: 14))
+                                                .foregroundColor(selectedCatg == catg.name ? .white : .secondary)
+                                                .frame(height: 38)
+                                                .background(selectedCatg == catg.name ? .akGreen: .akBg)
+                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                .onTapGesture {
+                                                    withAnimation(.snappy) {
+                                                        selectedCatg = catg.name
+                                                    }
                                                 }
                                             }
                                         }
+                                        .padding()
+                                        
                                     }
-                                    .padding()
+                                    .scrollIndicators(.hidden)
                                     
                                 }
-                                .scrollIndicators(.hidden)
-                                
                             }
-                        }
-                        
-                        
-                        VStack{
                             
-                            VStack(alignment: .leading,spacing: 25){
-                                ForEach(DummyData().foods, id: \.self){food in
-                                    VStack(alignment: .leading ,spacing: 7){
-                                        HStack(spacing: 190){
-                                            VStack {
-                                                Image(food.image)
-                                                    .resizable()
-                                                    .frame(width: 50, height: 50)
-                                                    .clipShape(Circle())
-                                            }
-                                            HStack(spacing: 6){
-                                                Image(systemName: "clock")
-                                                Text("15min")
-                                                    .font(.custom("Poppins-Regular", size: 15))
-                                                    .kerning(1)
-                                            }
-                                            
-                                            
-                                        }
-                                        
-                                        
-                                        
-                                        
-                                        VStack(alignment: .leading, spacing: 15){
-                                            Text(food.name)
-                                                .font(.custom("Poppins-Medium", size: 18))
-                                            Text(food.description)
-                                                .font(.custom("Poppins-Regular", size: 15))
-                                                .foregroundStyle(Color(.systemGray))
-                                            
-                                        }
-                                        .frame(width: 320, height: 100)
-                                        
-                                        
-                                        VStack{
-                                            
-                                            HStack(spacing: 199){
-                                                HStack {
-                                                    Text("🥗")
-                                                        .font(.system(size: 20))
-                                                    Text("Dinner")
+                            
+                            VStack{
+                                
+                                VStack(alignment: .leading,spacing: 25){
+                             
+                                 
+                                    ForEach(recipeData , id: \.self) { data in
+                                        VStack(alignment: .leading ,spacing: 7){
+                                            HStack(spacing: 190){
+                                                VStack {
+                                                    RecipeCircleImage(
+                                                        imageUrl: data.imageUrl
+                                                    )
+                                                }
+                                                HStack(spacing: 6){
+                                                    Image(systemName: "clock")
+                                                    Text("15min")
+                                                        .font(.custom("Poppins-Regular", size: 15))
+                                                        .kerning(1)
                                                 }
                                                 
-                                                HStack{
-                                                    Image(systemName: "heart")
-                                                        .imageScale(.large)
-                                                }
+                                                
                                             }
-                                            .kerning(1)
-                                            .font(.custom("Poppins-Regular", size: 14))
                                             
+                            
+                                            
+                                            VStack(alignment: .leading, spacing: 15){
+                                                Text(data.name)
+                                                    .font(.custom("Poppins-Medium", size: 18))
+                                                Text(data.instructions)
+                                                    .font(.custom("Poppins-Regular", size: 15))
+                                                    .foregroundStyle(Color(.systemGray))
+                                                
+                                            }
+                                            .frame(width: 320, height: 100)
+                                            
+                                            
+                                            VStack{
+                                                
+                                                HStack(spacing: 199){
+                                                    HStack {
+                                                        Text("🥗")
+                                                            .font(.system(size: 20))
+                                                        Text("Dinner")
+                                                    }
+                                                    
+                                                    HStack{
+                                                        Image(systemName: "heart")
+                                                            .imageScale(.large)
+                                                    }
+                                                }
+                                                .kerning(1)
+                                                .font(.custom("Poppins-Regular", size: 14))
+                                                
+                                                
+                                            }
+                                            .frame(width: 320, alignment: .leading)
+                                            .padding(.vertical, 10)
                                             
                                         }
-                                        .frame(width: 320, alignment: .leading)
-                                        .padding(.vertical, 10)
+                                        .padding(.horizontal, 10)
+                                        .frame(maxWidth: 340,alignment: .leading)
+                                        .padding(8)
+                                        .padding(.top, 8)
+                                        .background(.akBg)
+                                        .clipShape(RoundedRectangle(cornerRadius: 4))
                                         
                                     }
-                                    .padding(.horizontal, 10)
-                                    .frame(maxWidth: 340,alignment: .leading)
-                                    .padding(8)
-                                    .padding(.top, 8)
-                                    .background(.akBg)
-                                    .clipShape(RoundedRectangle(cornerRadius: 4))
-                                    
                                 }
+                                .padding()
                             }
-                            .padding()
                         }
                     }
                 }else{
