@@ -56,7 +56,7 @@ struct RegisterUserNameView: View {
             VStack{
                 VStack{
                     TextField(text: $viewModel.username) {
-                        Text("Enter yout username")
+                        Text("Enter yout name 😄")
                             .font(.custom("Poppins-Regular", size: 18))
                     
                     }
