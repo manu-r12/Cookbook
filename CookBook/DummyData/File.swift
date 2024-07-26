@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct Category: Hashable{    
-    let name: String
-    let emoji: String
-}
 
 
 struct Recipe: Hashable {
@@ -20,12 +16,12 @@ struct Recipe: Hashable {
 }
 
 class DummyData {
-    var catogories: [Category] = [.init(name: "Breakfast", emoji: "🥘"),
-                                  .init(name: "Lunch", emoji: "🍔"),
-                                  .init(name: "Dinner", emoji: "🥗"),
-                                  .init(name: "Dessart", emoji: "🍧"),
-                                  .init(name: "Non Veg", emoji: "🍗")
-                                 ]
+//    var catogories: [Category] = [.init(name: "Breakfast", emoji: "🥘"),
+//                                  .init(name: "Lunch", emoji: "🍔"),
+//                                  .init(name: "Dinner", emoji: "🥗"),
+//                                  .init(name: "Dessart", emoji: "🍧"),
+//                                  .init(name: "Non Veg", emoji: "🍗")
+//                                 ]
     
     var foods : [Recipe] = 
     [

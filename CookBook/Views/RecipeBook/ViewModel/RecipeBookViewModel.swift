@@ -48,7 +48,7 @@ class RecipeBookViewModel: ObservableObject {
             let res = try await docRef.getDocument()
             let data = try res.data(as: UserModel.self)
             self.user = data
-            
+             
             print("Got the registerd user data", data)
 
             
