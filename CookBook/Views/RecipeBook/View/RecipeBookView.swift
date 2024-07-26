@@ -21,7 +21,7 @@ struct RecipeBookView: View {
         ZStack{
             
             ScrollView{
-             
+                // Header
                 Header(vm: vm)
                 
                 //Search bar

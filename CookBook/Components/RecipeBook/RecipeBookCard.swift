@@ -19,30 +19,28 @@ struct RecipeBookCard: View {
         if category != .all {
             return recipeData.filter { $0.category.contains(category.rawValue)}
         }else{
-          return recipeData
+            return recipeData
         }
     }
     
     var body: some View {
         ForEach(filteredData , id: \.self) { data in
             VStack(alignment: .leading ,spacing: 7){
-                HStack(spacing: 190){
+                HStack(spacing: 220){
                     VStack {
                         RecipeCircleImage(
                             imageUrl: data.imageUrl
                         )
                     }
+                    .frame(width: 50, height: 50)
+                    
                     HStack(spacing: 6){
                         Image(systemName: "clock")
                         Text(data.cookingTime)
                             .font(.custom("Poppins-Regular", size: 15))
                             .kerning(1)
                     }
-                    
-                    
                 }
-                
-                
                 
                 VStack(alignment: .leading, spacing: 15){
                     Text(data.name)
