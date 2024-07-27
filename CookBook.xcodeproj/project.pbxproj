@@ -28,6 +28,7 @@
 		3259080B2C0ED8EF00506CD9 /* AuthenticationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3259080A2C0ED8EF00506CD9 /* AuthenticationDelegate.swift */; };
 		32753BA92BF543FB008AA139 /* RegisterUserNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32753BA82BF543FB008AA139 /* RegisterUserNameView.swift */; };
 		32753BAE2BF54442008AA139 /* RegisterUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32753BAD2BF54442008AA139 /* RegisterUserViewModel.swift */; };
+		32887E602C556C73007794A0 /* CategoriesSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32887E5F2C556C73007794A0 /* CategoriesSelectionView.swift */; };
 		328A50C22C5405E800996B2D /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328A50C12C5405E700996B2D /* CategoriesView.swift */; };
 		328A50C42C540AD400996B2D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328A50C32C540AD400996B2D /* SearchBar.swift */; };
 		328A50C62C540BA600996B2D /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328A50C52C540BA600996B2D /* Header.swift */; };
@@ -82,6 +83,7 @@
 		3259080A2C0ED8EF00506CD9 /* AuthenticationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationDelegate.swift; sourceTree = "<group>"; };
 		32753BA82BF543FB008AA139 /* RegisterUserNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserNameView.swift; sourceTree = "<group>"; };
 		32753BAD2BF54442008AA139 /* RegisterUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserViewModel.swift; sourceTree = "<group>"; };
+		32887E5F2C556C73007794A0 /* CategoriesSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesSelectionView.swift; sourceTree = "<group>"; };
 		328A50C12C5405E700996B2D /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		328A50C32C540AD400996B2D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		328A50C52C540BA600996B2D /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
@@ -369,6 +371,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		32887E5E2C556C59007794A0 /* AddRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				32887E5F2C556C73007794A0 /* CategoriesSelectionView.swift */,
+			);
+			path = AddRecipe;
+			sourceTree = "<group>";
+		};
 		3292835A2BD14FF600C90DB4 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +400,7 @@
 		32BE8DB12BD23ECC006798B5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				32887E5E2C556C59007794A0 /* AddRecipe */,
 				321E870C2C53FDDC00546BCC /* RecipeBook */,
 				32A516012C517104006791BD /* AsyncImages */,
 			);
@@ -510,6 +521,7 @@
 				323FE2EF2BD0FB5A0064A99A /* WelcomeView.swift in Sources */,
 				320032FE2BD3D71400B8CB41 /* AddRecipeView.swift in Sources */,
 				32753BAE2BF54442008AA139 /* RegisterUserViewModel.swift in Sources */,
+				32887E602C556C73007794A0 /* CategoriesSelectionView.swift in Sources */,
 				32254F8C2C0DC65F00D2D0E9 /* LoginView.swift in Sources */,
 				320033012BD3D9B300B8CB41 /* AddRecipeDetailsView.swift in Sources */,
 				320032F72BD3AB4500B8CB41 /* IngredinetsFinderView.swift in Sources */,

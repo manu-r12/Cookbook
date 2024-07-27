@@ -27,6 +27,8 @@ struct AddRecipeDetailsView: View {
     @State var cookingTime: String = ""
     @State var category: [String] = []
     
+    @State var categoriesSelected: Category = .all
+    
     
     @State private var isKeyboardVisible: Bool = false
     @State var isCameraMenuOpen: Bool = false
@@ -35,6 +37,8 @@ struct AddRecipeDetailsView: View {
     @State private var selectedImage: UIImage?
     @State private var isImageGallaryOpen: Bool = false
     
+    
+    @Environment(\.dismiss) var dimissView
     
     @ObservedObject var viewModel = AddRecipeViewModel()
     
@@ -73,7 +77,11 @@ struct AddRecipeDetailsView: View {
                                         preprationTime: preprationTime,
                                         cookingTime: cookingTime
                                     )
+                                    
+                                    dismissView()
                                 }
+                                
+                                
                            
                                 
                             }, label: {
@@ -315,23 +323,9 @@ struct AddRecipeDetailsView: View {
                                     }
                                     
                                 }
-                                
-                                TextField(text: $categoryInput) {
-                                    Text("Dinner ")
-                                        .font(.custom("Poppins-Regular", size: 18))
-                                }
-                                .onChange(of: categoryInput) { newValue in
-                                    if newValue.last == " " {
-                                        withAnimation(.spring) {
-                                            category.append(newValue.trimmingCharacters(in: .whitespaces))
-                                            categoryInput = ""
-                                        }
-                                        
-                                    }
-                                    print("Changed Values..")
-                                    print(category)
-                                }
-                                
+                
+                                // MARK: CategoriesView for selection
+                                CategoriesSelectionView(category: $category)
                                 
                             }
                             .padding()
