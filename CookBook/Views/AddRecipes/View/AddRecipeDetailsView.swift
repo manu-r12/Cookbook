@@ -17,15 +17,15 @@ enum TimeUnit: String, CaseIterable {
 struct AddRecipeDetailsView: View {
     
     @State private var timeUnit: TimeUnit = .minutes
-    @State var title: String = "Tacos"
+    @State var title: String = ""
     @State var quantity: String = ""
     @State var nameOfIngredient: String = ""
     @State var ingredients: [Ingredients] = []
-    @State var instructionsText: String = "Hello World"
-    @State var categoryInput: String = "12"
-    @State var preprationTime: String = "12"
+    @State var instructionsText: String = ""
+    @State var categoryInput: String = ""
+    @State var preprationTime: String = ""
     @State var cookingTime: String = ""
-    @State var category: [String] = ["Dinner", "Lunch"]
+    @State var category: [String] = []
     
     
     @State private var isKeyboardVisible: Bool = false
