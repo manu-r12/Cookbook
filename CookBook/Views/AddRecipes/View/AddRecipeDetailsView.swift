@@ -13,6 +13,14 @@ enum TimeUnit: String, CaseIterable {
     case hours = "Hours"
 }
 
+enum QuantityUnit: String, CaseIterable {
+    case cups = "Cups"
+    case ounces = "Ounces"
+    case grams = "Grams"
+    case milliliters = "Milliliters"
+    case liters = "Liters"
+}
+
 
 struct AddRecipeDetailsView: View {
     
