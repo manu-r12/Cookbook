@@ -8,6 +8,44 @@
 import SwiftUI
 import PhotosUI
 
+struct AddDurationView: View {
+    //        @State private var timeUnit: TimeUnit = .minutes
+    
+    @Binding var timeUnit: TimeUnit
+    @Binding var timeValue: String
+    let title: String
+    var body: some View {
+        VStack{
+            HStack {
+                Text(title)
+                    .font(.custom("Poppins-Regular", size: 17))
+                Spacer()
+                TextField(text: $timeValue) {
+                    Text("20")
+                        .font(.custom("Poppins-Regular", size: 16))
+                    
+                }
+                .frame(width: 40)
+                Spacer()
+                Picker("Select Time Unit", selection: $timeUnit) {
+                    ForEach(TimeUnit.allCases, id: \.self) {
+                        Text($0.rawValue)
+                            .font(.custom("Poppins-Regular", size: 16))
+                            .foregroundStyle(.black)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                .tint(.akGreen)
+            }
+        }
+        .padding()
+        .background(.akBg)
+        .clipShape(RoundedRectangle(cornerRadius: 18))
+    }
+}
+
+
+
 enum TimeUnit: String, CaseIterable {
     case minutes = "Minutes"
     case hours = "Hours"
@@ -345,60 +383,17 @@ struct AddRecipeDetailsView: View {
                                 Text("Add Durations")
                                     .font(.custom("Poppins-Regular", size: 18))
                                 // prepration time picker(menu)
-                                VStack{
-                                    HStack {
-                                        Text("Prepration Time")
-                                            .font(.custom("Poppins-Regular", size: 17))
-                                        Spacer()
-                                        TextField(text: $preprationTime) {
-                                            Text("20")
-                                                .font(.custom("Poppins-Regular", size: 16))
-                                            
-                                        }
-                                        .frame(width: 40)
-                                        Spacer()
-                                        Picker("Select Time Unit", selection: $timeUnit) {
-                                            ForEach(TimeUnit.allCases, id: \.self) {
-                                                Text($0.rawValue)
-                                                    .font(.custom("Poppins-Regular", size: 16))
-                                                    .foregroundStyle(.black)
-                                            }
-                                        }
-                                        .pickerStyle(MenuPickerStyle())
-                                        .tint(.akGreen)
-                                    }
-                                }
-                                .padding()
-                                .background(.akBg)
-                                .clipShape(RoundedRectangle(cornerRadius: 18))
+                                AddDurationView(
+                                    timeUnit: $timeUnit,
+                                    timeValue: $preprationTime, title: "Preparation Time"
+                                )
                                 
+                                // prepration time picker(menu)
+                                AddDurationView(
+                                    timeUnit: $timeUnit,
+                                    timeValue: $cookingTime, title: "Cooking Time"
+                                )
                                 
-                                VStack{
-                                    HStack {
-                                        Text("Cooking Time")
-                                            .font(.custom("Poppins-Regular", size: 17))
-                                        Spacer()
-                                        TextField(text: $cookingTime) {
-                                            Text("20")
-                                                .font(.custom("Poppins-Regular", size: 16))
-                                            
-                                        }
-                                        .frame(width: 40)
-                                        Spacer()
-                                        Picker("Select Time Unit", selection: $timeUnit) {
-                                            ForEach(TimeUnit.allCases, id: \.self) {
-                                                Text($0.rawValue)
-                                                    .font(.custom("Poppins-Regular", size: 16))
-                                                    .foregroundStyle(.black)
-                                            }
-                                        }
-                                        .pickerStyle(MenuPickerStyle())
-                                        .tint(.akGreen)
-                                    }
-                                }
-                                .padding()
-                                .background(.akBg)
-                                .clipShape(RoundedRectangle(cornerRadius: 18))
                                 
                             }
                             .padding()
@@ -464,3 +459,5 @@ struct AddRecipeDetailsView: View {
 #Preview {
     AddRecipeDetailsView()
 }
+
+
