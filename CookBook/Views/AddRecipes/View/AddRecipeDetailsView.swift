@@ -5,8 +5,13 @@
 //  Created by Manu on 2024-04-20.
 //
 
+
 import SwiftUI
 import PhotosUI
+
+class TimeUnit_Selected {
+    
+}
 
 struct AddDurationView: View {
     //        @State private var timeUnit: TimeUnit = .minutes

@@ -13,6 +13,7 @@
 		320032FE2BD3D71400B8CB41 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320032FD2BD3D71400B8CB41 /* AddRecipeView.swift */; };
 		320033012BD3D9B300B8CB41 /* AddRecipeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320033002BD3D9B300B8CB41 /* AddRecipeDetailsView.swift */; };
 		320033032BD3ED9300B8CB41 /* AddInstructionsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320033022BD3ED9300B8CB41 /* AddInstructionsSheetView.swift */; };
+		320A23B42C58004000942A04 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 320A23B32C58004000942A04 /* Kingfisher */; };
 		321E870E2C53FDFD00546BCC /* RecipeBookCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E870D2C53FDFD00546BCC /* RecipeBookCard.swift */; };
 		321E87102C54008B00546BCC /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321E870F2C54007C00546BCC /* Category.swift */; };
 		32254F8C2C0DC65F00D2D0E9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32254F8B2C0DC65F00D2D0E9 /* LoginView.swift */; };
@@ -124,7 +125,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		32A516002C5170F8006791BD /* New Folder */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "New Folder"; sourceTree = "<group>"; };
 		32A9B0DA2C46D518005A41DD /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (32A9B0DF2C46D530005A41DD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
 		32A9B0DB2C46D520005A41DD /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (32A9B0DC2C46D524005A41DD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -137,6 +137,7 @@
 				3293092B2BD143B40049B532 /* FirebaseFirestoreSwift in Frameworks */,
 				329309272BD143B40049B532 /* FirebaseDatabase in Frameworks */,
 				329309312BD143B40049B532 /* FirebaseStorageCombine-Community in Frameworks */,
+				320A23B42C58004000942A04 /* Kingfisher in Frameworks */,
 				329309292BD143B40049B532 /* FirebaseFirestore in Frameworks */,
 				3293092D2BD143B40049B532 /* FirebaseFunctions in Frameworks */,
 				3293092F2BD143B40049B532 /* FirebaseStorage in Frameworks */,
@@ -249,7 +250,6 @@
 		323FE2D92BD0EF4D0064A99A /* CookBook */ = {
 			isa = PBXGroup;
 			children = (
-				32A516002C5170F8006791BD /* New Folder */,
 				32E1AA302C01DDF90043EAA4 /* Utils */,
 				3225792C2BD649A700EC6A37 /* Models */,
 				320032EC2BD3937E00B8CB41 /* DummyData */,
@@ -450,6 +450,7 @@
 				3293092C2BD143B40049B532 /* FirebaseFunctions */,
 				3293092E2BD143B40049B532 /* FirebaseStorage */,
 				329309302BD143B40049B532 /* FirebaseStorageCombine-Community */,
+				320A23B32C58004000942A04 /* Kingfisher */,
 			);
 			productName = CookBook;
 			productReference = 323FE2D72BD0EF4D0064A99A /* CookBook.app */;
@@ -481,6 +482,7 @@
 			mainGroup = 323FE2CE2BD0EF4D0064A99A;
 			packageReferences = (
 				329309212BD143B40049B532 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				320A23B22C58004000942A04 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 323FE2D82BD0EF4D0064A99A /* Products */;
 			projectDirPath = "";
@@ -766,6 +768,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		320A23B22C58004000942A04 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 		329309212BD143B40049B532 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -777,6 +787,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		320A23B32C58004000942A04 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 320A23B22C58004000942A04 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		329309222BD143B40049B532 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 329309212BD143B40049B532 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

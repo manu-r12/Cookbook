@@ -3,8 +3,6 @@ import Foundation
 
 
 
-
-
 struct Ingredients: Codable, Hashable{
     let quantity: String
     let nameOfIngredient: String
