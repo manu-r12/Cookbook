@@ -1,53 +1,51 @@
+// TabbarView.swift
+// CookBook
 //
-//  TabbarView.swift
-//  CookBook
-//
-//  Created by Manu on 2024-04-19.
+// Created by Manu on 2024-04-19.
 //
 
 import SwiftUI
 
+
 struct TabbarView: View {
-    @State var selectedTab: SelectedTabs = .Book
-    
-    init(){
-        UITabBar.appearance().isHidden = true
-    }
-    
- 
+    @State private var selectedTab: SelectedTabs = .Book
     
     var body: some View {
-        ZStack{
-            VStack{
-                TabView(selection: $selectedTab){
-                    RecipeBookView()
-                        .tag(SelectedTabs.Book)
-                    
-                    IngredinetsFinderView()
-                        .tag(SelectedTabs.Search)
-                    
-                    AddRecipeView()
-                        .tag(SelectedTabs.Add)
-                    
-                    Text("Bookmark")
-                        .tag(SelectedTabs.Bookmark)
-                    
-                    Text("Settings")
-                        .tag(SelectedTabs.Settings)
-                    
-                }
+            TabView(selection: $selectedTab) {
+                RecipeBookView()
+                    .tabItem {
+                        Image(systemName: "book")
+                    }
+                    .tag(SelectedTabs.Book)
+                
+                IngredinetsFinderView()
+                    .tabItem {
+                        Image(systemName: "magnifyingglass")
+                    }
+                    .tag(SelectedTabs.Search)
+                
+                
+                Text("Bookmark")
+                    .tabItem {
+                        Image(systemName: "bookmark")
+                    }
+                    .tag(SelectedTabs.Bookmark)
+                
+                Text("Settings")
+                    .tabItem {
+                        Image(systemName: "gear")
+                    }
+                    .tag(SelectedTabs.Settings)
             }
-            
-            VStack{
-                Spacer()
-                CustomTabbarView(selectedTab: $selectedTab)
-                    .padding(.bottom, -20)
-            }
-        }
-       
+            .padding(.top, 10)
+            .tint(.white)
+            .ignoresSafeArea()
+     
     }
 }
 
-#Preview {
-    TabbarView()
+struct TabbarView_Previews: PreviewProvider {
+    static var previews: some View {
+        TabbarView()
+    }
 }

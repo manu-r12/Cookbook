@@ -10,35 +10,40 @@ import SwiftUI
 
 struct RecipeBookView: View {
     
-    @ObservedObject var AuthManager = AuthenticationManager.shared
     
-    let  vm = RecipeBookViewModel()
+    let vm = RecipeBookViewModel()
     
     @State var searchText: String = ""
   
     
     var body: some View {
-        ZStack{
-            
-            ScrollView{
-                // Header
-                Header(vm: vm)
+        VStack {
+            ZStack{
+                ScrollView{
+                    // Header
+                    Header(vm: vm)
+                    
+                    //Search bar
+                    SearchBar(searchText: $searchText)
+                    
+                    //                Recipe Items
+                    RecipeCardsView(vm: vm)
+                    
+                }
+                .scrollIndicators(.hidden)
                 
-                //Search bar
-                SearchBar(searchText: $searchText)
-                
-                //Recipe Items
-                RecipeCardsView(vm: vm)
-               
+                FloatingButton(icon: "plus")
             }
-            .scrollIndicators(.hidden)
+        
         }
         .ignoresSafeArea()
+        
+//
         
         
     }
 }
 
 #Preview {
-    TabbarView()
+    RecipeBookView()
 }
