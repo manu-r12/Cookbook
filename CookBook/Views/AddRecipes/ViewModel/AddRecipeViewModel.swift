@@ -19,6 +19,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     var delegate: AddRecipePhotoDelegate
     
+    
     init(delegate: AddRecipePhotoDelegate) {
         self.delegate = delegate
     }
