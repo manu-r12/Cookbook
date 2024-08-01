@@ -44,3 +44,7 @@ DerivedData/
 
 #Plist 
 *.plist
+
+*.json
+config.json
+

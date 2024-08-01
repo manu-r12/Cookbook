@@ -24,12 +24,22 @@ class RecipeBookViewModel: ObservableObject {
     @Published var isFetchingRecipes: Bool = false
     @Published var user: UserModel?
     
+    func getItem() async
+    {
+        print("Fetching the recipe from the api")
+        let data = try? await IngredientsFInderOptionsViewModel
+            .fetchRecipesInfo(query: "Moroccan Chicken Tagine", numberOfRes: 25)
+        print("Done here is the data \(data?.results)")
+    }
+    
+
     
     
     init(){
         Task{
             await fetchRecipeItems()
             await fetchUserDetails()
+            await getItem()
         }
     }
     

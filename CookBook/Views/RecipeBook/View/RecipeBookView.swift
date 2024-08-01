@@ -14,6 +14,8 @@ struct RecipeBookView: View {
     let vm = RecipeBookViewModel()
     
     @State var searchText: String = ""
+    
+ 
   
     
     var body: some View {

@@ -24,16 +24,30 @@ struct IngredientsFInderOptionsView: View {
                         HStack(){
                             Text("Find recipes that you desire")
                                 .font(.custom("Poppins-Medium", size: 31))
+//                                .foregroundStyle(
+//                                    LinearGradient(
+//                                        colors: [.akGreen, .green],
+//                                        startPoint: .topLeading,
+//                                        endPoint: .bottomTrailing
+//                                    )
+//                                )
+//                            
                             Spacer()
                             Image(systemName: "fork.knife.circle")
                                 .font(.system(size: 58))
+//                                .foregroundStyle(
+//                                    LinearGradient(
+//                                        colors: [.akGreen, .green],
+//                                        startPoint: .topLeading,
+//                                        endPoint: .bottomTrailing
+//                                    )
+//                                )
                         }
                     }
                     .padding([.horizontal],20)
                     .frame(maxWidth: .infinity, alignment: .leading)
-
+                    
                     // MARK: Options Grid View
-                    // TODO: Later this part of view will be refactored!!
                     VStack(){
                         VStack{
                             
@@ -44,7 +58,7 @@ struct IngredientsFInderOptionsView: View {
                                     bgColor: .indigo,
                                     icon: "camera",
                                     action: {
-                                        
+                                        isCameraOpen.toggle()
                                     }
                                 )
                                 
@@ -55,7 +69,7 @@ struct IngredientsFInderOptionsView: View {
                                         bgColor: .akGreen,
                                         icon: "takeoutbag.and.cup.and.straw",
                                         action: {
-                                            
+                                            print("Triggered By -> Search By Ingredients")
                                         }
                                     )
                                     
