@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchBar: View {
     @Binding var searchText: String
+//    @FocusState var isEditing: Bool
     var body: some View {
         VStack{
             HStack(spacing: 20){
@@ -18,6 +19,7 @@ struct SearchBar: View {
                     Text("Search your recipe")
                         .font(.custom("Poppins-Medium", size: 17))
                 }
+//                .focused($isEditing)
             }
             .padding()
             .frame(height: 45)
@@ -25,6 +27,7 @@ struct SearchBar: View {
             .clipShape(RoundedRectangle(cornerRadius: 18))
             .padding(20)
         }
+        
     }
 }
 

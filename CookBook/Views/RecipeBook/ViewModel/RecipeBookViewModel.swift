@@ -27,8 +27,8 @@ class RecipeBookViewModel: ObservableObject {
     func getItem() async
     {
         print("Fetching the recipe from the api")
-        let data = try? await IngredientsFInderOptionsViewModel
-            .fetchRecipesInfo(query: "Moroccan Chicken Tagine", numberOfRes: 25)
+        let data = try? await IngredientsFInderOptionsViewModel()
+            .fetchRecipesInfo(query: "Moroccan Chicken", numberOfRes: 5)
         print("Done here is the data \(data?.results)")
     }
     

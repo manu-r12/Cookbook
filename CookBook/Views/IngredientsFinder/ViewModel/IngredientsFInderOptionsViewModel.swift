@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+
 struct FetchedItem: Codable{
     let results: [FetchedRecipe]
 }
@@ -18,15 +20,19 @@ enum APIENDPOINTS: String, CaseIterable {
 struct FetchedRecipe: Codable, Identifiable, Hashable{
     let id: Int
     let title: String
-
+    
     
 }
 
 
-class IngredientsFInderOptionsViewModel: Identifiable {
+class IngredientsFInderOptionsViewModel: Identifiable, ObservableObject {
     
     
-    static func fetchRecipesInfo(query: String, numberOfRes: Int) async throws -> FetchedItem {
+     func fetchRecipesInfo(query: String,
+                                 numberOfRes: Int,
+                                 searchMethod: SearchMethod = .SearchByTitle) async throws -> FetchedItem
+    
+    {
         guard let apiKey = ConfigLoader.loadConfig()?.SpoonacularAPIKey else {
             throw URLError(.badURL)
         }
@@ -35,20 +41,30 @@ class IngredientsFInderOptionsViewModel: Identifiable {
             string: APIENDPOINTS.GET_RECIPE_INFO
                 .rawValue) else {
             throw URLError(.badURL)
-
+            
+        }
+        var urlQueryItems: [URLQueryItem]
+        
+        //How we wanna search
+        if searchMethod == .SearchByName {
+            urlQueryItems = [
+                URLQueryItem(name: "apiKey", value: apiKey),
+                URLQueryItem(name: "query", value: query),
+                URLQueryItem(name: "number", value: "\(numberOfRes)"),
+                
+            ]
+            
+        }else{
+            urlQueryItems = [
+                URLQueryItem(name: "apiKey", value: apiKey),
+                URLQueryItem(name: "titleMatch", value: query),
+                URLQueryItem(name: "number", value: "\(numberOfRes)"),
+                
+            ]
         }
         
-//        guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-//            throw URLError(.badURL)
-//        }
         
-        urlComponents.queryItems = [
-            URLQueryItem(name: "apiKey", value: apiKey),
-//            URLQueryItem(name: "query", value: query),
-            URLQueryItem(name: "number", value: "\(numberOfRes)"),
-            URLQueryItem(name: "titleMatch", value: "Crock Pot")
-            
-        ]
+        urlComponents.queryItems = urlQueryItems
         
         guard let url = urlComponents.url else {
             throw URLError(.badURL)
@@ -58,7 +74,7 @@ class IngredientsFInderOptionsViewModel: Identifiable {
         
         guard let httpResponse = res as? HTTPURLResponse, httpResponse.statusCode == 200  else {
             throw URLError(.badServerResponse)
-
+            
         }
         
         let fetchedRecipeData = try JSONDecoder().decode(

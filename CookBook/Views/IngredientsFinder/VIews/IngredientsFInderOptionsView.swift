@@ -10,6 +10,9 @@ import SwiftUI
 struct IngredientsFInderOptionsView: View {
     
     @State var isCameraOpen: Bool = false
+    @State var isSearchViewOpen: Bool = false
+    
+    let vm = IngredientsFInderOptionsViewModel()
     
     let IngredientsFinderVCWrapper = UIKitViewControllerWrapper(viewController: IngredientsFinderWithCameraViewController())
     
@@ -78,7 +81,7 @@ struct IngredientsFInderOptionsView: View {
                                         bgColor: .akBg,
                                         icon: "magnifyingglass",
                                         action: {
-                                            
+                                            isSearchViewOpen.toggle()
                                         }
                                     )
                                 }
@@ -95,6 +98,9 @@ struct IngredientsFInderOptionsView: View {
             }
             .padding(.top, 45)
         }
+        .fullScreenCover(isPresented: $isSearchViewOpen, content: {
+            SearchRecipeByNameView(viewModel: vm)
+        })
         .fullScreenCover(isPresented: $isCameraOpen, content: {
             IngredientsFinderVCWrapper
                 .presentationBackground(.black)
