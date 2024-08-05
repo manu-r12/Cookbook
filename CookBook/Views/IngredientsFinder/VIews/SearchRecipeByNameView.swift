@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import Kingfisher
 
-enum SearchMethod: String , CaseIterable {
+enum SearchMethods: String , CaseIterable {
     case SearchByTitle = "Search By Title"
     case SearchByName = "Search By Name"
     //    case /*Nothing*/
@@ -15,7 +16,7 @@ enum SearchMethod: String , CaseIterable {
 
 struct SearchRecipeByNameView: View {
     @State var searchTextInput: String = ""
-    @State var selectedMethod: SearchMethod = .SearchByTitle
+    @State var selectedMethod: SearchMethods = .SearchByTitle
     @ObservedObject var viewModel: IngredientsFInderOptionsViewModel
     @State var showOptions: Bool = true
     
@@ -30,7 +31,7 @@ struct SearchRecipeByNameView: View {
                     }
                     
                     HStack{
-                        ForEach(SearchMethod.allCases, id: \.self){ method in
+                        ForEach(SearchMethods.allCases, id: \.self){ method in
                             Button {
                                 withAnimation(.smooth) {
                                     selectedMethod = method
@@ -57,7 +58,10 @@ struct SearchRecipeByNameView: View {
                     SearchBar(searchText: $searchTextInput)
                         .onSubmit {
                             print("\(searchTextInput)")
-                            showOptions = false
+                            withAnimation(.smooth) {
+                                showOptions = false
+
+                            }
                             Task {
                                 await viewModel
                                     .startFetching(
@@ -68,6 +72,41 @@ struct SearchRecipeByNameView: View {
                         }
                 }
                 
+                //Cell View
+                if !showOptions {
+                    if viewModel.isFetchingData {
+                        ProgressView().padding(.top, 60)
+                        
+                    }else{
+                        VStack{
+                            if let recipeData = viewModel.fetchedResultData?.results {
+                                
+                                ForEach(recipeData, id: \.self){recipeInfo in
+                                    VStack(alignment: .leading){
+                                        HStack(){
+                                            VStack{
+                                                RecipeCircleImage(
+                                                    imageUrl: recipeInfo
+                                                        .image)
+                                                
+                                            }
+                                            .frame(width: 50, height: 50)
+                                            
+                                            Text("\(recipeInfo.title)")
+                                        }
+                                    }
+                                    .padding(12)
+                                    .frame(width: 350)
+                                    .background(.akBg)
+                                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                                }
+                            }
+                            else{
+                                Text("Nothing")
+                            }
+                        }
+                    }
+                }
                 
             }
         }

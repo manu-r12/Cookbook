@@ -45,7 +45,7 @@ enum APIENDPOINTS: String, CaseIterable {
 //    }
 //}
 
-struct FetchedRecipe: Codable{
+struct FetchedRecipe: Codable, Identifiable, Hashable{
     let id: Int
     let title: String
     let image: String
@@ -65,7 +65,7 @@ class IngredientsFInderOptionsViewModel: ObservableObject {
     
     @MainActor
     func startFetching(query: String,
-                       searchMethod: SearchMethod) async {
+                       searchMethod: SearchMethods) async {
         isFetchingData = true
         // Handling the case
         do {
@@ -89,7 +89,7 @@ class IngredientsFInderOptionsViewModel: ObservableObject {
     
     func fetchRecipesInfo(query: String,
                                  numberOfRes: Int,
-                                 searchMethod: SearchMethod) async throws -> FetchedItem
+                                 searchMethod: SearchMethods) async throws -> FetchedItem
     
     {
         guard let apiKey = ConfigLoader.loadConfig()?.SpoonacularAPIKey else {
