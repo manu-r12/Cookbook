@@ -27,10 +27,37 @@ struct FetchedRecipe: Codable, Identifiable, Hashable{
 
 class IngredientsFInderOptionsViewModel: Identifiable, ObservableObject {
     
+    @Published var fetchedResultData: FetchedItem?
+    @Published var isFetchingData: Bool = false
     
-     func fetchRecipesInfo(query: String,
+    
+    @MainActor
+    func startFetching(query: String,
+                       searchMethod: SearchMethod) async {
+        isFetchingData = true
+        // Handling the case
+        do {
+            print("Started Fetching.....")
+            fetchedResultData = try await fetchRecipesInfo(
+                query: query,
+                numberOfRes: 20,
+                searchMethod: searchMethod
+                )
+            print("========== Fetching Done ==========")
+            print("\(fetchedResultData)")
+            isFetchingData = false
+        }catch{
+            print(
+                "Error in fetching from (fetchRecipesInfo()) - \(error.localizedDescription)"
+            )
+            isFetchingData = false
+        }
+  
+    }
+    
+    func fetchRecipesInfo(query: String,
                                  numberOfRes: Int,
-                                 searchMethod: SearchMethod = .SearchByTitle) async throws -> FetchedItem
+                                 searchMethod: SearchMethod) async throws -> FetchedItem
     
     {
         guard let apiKey = ConfigLoader.loadConfig()?.SpoonacularAPIKey else {
@@ -51,6 +78,9 @@ class IngredientsFInderOptionsViewModel: Identifiable, ObservableObject {
                 URLQueryItem(name: "apiKey", value: apiKey),
                 URLQueryItem(name: "query", value: query),
                 URLQueryItem(name: "number", value: "\(numberOfRes)"),
+                URLQueryItem(name: "addRecipeInformation", value: "True"),
+                URLQueryItem(name: "titleMatch", value: query),
+//                URLQueryItem(name: "instructionsRequired", value: "true")	
                 
             ]
             
@@ -59,6 +89,7 @@ class IngredientsFInderOptionsViewModel: Identifiable, ObservableObject {
                 URLQueryItem(name: "apiKey", value: apiKey),
                 URLQueryItem(name: "titleMatch", value: query),
                 URLQueryItem(name: "number", value: "\(numberOfRes)"),
+                
                 
             ]
         }
