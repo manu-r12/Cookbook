@@ -17,15 +17,47 @@ enum APIENDPOINTS: String, CaseIterable {
     case GET_RECIPE_INFO = "https://api.spoonacular.com/recipes/complexSearch"
 }
 
-struct FetchedRecipe: Codable, Identifiable, Hashable{
+//enum PreparationMinutes: Codable {
+//    case int(Int)
+//    case string(String)
+//    
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.singleValueContainer()
+//        if let intValue = try? container.decode(Int.self) {
+//            self = .int(intValue)
+//            return
+//        }
+//        if let stringValue = try? container.decode(String.self) {
+//            self = .string(stringValue)
+//            return
+//        }
+//        throw DecodingError.typeMismatch(PreparationMinutes.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Expected Int or String"))
+//    }
+//    
+//    func encode(to encoder: Encoder) throws {
+//        var container = encoder.singleValueContainer()
+//        switch self {
+//        case .int(let intValue):
+//            try container.encode(intValue)
+//        case .string(let stringValue):
+//            try container.encode(stringValue)
+//        }
+//    }
+//}
+
+struct FetchedRecipe: Codable{
     let id: Int
     let title: String
-    
-    
+    let image: String
+    let dishTypes: [String]
+    let servings: Int
+    let readyInMinutes: Int
+
+
 }
 
 
-class IngredientsFInderOptionsViewModel: Identifiable, ObservableObject {
+class IngredientsFInderOptionsViewModel: ObservableObject {
     
     @Published var fetchedResultData: FetchedItem?
     @Published var isFetchingData: Bool = false
@@ -80,7 +112,7 @@ class IngredientsFInderOptionsViewModel: Identifiable, ObservableObject {
                 URLQueryItem(name: "number", value: "\(numberOfRes)"),
                 URLQueryItem(name: "addRecipeInformation", value: "True"),
                 URLQueryItem(name: "titleMatch", value: query),
-//                URLQueryItem(name: "instructionsRequired", value: "true")	
+                URLQueryItem(name: "instructionsRequired", value: "true")	
                 
             ]
             
