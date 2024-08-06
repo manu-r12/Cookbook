@@ -121,19 +121,19 @@ struct AddRecipeDetailsView: View {
                                 
                                 Task{
                                     try await viewModel.uploadRecipe (
-                                        name: title,
-                                        ingredients: ingredients,
-                                        instructions: instructionsText,
-                                        category: category,
+                                        name:           title,
+                                        ingredients:    ingredients,
+                                        instructions:   instructionsText,
+                                        category:       category,
                                         preprationTime: preprationTime,
-                                        cookingTime: cookingTime
-                                    )
+                                        cookingTime:    cookingTime
+                                                                    )
                                     
                                     dismissView()
                                 }
                                 
                                 
-                           
+                                
                                 
                             }, label: {
                                 Text("Add")
@@ -263,11 +263,7 @@ struct AddRecipeDetailsView: View {
                                                         Button(action: {
                                                             
                                                             if  let index = ingredients.firstIndex(of: ing){
-                                                                
-                                                                withAnimation(.spring) {
-                                                                    ingredients.remove(at: index)
-                                                                }
-
+                                                                ingredients.remove(at: index)
                                                             }
                                                             
                                                             
@@ -374,7 +370,7 @@ struct AddRecipeDetailsView: View {
                                     }
                                     
                                 }
-                
+                                
                                 // MARK: CategoriesView for selection
                                 CategoriesSelectionView(category: $category)
                                 
@@ -405,7 +401,7 @@ struct AddRecipeDetailsView: View {
                         }
                     }
                 }
-            } 
+            }
             .photosPicker(isPresented: $isImageGallaryOpen, selection: $viewModel.pickedItem)
             .sheet(isPresented: $isInstructionsInputOpen, content: {
                 AddInstructionsSheetView(text: $instructionsText)
@@ -446,15 +442,15 @@ struct AddRecipeDetailsView: View {
                     
                     
                     ProgressView(value: viewModel.progress)
-                                      .frame(width: 250)
-                                      .progressViewStyle(LinearProgressViewStyle())
-                                      .padding()
-                                      .foregroundStyle(.akGreen)
+                        .frame(width: 250)
+                        .progressViewStyle(LinearProgressViewStyle())
+                        .padding()
+                        .foregroundStyle(.akGreen)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.thinMaterial)
             }
-           
+            
         }
         
         .ignoresSafeArea()

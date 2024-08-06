@@ -75,8 +75,6 @@ class IngredientsFInderOptionsViewModel: ObservableObject {
                 numberOfRes: 20,
                 searchMethod: searchMethod
                 )
-            print("========== Fetching Done ==========")
-            print("\(fetchedResultData)")
             isFetchingData = false
         }catch{
             print(
