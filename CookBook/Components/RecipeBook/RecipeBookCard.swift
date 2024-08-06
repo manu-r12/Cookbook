@@ -9,6 +9,7 @@
 
 
 import SwiftUI
+import Foundation
 
 struct RecipeBookCard: View {
     let recipeData: [RecipeModel]
@@ -61,8 +62,6 @@ struct RecipeBookCard: View {
                     
                     HStack(spacing: 199){
                         HStack {
-                            Text("🥗")
-                                .font(.system(size: 20))
                             Text("Dinner")
                         }
                         

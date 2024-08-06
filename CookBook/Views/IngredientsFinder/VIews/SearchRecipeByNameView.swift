@@ -78,27 +78,11 @@ struct SearchRecipeByNameView: View {
                         ProgressView().padding(.top, 60)
                         
                     }else{
-                        VStack{
+                        VStack(spacing: 20){
                             if let recipeData = viewModel.fetchedResultData?.results {
                                 
                                 ForEach(recipeData, id: \.self){recipeInfo in
-                                    VStack(alignment: .leading){
-                                        HStack(){
-                                            VStack{
-                                                RecipeCircleImage(
-                                                    imageUrl: recipeInfo
-                                                        .image)
-                                                
-                                            }
-                                            .frame(width: 50, height: 50)
-                                            
-                                            Text("\(recipeInfo.title)")
-                                        }
-                                    }
-                                    .padding(12)
-                                    .frame(width: 350)
-                                    .background(.akBg)
-                                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                                    RecipeRowCellView(recipeData: recipeInfo)
                                 }
                             }
                             else{
@@ -111,6 +95,7 @@ struct SearchRecipeByNameView: View {
             }
         }
     }
+        
 }
 
 #Preview {

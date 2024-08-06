@@ -52,6 +52,7 @@
 		329309332BD14AC50049B532 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 329309322BD14AC50049B532 /* GoogleService-Info.plist */; };
 		32A516032C517123006791BD /* RecipeImage-Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A516022C517123006791BD /* RecipeImage-Async.swift */; };
 		32A516052C5182DF006791BD /* UserPFP-Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A516042C5182DF006791BD /* UserPFP-Async.swift */; };
+		32ABE48A2C6272DC00AB80A4 /* RecipeRowCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ABE4892C6272DC00AB80A4 /* RecipeRowCellView.swift */; };
 		32BE8DB62BD24610006798B5 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BE8DB52BD24610006798B5 /* TabbarView.swift */; };
 		32C501382C580E2300366551 /* FloatingButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C501372C580E2300366551 /* FloatingButton .swift */; };
 		32E1AA2F2C01961F0043EAA4 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1AA2E2C01961F0043EAA4 /* RegisterView.swift */; };
@@ -106,6 +107,7 @@
 		329309322BD14AC50049B532 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		32A516022C517123006791BD /* RecipeImage-Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeImage-Async.swift"; sourceTree = "<group>"; };
 		32A516042C5182DF006791BD /* UserPFP-Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserPFP-Async.swift"; sourceTree = "<group>"; };
+		32ABE4892C6272DC00AB80A4 /* RecipeRowCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRowCellView.swift; sourceTree = "<group>"; };
 		32BE8DB52BD24610006798B5 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
 		32C501372C580E2300366551 /* FloatingButton .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingButton .swift"; sourceTree = "<group>"; };
 		32E1AA2E2C01961F0043EAA4 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				323FA11D2C5BEE3E00C49269 /* MediumSizeOptionBox.swift */,
 				323FA11F2C5BF57B00C49269 /* LargeSizeOptionBox.swift */,
+				32ABE4892C6272DC00AB80A4 /* RecipeRowCellView.swift */,
 			);
 			path = IngredientsFInderOptions;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				32E1AA362C01E0E30043EAA4 /* RegisterUser.swift in Sources */,
 				32A516052C5182DF006791BD /* UserPFP-Async.swift in Sources */,
 				322579292BD4E7DD00EC6A37 /* AddRecipeViewModel.swift in Sources */,
+				32ABE48A2C6272DC00AB80A4 /* RecipeRowCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
