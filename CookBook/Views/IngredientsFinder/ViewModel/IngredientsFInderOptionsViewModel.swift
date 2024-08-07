@@ -52,6 +52,7 @@ struct FetchedRecipe: Codable, Identifiable, Hashable{
     let dishTypes: [String]
     let servings: Int
     let readyInMinutes: Int
+    let summary: String
 
 
 }
