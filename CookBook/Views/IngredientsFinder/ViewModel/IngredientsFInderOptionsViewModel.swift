@@ -13,8 +13,19 @@ struct FetchedItem: Codable{
     let results: [FetchedRecipe]
 }
 
-enum APIENDPOINTS: String, CaseIterable {
-    case GET_RECIPE_INFO = "https://api.spoonacular.com/recipes/complexSearch"
+enum APIENDPOINTS {
+    case GET_RECIPE_INFO
+    case GET_INGREDIENTS_BY_RECIPE_ID(id: Int)
+    
+    
+    var url: String {
+        switch self {
+        case .GET_RECIPE_INFO:
+            return "https://api.spoonacular.com/recipes/complexSearch"
+        case .GET_INGREDIENTS_BY_RECIPE_ID(let id):
+            return "https://api.spoonacular.com/recipes/\(id)/ingredientWidget.json"
+        }
+    }
 }
 
 //enum PreparationMinutes: Codable {
@@ -97,7 +108,7 @@ class IngredientsFInderOptionsViewModel: ObservableObject {
         
         guard var urlComponents = URLComponents(
             string: APIENDPOINTS.GET_RECIPE_INFO
-                .rawValue) else {
+                .url) else {
             throw URLError(.badURL)
             
         }

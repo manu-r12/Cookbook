@@ -23,6 +23,7 @@
 		322579292BD4E7DD00EC6A37 /* AddRecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322579282BD4E7DD00EC6A37 /* AddRecipeViewModel.swift */; };
 		3225792B2BD4E95D00EC6A37 /* AddRecipePhotoDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3225792A2BD4E95D00EC6A37 /* AddRecipePhotoDelegate.swift */; };
 		3225792E2BD649B300EC6A37 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3225792D2BD649B300EC6A37 /* RecipeModel.swift */; };
+		3229173E2C63ECE100754229 /* APIManager .swift in Sources */ = {isa = PBXBuildFile; fileRef = 3229173D2C63ECE100754229 /* APIManager .swift */; };
 		323FA11E2C5BEE3E00C49269 /* MediumSizeOptionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323FA11D2C5BEE3E00C49269 /* MediumSizeOptionBox.swift */; };
 		323FA1202C5BF57B00C49269 /* LargeSizeOptionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323FA11F2C5BF57B00C49269 /* LargeSizeOptionBox.swift */; };
 		323FA1242C5C10D500C49269 /* ConfigLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323FA1232C5C10D500C49269 /* ConfigLoader.swift */; };
@@ -85,6 +86,7 @@
 		322579282BD4E7DD00EC6A37 /* AddRecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewModel.swift; sourceTree = "<group>"; };
 		3225792A2BD4E95D00EC6A37 /* AddRecipePhotoDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipePhotoDelegate.swift; sourceTree = "<group>"; };
 		3225792D2BD649B300EC6A37 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
+		3229173D2C63ECE100754229 /* APIManager .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIManager .swift"; sourceTree = "<group>"; };
 		323FA11D2C5BEE3E00C49269 /* MediumSizeOptionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumSizeOptionBox.swift; sourceTree = "<group>"; };
 		323FA11F2C5BF57B00C49269 /* LargeSizeOptionBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeSizeOptionBox.swift; sourceTree = "<group>"; };
 		323FA1232C5C10D500C49269 /* ConfigLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigLoader.swift; sourceTree = "<group>"; };
@@ -126,6 +128,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		322917412C63F13800754229 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				RecipeDetailsVIewModel.swift,
+			);
+			target = 323FE2D62BD0EF4D0064A99A /* CookBook */;
+		};
 		32A9B0DC2C46D524005A41DD /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -145,7 +154,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		32A9B0DA2C46D518005A41DD /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (32A9B0DF2C46D530005A41DD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
 		32A9B0DB2C46D520005A41DD /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (32A9B0DC2C46D524005A41DD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
-		32ABE48E2C6288F800AB80A4 /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
+		32ABE48E2C6288F800AB80A4 /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (322917412C63F13800754229 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +269,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		3229173C2C63ECCC00754229 /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				3229173D2C63ECE100754229 /* APIManager .swift */,
+			);
+			path = APIManager;
+			sourceTree = "<group>";
+		};
 		323FA11C2C5BEDD800C49269 /* IngredientsFInderOptions */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +314,7 @@
 		323FE2D92BD0EF4D0064A99A /* CookBook */ = {
 			isa = PBXGroup;
 			children = (
+				3229173C2C63ECCC00754229 /* APIManager */,
 				321BA9B92C5D5B5700EE2B4D /* config.json */,
 				32E1AA302C01DDF90043EAA4 /* Utils */,
 				3225792C2BD649A700EC6A37 /* Models */,
@@ -600,6 +618,7 @@
 				32E1AA2F2C01961F0043EAA4 /* RegisterView.swift in Sources */,
 				3225792E2BD649B300EC6A37 /* RecipeModel.swift in Sources */,
 				323FE2EF2BD0FB5A0064A99A /* WelcomeView.swift in Sources */,
+				3229173E2C63ECE100754229 /* APIManager .swift in Sources */,
 				323FA1272C5C131400C49269 /* IngredientsFInderOptionsViewModel.swift in Sources */,
 				320032FE2BD3D71400B8CB41 /* AddRecipeView.swift in Sources */,
 				32753BAE2BF54442008AA139 /* RegisterUserViewModel.swift in Sources */,

@@ -20,3 +20,24 @@ struct RecipeModel: Codable, Identifiable, Hashable {
     let cookingTime: String
     
 }
+
+
+
+struct IngredientsAmount: Codable {
+    let us: USMetric
+}
+
+struct USMetric: Codable {
+    let unit: String
+    let value: Float
+}
+
+struct FetchedIngredientsInfo: Codable {
+    let name: String
+    let image: String
+    let amount: IngredientsAmount
+}
+
+struct FetchedIngredientsByRecipeID: Codable {
+    let ingredients : [FetchedIngredientsInfo]
+}

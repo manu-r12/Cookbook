@@ -11,6 +11,7 @@ import SwiftUI
 struct RecipeDetailsVIew: View {
     let recipeData: FetchedRecipe
     @Environment(\.dismiss) var dismiss
+    @ObservedObject var vm = RecipeDetailsVIewModel()
 
     var body: some View {
         ScrollView {
@@ -108,6 +109,6 @@ struct RecipeDetailsVIew: View {
             dishTypes: ["mddddddsain", "non-veg main itemddd", "dinner"],
             servings: 3,
             readyInMinutes: 12,
-            summary: "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs might be a good recipe to expand your main course repertoire."
+            summary: "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs might be a good recipe to expand your main course repertoire.Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs might be a good recipe to expand your main course repertoire.Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs might be a good recipe to expand your main course repertoire."
         ))
 }
