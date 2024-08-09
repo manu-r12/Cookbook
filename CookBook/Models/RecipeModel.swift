@@ -21,32 +21,32 @@ struct RecipeModel: Codable, Identifiable, Hashable {
     
 }
 
-struct Steps: Codable {
+struct Steps: Codable, Hashable {
     let step: String
 }
 
-struct RecipeInstrcutions: Codable{
+struct RecipeInstrcutions: Codable, Hashable{
     let steps: [Steps]
     let name: String
 
 }
 
 
-struct IngredientsAmount: Codable {
+struct IngredientsAmount: Codable, Hashable {
     let us: USMetric
 }
 
-struct USMetric: Codable {
+struct USMetric: Codable, Hashable {
     let unit: String
     let value: Float
 }
 
-struct FetchedIngredientsInfo: Codable {
+struct FetchedIngredientsInfo: Codable, Hashable {
     let name: String
     let image: String
     let amount: IngredientsAmount
 }
 
-struct FetchedIngredientsByRecipeID: Codable {
+struct FetchedIngredientsByRecipeID: Codable, Hashable {
     let ingredients : [FetchedIngredientsInfo]
 }

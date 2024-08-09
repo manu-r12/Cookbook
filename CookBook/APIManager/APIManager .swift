@@ -10,7 +10,7 @@ import Foundation
 
 fileprivate func makeurlComponents(endpoint: API_ENDPOINTS) -> URLComponents? {
     
-    guard var urlComponents = URLComponents(
+    guard let urlComponents = URLComponents(
         string: endpoint.url) else {
         return nil
     }

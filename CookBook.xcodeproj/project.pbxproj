@@ -135,7 +135,7 @@
 		322917412C63F13800754229 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				RecipeDetailsVIewModel.swift,
+				RecipeDetailsViewModel.swift,
 			);
 			target = 323FE2D62BD0EF4D0064A99A /* CookBook */;
 		};
