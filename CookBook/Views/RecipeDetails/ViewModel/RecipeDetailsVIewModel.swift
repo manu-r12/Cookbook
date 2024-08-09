@@ -20,7 +20,7 @@ class RecipeDetailsVIewModel: ObservableObject {
     func getIngredientByRecipeId() async {
         do{
             print("Fetching Ingredients.....")
-            let data = try await APIManager.fetchIngredientsByRecipeId(id: 1003464)
+            let data = try await APIManager().fetchIngredientsByRecipeId(id: 1003464)
             print("Fetched the data => \(data?.ingredients)")
         }catch{
             print(

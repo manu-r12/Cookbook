@@ -21,6 +21,13 @@ struct RecipeModel: Codable, Identifiable, Hashable {
     
 }
 
+struct Steps: Codable {
+    let step: String
+}
+
+struct RecipeInstrcutions: Codable{
+    let steps: [Steps]
+}
 
 
 struct IngredientsAmount: Codable {

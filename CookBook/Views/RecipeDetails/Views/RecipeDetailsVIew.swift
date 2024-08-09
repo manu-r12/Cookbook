@@ -16,48 +16,67 @@ struct RecipeDetailsVIew: View {
     var body: some View {
         ScrollView {
             // header
-            ZStack(alignment: .topLeading) {
+            VStack{
+                ZStack(alignment: .topLeading) {
 
-                VStack {
-                    KFImage(URL(string: recipeData.image))
-                        .resizable()
-                        .scaledToFill()
-                }
-                .frame(height: 300)
-                .clipShape(RoundedRectangle(cornerRadius: 28))
+                    VStack {
+                        KFImage(URL(string: recipeData.image))
+                            .resizable()
+                            .scaledToFill()
+                    }
+                    .frame(height: 300)
+                    .clipShape(RoundedRectangle(cornerRadius: 28))
 
 
-                Button(
-                    action: {
-                        print("Hello..")
-                        dismiss()
-                    },
-                    label: {
-                        VStack {
+                    Button(
+                        action: {
+                            print("Hello..")
+                            dismiss()
+                        },
+                        label: {
+                            VStack {
 
-                            Image(systemName: "chevron.left")
-                                .imageScale(.large)
-                                .foregroundStyle(.akGreen)
-                                .background(
-                                    Circle().fill(Color.black).frame(
-                                        width: 42,
-                                        height: 42
+                                Image(systemName: "chevron.left")
+                                    .imageScale(.large)
+                                    .foregroundStyle(.akGreen)
+                                    .background(
+                                        Circle().fill(Color.black).frame(
+                                            width: 42,
+                                            height: 42
+                                        )
                                     )
-                                )
-                        }
-                        .padding(.vertical, 70)
-                        .padding(.horizontal, 40)
+                            }
+                            .padding(.vertical, 70)
+                            .padding(.horizontal, 40)
 
-                    })
+                        })
+                }
             }
-            // image of the recipe
+            
+   
             VStack {
-                VStack{
-                    Text(recipeData.title)
-                        .font(.custom("Poppins-Medium", size: 22))
+                HStack{
+                    VStack{
+                        Text(recipeData.title)
+                            .font(.custom("Poppins-Medium", size: 22))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    VStack{
+                        
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "heart")
+                                .imageScale(.large)
+                        }
+                        .tint(.akGreen)
+               
+                    }
+                    .padding(.trailing, 20)
                 }
                 .padding(.horizontal, 15)
-                .frame(maxWidth: .infinity, alignment: .leading)
+
                 
                 VStack{
                     HStack{
@@ -81,17 +100,48 @@ struct RecipeDetailsVIew: View {
                             .font(.custom("Poppins-Regular", size: 15))
                     }
                     .padding()
-                    .frame(width: 380, height: 160, alignment: .topLeading)
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: 160,
+                        alignment: .topLeading
+                    )
                     .background(.akBg)
                     .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
                 .padding(.horizontal, 15)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 14)
-
+                
+                
+                VStack(alignment: .leading){
+                    Text("Ingredients")
+                        .font(.custom("Poppins-Medium", size: 18))
                     
+                    
+                    VStack(){
+                        VStack{
+                            HStack{
+                                Text("Ginger Paste")
+                                Spacer()
+                                Text("3 tbsp")
+                            }
+                        }
+                        .padding(20)
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .background(.akBg)
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                    }
+                    .padding(.top, 10)
+                    
+                }
+                .padding(.horizontal, 15)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 14)
             }
+            .padding(.horizontal,3)
             .padding(.top, 30)
+     
+           
 
         }
         .ignoresSafeArea()
