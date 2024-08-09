@@ -17,7 +17,7 @@ enum SearchMethods: String , CaseIterable {
 struct SearchRecipeByNameView: View {
     @State var searchTextInput: String = ""
     @State var selectedMethod: SearchMethods = .SearchByTitle
-    @ObservedObject var viewModel: IngredientsFInderOptionsViewModel
+    @ObservedObject var viewModel: IngredientsFinderOptionsViewModel
     @State var showOptions: Bool = true
     
     var body: some View {
@@ -99,5 +99,5 @@ struct SearchRecipeByNameView: View {
 }
 
 #Preview {
-    SearchRecipeByNameView( viewModel: IngredientsFInderOptionsViewModel())
+    SearchRecipeByNameView( viewModel: IngredientsFinderOptionsViewModel())
 }

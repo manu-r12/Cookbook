@@ -12,7 +12,7 @@ struct IngredientsFInderOptionsView: View {
     @State var isCameraOpen: Bool = false
     @State var isSearchViewOpen: Bool = false
     
-    let vm = IngredientsFInderOptionsViewModel()
+    let vm = IngredientsFinderOptionsViewModel()
     
     let IngredientsFinderVCWrapper = UIKitViewControllerWrapper(viewController: IngredientsFinderWithCameraViewController())
     

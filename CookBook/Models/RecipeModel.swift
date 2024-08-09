@@ -27,6 +27,8 @@ struct Steps: Codable {
 
 struct RecipeInstrcutions: Codable{
     let steps: [Steps]
+    let name: String
+
 }
 
 
