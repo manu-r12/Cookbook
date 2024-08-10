@@ -63,6 +63,11 @@ class RecipeBookViewModel: ObservableObject {
     }
     
     
+    func refreshData() async {
+        await fetchRecipeItems()
+    }
+    
+    
     
     
     

@@ -19,7 +19,7 @@ struct RecipeCardsView: View {
                         VStack(alignment: .leading){
                             Text("Your Recipies")
                                 .font(.custom("Poppins-Medium", size: 19))
-                                .padding(20)
+                                .padding(.horizontal,20)
                             CategoriesView(selectedCatg: $selectedCatg)
                             
                         }

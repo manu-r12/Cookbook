@@ -15,6 +15,9 @@ struct RecipeBookCard: View {
     let recipeData: [RecipeModel]
     let category: Category
     
+    @State private var offset: CGFloat = -UIScreen.main.bounds.width
+
+    
     var filteredData: [RecipeModel] {
         
         if category != .all {
@@ -27,29 +30,41 @@ struct RecipeBookCard: View {
     var body: some View {
         ForEach(filteredData , id: \.self) { data in
             VStack(alignment: .leading ,spacing: 7){
-                HStack(spacing: 220){
-                    VStack {
-                        RecipeCircleImage(
-                            imageUrl: data.imageUrl
-                        )
-                    }
-                    .frame(width: 50, height: 50)
-                    
-                    HStack(spacing: 6){
-                        Image(systemName: "clock")
-                        Text(data.cookingTime)
-                            .font(.custom("Poppins-Regular", size: 15))
-                            .kerning(1)
-                    }
-                }
+                //                HStack(spacing: 220){
+                //                    VStack {
+                //                        RecipeCircleImage(
+                //                            imageUrl: data.imageUrl
+                //                        )
+                //                    }
+                //                    .frame(width: 50, height: 50)
+                //
+                //                    HStack(spacing: 6){
+                //                        Image(systemName: "clock")
+                //                        Text(data.cookingTime)
+                //                            .font(.custom("Poppins-Regular", size: 15))
+                //                            .kerning(1)
+                //                    }
+                //                }
                 
                 VStack(alignment: .leading, spacing: 15){
-                    Text(data.name)
-                        .font(.custom("Poppins-Medium", size: 18))
-                    Text(data.instructions)
-                        .font(.custom("Poppins-Regular", size: 15))
-                        .foregroundStyle(Color(.systemGray))
-                    
+                    HStack(alignment: .center){
+                        VStack(alignment: .leading, spacing: 10){
+                            Text(data.name)
+                                .font(.custom("Poppins-Medium", size: 17))
+                            Text(data.instructions)
+                                .font(.custom("Poppins-Regular", size: 14))
+                                .foregroundStyle(Color(.systemGray))
+                            
+                        }
+                        .frame(maxHeight: 90)
+                        Spacer()
+                        VStack {
+                            RecipeCircleImage(
+                                imageUrl: data.imageUrl
+                            )
+                        }
+                        .frame(width: 60, height: 60)
+                    }
                 }
                 .frame(
                     width: 320,
@@ -60,18 +75,41 @@ struct RecipeBookCard: View {
                 
                 VStack{
                     
-                    HStack(spacing: 199){
+                    HStack(){
                         HStack {
-                            Text("Dinner")
+                            if data.category.count > 1 {
+                                HStack{
+                                    Text("\(data.category[0]),")
+                                    Text(data.category[1])
+                                }
+                                .font(.custom("Poppins-Regular", size: 13))
+
+                            }else{
+                                Text(data.category[0])
+                                    .font(.custom("Poppins-Regular", size: 13))
+
+                            }
+                            
+                        
+                            
+                            HStack(spacing: 6){
+                                Image(systemName: "clock")
+                                Text(data.cookingTime)
+                                    .font(.custom("Poppins-Regular", size: 13))
+                                    .kerning(1)
+                            }
+                            
+                            
                         }
                         
+                        Spacer()
                         HStack{
                             Image(systemName: "heart")
                                 .imageScale(.large)
                         }
                     }
                     .kerning(1)
-                    .font(.custom("Poppins-Regular", size: 14))
+                    .font(.custom("Poppins-Regular", size: 15))
                     
                     
                 }
@@ -82,10 +120,22 @@ struct RecipeBookCard: View {
             .padding(.horizontal, 10)
             .frame(maxWidth: 340,alignment: .leading)
             .padding(8)
-            .padding(.top, 8)
             .background(.akBg)
-            .clipShape(RoundedRectangle(cornerRadius: 4))
+//            .offset(x: offset)
+            .clipShape(RoundedRectangle(cornerRadius: 24))
+//            .onAppear {
+//                withAnimation(.easeOut(duration: 0.5)) {
+//                    offset = 0
+//                }
+//            }
         }
     }
 }
 
+
+#Preview {
+    RecipeBookCard(
+        recipeData: [.init(id: UUID(), name: "Curry", imageUrl: "https://lanesbbq.com/cdn/shop/articles/pow-pow-chicken-lollipops.jpg?v=1674056829&width=1500", ingredients: [.init(quantity: "3", nameOfIngredient: "3")], instructions: "wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd", category: ["Dinner", "Main"], preprationTime: "12", cookingTime: "12")],
+        category: .all
+    )
+}

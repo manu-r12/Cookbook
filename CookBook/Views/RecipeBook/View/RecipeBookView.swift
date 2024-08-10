@@ -19,30 +19,28 @@ struct RecipeBookView: View {
   
     
     var body: some View {
-        VStack {
             ZStack{
                 ScrollView{
-                    // Header
+                    //Header
                     Header(vm: vm)
                     
                     //Search bar
                     SearchBar(searchText: $searchText)
                     
-                    //                Recipe Items
+                    //Recipe Items
                     RecipeCardsView(vm: vm)
                     
                 }
                 .scrollIndicators(.hidden)
+                .refreshable(action: {
+                    Task{
+                        await vm.refreshData()
+                    }
+                })
                 
                 FloatingButton(icon: "plus")
             }
-        
-        }
-        .ignoresSafeArea()
-        
-//
-        
-        
+            .ignoresSafeArea([.container])
     }
 }
 
