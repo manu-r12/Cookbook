@@ -18,7 +18,7 @@ fileprivate func makeurlComponents(endpoint: API_ENDPOINTS) -> URLComponents? {
     return urlComponents
 }
 
-//MARK: APIManager
+// MARK: APIManager
 /// responsible for handling all api related calles (for example: recipe api)
 class APIManager {
     
@@ -29,42 +29,16 @@ class APIManager {
     
     {
         guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
-
-        
-        guard var urlComponents = makeurlComponents(
-            endpoint: API_ENDPOINTS.GET_RECIPE_INFO
-        ) else {throw URLError(.badURL)}
-        
-        var urlQueryItems: [URLQueryItem]
-        
-        //How we wanna search
-        if searchMethod == .SearchByName {
-            urlQueryItems = [
-                URLQueryItem(name: "apiKey", value: apiKey),
-                URLQueryItem(name: "query", value: query),
-                URLQueryItem(name: "number", value: "\(numberOfRes)"),
-                URLQueryItem(name: "addRecipeInformation", value: "True"),
-                URLQueryItem(name: "titleMatch", value: query),
-                URLQueryItem(name: "instructionsRequired", value: "true")
-                
-            ]
-            
-        }else{
-            urlQueryItems = [
-                URLQueryItem(name: "apiKey", value: apiKey),
-                URLQueryItem(name: "titleMatch", value: query),
-                URLQueryItem(name: "number", value: "\(numberOfRes)"),
-                
-                
-            ]
-        }
         
         
-        urlComponents.queryItems = urlQueryItems
         
-        guard let url = urlComponents.url else {
-            throw URLError(.badURL)
-        }
+        guard let url = try UrlComponentsData.fetchRecipeData(
+            apikey: apiKey,
+            query: query,
+            number: numberOfRes,
+            searchMeh: searchMethod
+        ).getUrl(endpoint: .GET_RECIPE_INFO) else {throw URLError(.badURL)}
+        
         
         let (data, res) = try await URLSession.shared.data(from: url)
         
@@ -81,26 +55,18 @@ class APIManager {
         return fetchedRecipeData
     }
     
-
     
-     // MARK: Fetch Ingredients By Recipe Id
-     func fetchIngredientsByRecipeId(id: Int) async throws -> FetchedIngredientsByRecipeID? {
+    
+    // MARK: Fetch Ingredients By Recipe Id
+    func fetchIngredientsByRecipeId(id: Int) async throws -> FetchedIngredientsByRecipeID? {
         
         guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
         
-         guard var urlComponents = makeurlComponents(
-            endpoint: API_ENDPOINTS.GET_INGREDIENTS_BY_RECIPE_ID(id: id)
-         ) else {throw URLError(.badURL)}
-                
-
-        urlComponents.queryItems = [
-            URLQueryItem(name: "apiKey", value: apiKey),
-
-        ]
         
-        guard let url = urlComponents.url else {
-            throw URLError(.badURL)
-        }
+        guard let url = try UrlComponentsData.fetchRecipeDataById(apikey: apiKey).getUrl(
+            endpoint: .GET_INGREDIENTS_BY_RECIPE_ID(id: id)
+        ) else {throw URLError(.badURL)}
+        
         
         let (data, res) = try await URLSession.shared.data(
             from: url
@@ -151,5 +117,28 @@ class APIManager {
         let fetchedIngredientsData = try JSONDecoder().decode([RecipeInstrcutions].self, from: data)
         
         return fetchedIngredientsData
+    }
+    
+    
+    //MARK: Generic Function
+    func fetchRecipeByIngredients<T : Codable>(data: T, id: Int) async throws ->  T? {
+        
+        guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
+        
+        // The URL for fetching recipe info by ingredients
+        guard var urlComponents = makeurlComponents(
+            endpoint: API_ENDPOINTS.GET_INSTRUCTIONS(id: id)
+        ) else {throw URLError(.badURL)}
+        
+        
+        // can we make it reusable
+        urlComponents.queryItems = [
+            URLQueryItem(name: "apiKey", value: apiKey),
+            
+        ]
+        
+        
+        
+        return nil
     }
 }
