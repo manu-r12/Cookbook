@@ -22,7 +22,13 @@ fileprivate func makeurlComponents(endpoint: API_ENDPOINTS) -> URLComponents? {
 /// responsible for handling all api related calles (for example: recipe api)
 class APIManager {
     
-    // MARK: Fetch Recipe Infp
+    var urlSession: URLSession
+    
+    init(urlSession: URLSession) {
+        self.urlSession = urlSession
+    }
+    
+    // MARK: Fetch Recipe Info
     func fetchRecipesInfo(query: String,
                           numberOfRes: Int,
                           searchMethod: SearchMethods) async throws -> FetchedItem
@@ -40,7 +46,7 @@ class APIManager {
         ).getUrl(endpoint: .GET_RECIPE_INFO) else {throw URLError(.badURL)}
         
         
-        let (data, res) = try await URLSession.shared.data(from: url)
+        let (data, res) = try await urlSession.data(from: url)
         
         guard let httpResponse = res as? HTTPURLResponse, httpResponse.statusCode == 200  else {
             throw URLError(.badServerResponse)
@@ -91,19 +97,10 @@ class APIManager {
         
         guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
         
-        guard var urlComponents = makeurlComponents(
-            endpoint: API_ENDPOINTS.GET_INSTRUCTIONS(id: id)
+        guard let url = try UrlComponentsData.fetchRecipeIntsructions(apikey: apiKey).getUrl(
+            endpoint: .GET_INSTRUCTIONS(id: id)
         ) else {throw URLError(.badURL)}
         
-        
-        urlComponents.queryItems = [
-            URLQueryItem(name: "apiKey", value: apiKey),
-            
-        ]
-        
-        guard let url = urlComponents.url else {
-            throw URLError(.badURL)
-        }
         
         let (data, res) = try await URLSession.shared.data(
             from: url

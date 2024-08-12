@@ -72,6 +72,16 @@
 		32F50D652C006B3A00F45999 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32F50D5F2C006B3A00F45999 /* Poppins-Black.ttf */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3203ECD52C6A7282008DEA9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 323FE2CF2BD0EF4D0064A99A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 323FE2D62BD0EF4D0064A99A;
+			remoteInfo = CookBook;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		320032ED2BD3939E00B8CB41 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		320032F42BD3A54700B8CB41 /* IngredientsFinderWithCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsFinderWithCameraViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +89,7 @@
 		320032FD2BD3D71400B8CB41 /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		320033002BD3D9B300B8CB41 /* AddRecipeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeDetailsView.swift; sourceTree = "<group>"; };
 		320033022BD3ED9300B8CB41 /* AddInstructionsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInstructionsSheetView.swift; sourceTree = "<group>"; };
+		3203ECD12C6A7282008DEA9A /* CookBookTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookBookTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		321BA9B72C5D3EB800EE2B4D /* SearchRecipeByNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeByNameView.swift; sourceTree = "<group>"; };
 		321BA9B92C5D5B5700EE2B4D /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		321E870D2C53FDFD00546BCC /* RecipeBookCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBookCard.swift; sourceTree = "<group>"; };
@@ -156,12 +167,20 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		3203ECD22C6A7282008DEA9A /* CookBookTest */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CookBookTest; sourceTree = "<group>"; };
 		32A9B0DA2C46D518005A41DD /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (32A9B0DF2C46D530005A41DD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
 		32A9B0DB2C46D520005A41DD /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (32A9B0DC2C46D524005A41DD /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
 		32ABE48E2C6288F800AB80A4 /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (322917412C63F13800754229 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3203ECCE2C6A7282008DEA9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		323FE2D42BD0EF4D0064A99A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -304,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				323FE2D92BD0EF4D0064A99A /* CookBook */,
+				3203ECD22C6A7282008DEA9A /* CookBookTest */,
 				323FE2D82BD0EF4D0064A99A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -312,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				323FE2D72BD0EF4D0064A99A /* CookBook.app */,
+				3203ECD12C6A7282008DEA9A /* CookBookTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -529,6 +550,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3203ECD02C6A7282008DEA9A /* CookBookTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3203ECD72C6A7282008DEA9A /* Build configuration list for PBXNativeTarget "CookBookTest" */;
+			buildPhases = (
+				3203ECCD2C6A7282008DEA9A /* Sources */,
+				3203ECCE2C6A7282008DEA9A /* Frameworks */,
+				3203ECCF2C6A7282008DEA9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3203ECD62C6A7282008DEA9A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3203ECD22C6A7282008DEA9A /* CookBookTest */,
+			);
+			name = CookBookTest;
+			packageProductDependencies = (
+			);
+			productName = CookBookTest;
+			productReference = 3203ECD12C6A7282008DEA9A /* CookBookTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		323FE2D62BD0EF4D0064A99A /* CookBook */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 323FE2E52BD0EF4E0064A99A /* Build configuration list for PBXNativeTarget "CookBook" */;
@@ -564,9 +608,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					3203ECD02C6A7282008DEA9A = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 323FE2D62BD0EF4D0064A99A;
+					};
 					323FE2D62BD0EF4D0064A99A = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -590,11 +638,19 @@
 			projectRoot = "";
 			targets = (
 				323FE2D62BD0EF4D0064A99A /* CookBook */,
+				3203ECD02C6A7282008DEA9A /* CookBookTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3203ECCF2C6A7282008DEA9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		323FE2D52BD0EF4D0064A99A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -615,6 +671,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3203ECCD2C6A7282008DEA9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		323FE2D32BD0EF4D0064A99A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -668,7 +731,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3203ECD62C6A7282008DEA9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 323FE2D62BD0EF4D0064A99A /* CookBook */;
+			targetProxy = 3203ECD52C6A7282008DEA9A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		3203ECD82C6A7282008DEA9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4GU8L4AQM;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manu.CookBookTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CookBook.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CookBook";
+			};
+			name = Debug;
+		};
+		3203ECD92C6A7282008DEA9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W4GU8L4AQM;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manu.CookBookTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CookBook.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CookBook";
+			};
+			name = Release;
+		};
 		323FE2E32BD0EF4E0064A99A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -809,6 +918,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -843,6 +953,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -860,6 +971,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3203ECD72C6A7282008DEA9A /* Build configuration list for PBXNativeTarget "CookBookTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3203ECD82C6A7282008DEA9A /* Debug */,
+				3203ECD92C6A7282008DEA9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		323FE2D22BD0EF4D0064A99A /* Build configuration list for PBXProject "CookBook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

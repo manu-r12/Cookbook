@@ -11,7 +11,7 @@ import OSLog
 class RecipeDetailsViewModel: ObservableObject {
   
     
-    let apiManager = APIManager()
+    let apiManager = APIManager(urlSession: .init(configuration: .default))
     @Published var isIngredientsFetching: Bool = false
     @Published var isInstructionsFetching: Bool = false
     
@@ -19,23 +19,6 @@ class RecipeDetailsViewModel: ObservableObject {
 
     @Published var ingredients: FetchedIngredientsByRecipeID?
     
-
-//    
-//    init(
-//        recipeInfo: FetchedRecipe
-//    ) {
-//        self.recipeInfo = recipeInfo
-//    }
-//    
-//    init(rec){
-//
-////        Task{
-////            await getIngredientByRecipeId()
-////            await getRecipeInstrucions()
-//// 
-////
-////        }
-//    }
     @MainActor
     func getIngredientByRecipeId(id: Int) async {
         do{
