@@ -8,7 +8,7 @@
 import XCTest
 @testable import CookBook
 
-
+// this will perform mock networking
 class MockURLProtocol: URLProtocol {
     static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data?))?
     
@@ -78,13 +78,12 @@ class APIManagerTest: XCTestCase {
                 {
                     "id": 123,
                     "title": "Test Recipe",
-                    "image": "testingImageUrl"
-                    "dishTypes": ["Dinner"]
-                    "preprationTime": 12
+                    "image": "testingImageUrl",
+                    "dishTypes": ["Dinner"],
+                    "servings": 12,
+                    "readyInMinutes": 12,
                     "summary": "Sample Test Recipe"
-                    "servings": 12
                 }
-            
             ]
         }
         """
@@ -98,20 +97,25 @@ class APIManagerTest: XCTestCase {
             return (response, jsonResponse.data(using: .utf8))
         }
         
-        do{
-           let data = try await apiManager
+
+        do {
+            let data = try await apiManager
                 .fetchRecipesInfo(
                     query: "Chicken",
                     numberOfRes: 1,
                     searchMethod: .SearchByName
                 ).results
+            
+            // Assertions
             XCTAssertEqual(data[0].id, 123)
             XCTAssertEqual(data[0].title, "Test Recipe")
-            XCTAssertEqual(data[0].servings, 13)
+            XCTAssertEqual(data[0].summary, "Sample Test Recipe")
             XCTAssertEqual(data[0].dishTypes[0], "Dinner")
-
-        }catch{
-            XCTAssertThrowsError(error.localizedDescription)
+            XCTAssertEqual(data[0].servings, 12)
+            XCTAssertEqual(data[0].readyInMinutes, 12)
+            
+        } catch {
+            XCTFail("Fetch failed with error: \(error)")
         }
         
         
