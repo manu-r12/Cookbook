@@ -13,6 +13,8 @@
 		320032FE2BD3D71400B8CB41 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320032FD2BD3D71400B8CB41 /* AddRecipeView.swift */; };
 		320033012BD3D9B300B8CB41 /* AddRecipeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320033002BD3D9B300B8CB41 /* AddRecipeDetailsView.swift */; };
 		320033032BD3ED9300B8CB41 /* AddInstructionsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320033022BD3ED9300B8CB41 /* AddInstructionsSheetView.swift */; };
+		3203ECE42C6AA21C008DEA9A /* SearchByIngredientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3203ECE32C6AA21C008DEA9A /* SearchByIngredientsView.swift */; };
+		3203ECEA2C6AABEA008DEA9A /* TagLayoutView in Frameworks */ = {isa = PBXBuildFile; productRef = 3203ECE92C6AABEA008DEA9A /* TagLayoutView */; };
 		320A23B42C58004000942A04 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 320A23B32C58004000942A04 /* Kingfisher */; };
 		321BA9B82C5D3EB800EE2B4D /* SearchRecipeByNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321BA9B72C5D3EB800EE2B4D /* SearchRecipeByNameView.swift */; };
 		321BA9BA2C5D5B5700EE2B4D /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 321BA9B92C5D5B5700EE2B4D /* config.json */; };
@@ -90,6 +92,7 @@
 		320033002BD3D9B300B8CB41 /* AddRecipeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeDetailsView.swift; sourceTree = "<group>"; };
 		320033022BD3ED9300B8CB41 /* AddInstructionsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInstructionsSheetView.swift; sourceTree = "<group>"; };
 		3203ECD12C6A7282008DEA9A /* CookBookTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CookBookTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3203ECE32C6AA21C008DEA9A /* SearchByIngredientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByIngredientsView.swift; sourceTree = "<group>"; };
 		321BA9B72C5D3EB800EE2B4D /* SearchRecipeByNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeByNameView.swift; sourceTree = "<group>"; };
 		321BA9B92C5D5B5700EE2B4D /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		321E870D2C53FDFD00546BCC /* RecipeBookCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBookCard.swift; sourceTree = "<group>"; };
@@ -187,6 +190,7 @@
 			files = (
 				3293092B2BD143B40049B532 /* FirebaseFirestoreSwift in Frameworks */,
 				329309272BD143B40049B532 /* FirebaseDatabase in Frameworks */,
+				3203ECEA2C6AABEA008DEA9A /* TagLayoutView in Frameworks */,
 				329309312BD143B40049B532 /* FirebaseStorageCombine-Community in Frameworks */,
 				320A23B42C58004000942A04 /* Kingfisher in Frameworks */,
 				329309292BD143B40049B532 /* FirebaseFirestore in Frameworks */,
@@ -241,6 +245,7 @@
 				320032F62BD3AB4500B8CB41 /* IngredientsFInderOptionsView.swift */,
 				320032F42BD3A54700B8CB41 /* IngredientsFinderWithCameraViewController.swift */,
 				321BA9B72C5D3EB800EE2B4D /* SearchRecipeByNameView.swift */,
+				3203ECE32C6AA21C008DEA9A /* SearchByIngredientsView.swift */,
 			);
 			path = VIews;
 			sourceTree = "<group>";
@@ -596,6 +601,7 @@
 				3293092E2BD143B40049B532 /* FirebaseStorage */,
 				329309302BD143B40049B532 /* FirebaseStorageCombine-Community */,
 				320A23B32C58004000942A04 /* Kingfisher */,
+				3203ECE92C6AABEA008DEA9A /* TagLayoutView */,
 			);
 			productName = CookBook;
 			productReference = 323FE2D72BD0EF4D0064A99A /* CookBook.app */;
@@ -632,6 +638,7 @@
 			packageReferences = (
 				329309212BD143B40049B532 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				320A23B22C58004000942A04 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				3203ECE82C6AABEA008DEA9A /* XCRemoteSwiftPackageReference "TagLayoutView" */,
 			);
 			productRefGroup = 323FE2D82BD0EF4D0064A99A /* Products */;
 			projectDirPath = "";
@@ -682,6 +689,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3203ECE42C6AA21C008DEA9A /* SearchByIngredientsView.swift in Sources */,
 				32BE8DB62BD24610006798B5 /* TabbarView.swift in Sources */,
 				323FA1202C5BF57B00C49269 /* LargeSizeOptionBox.swift in Sources */,
 				32E1AA2F2C01961F0043EAA4 /* RegisterView.swift in Sources */,
@@ -1001,6 +1009,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3203ECE82C6AABEA008DEA9A /* XCRemoteSwiftPackageReference "TagLayoutView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/giiiita/TagLayoutView.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		320A23B22C58004000942A04 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -1020,6 +1036,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3203ECE92C6AABEA008DEA9A /* TagLayoutView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3203ECE82C6AABEA008DEA9A /* XCRemoteSwiftPackageReference "TagLayoutView" */;
+			productName = TagLayoutView;
+		};
 		320A23B32C58004000942A04 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 320A23B22C58004000942A04 /* XCRemoteSwiftPackageReference "Kingfisher" */;

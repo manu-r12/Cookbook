@@ -11,6 +11,7 @@ struct IngredientsFInderOptionsView: View {
     
     @State var isCameraOpen: Bool = false
     @State var isSearchViewOpen: Bool = false
+    @State var isSearchViewOpen_ByIngredients: Bool = false
     
     let vm = IngredientsFinderOptionsViewModel()
     
@@ -72,7 +73,8 @@ struct IngredientsFInderOptionsView: View {
                                         bgColor: .akGreen,
                                         icon: "takeoutbag.and.cup.and.straw",
                                         action: {
-                                            print("Triggered By -> Search By Ingredients")
+                                            isSearchViewOpen_ByIngredients
+                                                .toggle()
                                         }
                                     )
                                     
@@ -98,6 +100,12 @@ struct IngredientsFInderOptionsView: View {
             }
             .padding(.top, 45)
         }
+        .fullScreenCover(
+            isPresented: $isSearchViewOpen_ByIngredients,
+            content: {
+                SearchByIngredientsView()
+            }
+        )
         .fullScreenCover(isPresented: $isSearchViewOpen, content: {
             SearchRecipeByNameView(viewModel: vm)
         })

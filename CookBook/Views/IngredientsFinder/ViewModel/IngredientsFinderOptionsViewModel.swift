@@ -42,23 +42,29 @@ struct FetchedItem: Codable{
 //    }
 //}
 
-struct FetchedRecipe: Codable, Identifiable, Hashable{
-    let id: Int
-    let title: String
-    let image: String
-    let dishTypes: [String]
-    let servings: Int
-    let readyInMinutes: Int
-    let summary: String
 
-
-}
 
 
 class IngredientsFinderOptionsViewModel: ObservableObject {
     
     @Published var fetchedResultData: FetchedItem?
     @Published var isFetchingData: Bool = false
+    let apiManager = APIManager(urlSession: .init(configuration: .default))
+
+    
+    init(){
+        Task{
+            print("Fetching Recipes By Ingredients")
+            var res = try? await apiManager.fetchRecipeByIngredients(
+                ingredients: "apples,flour,sugar"
+            )
+            
+            print("Got the Recipe Data by Ingredients -> \(res ?? [])")
+            print(
+                "Count of Missed Ingredients -> \(res?[0].missedIngredientsCount() )"
+            )
+        }
+    }
     
     
     @MainActor

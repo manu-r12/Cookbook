@@ -118,24 +118,50 @@ class APIManager {
     
     
     //MARK: Generic Function
-    func fetchRecipeByIngredients<T : Codable>(data: T, id: Int) async throws ->  T? {
+//    func fetchRecipeByIngredients<T : Codable>(modelType: T, id: Int) async throws ->  T? {
+//        
+//        guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
+//        
+//        // The URL for fetching recipe info by ingredients
+//        guard var urlComponents = makeurlComponents(
+//            endpoint: API_ENDPOINTS.GET_INSTRUCTIONS(id: id)
+//        ) else {throw URLError(.badURL)}
+//        
+//        
+//        // can we make it reusable
+//        urlComponents.queryItems = [
+//            URLQueryItem(name: "apiKey", value: apiKey),
+//            
+//        ]
+//        
+//        
+//        
+//        return nil
+//    }
+    
+    
+    func fetchRecipeByIngredients(ingredients: String) async throws -> [FetchedRecipeByIngredients]? {
         
         guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
         
-        // The URL for fetching recipe info by ingredients
-        guard var urlComponents = makeurlComponents(
-            endpoint: API_ENDPOINTS.GET_INSTRUCTIONS(id: id)
-        ) else {throw URLError(.badURL)}
+        guard let url = try UrlComponentsData.fetchRecipeDatabyIngredients(
+            apikey: apiKey,
+            ingredients: ingredients
+        ).getUrl(endpoint: .GET_RECIPE_BY_INGREDIENTS)
+         else {throw URLError(.badURL)}
         
         
-        // can we make it reusable
-        urlComponents.queryItems = [
-            URLQueryItem(name: "apiKey", value: apiKey),
+        let (data, res) = try await URLSession.shared.data(
+            from: url
+        )
+        
+        guard let httpResponse = res as? HTTPURLResponse, httpResponse.statusCode == 200  else {
+            throw URLError(.badServerResponse)
             
-        ]
+        }
         
+        let fetchedIngredientsData = try JSONDecoder().decode([FetchedRecipeByIngredients].self, from: data)
         
-        
-        return nil
+        return fetchedIngredientsData
     }
 }

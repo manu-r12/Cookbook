@@ -50,3 +50,43 @@ struct FetchedIngredientsInfo: Codable, Hashable {
 struct FetchedIngredientsByRecipeID: Codable, Hashable {
     let ingredients : [FetchedIngredientsInfo]
 }
+
+
+struct FetchedRecipe: Codable, Identifiable, Hashable{
+    let id: Int
+    let title: String
+    let image: String
+    let dishTypes: [String]
+    let servings: Int
+    let readyInMinutes: Int
+    let summary: String
+    
+}
+
+
+struct FetchedRecipeByIngredients: Codable, Identifiable, Hashable{
+    let id: Int
+    let title: String
+    let image: String
+    let missedIngredients: [MissedIngredients]
+    let usedIngredients: [UsedIngredients]
+    
+    func missedIngredientsCount() -> Int {
+        missedIngredients.count
+    }
+    
+    func usedIngredientsCount() -> Int {
+        usedIngredients.count
+    }
+}
+
+struct MissedIngredients: Codable, Hashable {
+    let name: String
+    let image: String
+}
+
+
+struct UsedIngredients: Codable, Hashable {
+    let name: String
+    let image: String
+}

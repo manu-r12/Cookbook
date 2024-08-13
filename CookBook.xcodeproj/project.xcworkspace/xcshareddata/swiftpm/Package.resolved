@@ -1,5 +1,5 @@
 {
-  "originHash" : "3070b8fac9c73247cbef0a5cf9e2152e192c5788c4a081a0d3e6cc9237872176",
+  "originHash" : "a1ebdbdec79b99f2b188b5a129ccb1fb19f6c9e7134d41e6d54931e60694e428",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -125,6 +125,15 @@
       "state" : {
         "revision" : "9f0c76544701845ad98716f3f6a774a892152bcb",
         "version" : "1.26.0"
+      }
+    },
+    {
+      "identity" : "taglayoutview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/giiiita/TagLayoutView.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "815deadaca2b65edb03ec2fe25d0ce300d2eb7b3"
       }
     }
   ],

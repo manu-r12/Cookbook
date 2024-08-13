@@ -23,6 +23,8 @@ enum API_ENDPOINTS {
     case GET_RECIPE_INFO
     case GET_INGREDIENTS_BY_RECIPE_ID(id: Int)
     case GET_INSTRUCTIONS(id: Int)
+    case GET_RECIPE_BY_INGREDIENTS
+    
     
     var url: String {
         switch self {
@@ -32,6 +34,8 @@ enum API_ENDPOINTS {
             return "https://api.spoonacular.com/recipes/\(id)/ingredientWidget.json"
         case .GET_INSTRUCTIONS(id: let id):
             return "https://api.spoonacular.com/recipes/\(id)/analyzedInstructions"
+        case .GET_RECIPE_BY_INGREDIENTS:
+            return "https://api.spoonacular.com/recipes/findByIngredients"
         }
     }
 }
@@ -42,7 +46,7 @@ enum UrlComponentsData {
     case fetchRecipeData(apikey: String,query: String,number: Int,  searchMeh: SearchMethods)
     case fetchRecipeDataById(apikey: String)
     case fetchRecipeIntsructions(apikey: String)
-//    case fetchRecipeDatabyIngredients
+    case fetchRecipeDatabyIngredients(apikey: String, ingredients: String)
     
     func getUrl(endpoint: API_ENDPOINTS) throws -> URL? {
         var urlQueryItems: [URLQueryItem]
@@ -128,6 +132,23 @@ enum UrlComponentsData {
             return url
   
             
+        case .fetchRecipeDatabyIngredients(let apikey, let ingredients):
+            let number = 10
+            guard var components = makeurlComponents(endpoint: endpoint) else {
+                throw URLError(.badURL)
+            }
+            
+            components.queryItems = [
+                URLQueryItem(name: "apiKey", value: apikey),
+                URLQueryItem(name: "ingredients", value: ingredients),
+                URLQueryItem(name: "number", value: "\(number)"),
+            ]
+            
+            guard let url = components.url else {
+                throw URLError(.badURL)
+            }
+            
+            return url
         }
     }
 }
