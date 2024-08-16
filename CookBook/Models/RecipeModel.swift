@@ -28,7 +28,7 @@ struct Steps: Codable, Hashable {
 struct RecipeInstrcutions: Codable, Hashable{
     let steps: [Steps]
     let name: String
-
+    
 }
 
 
@@ -64,12 +64,17 @@ struct FetchedRecipe: Codable, Identifiable, Hashable{
 }
 
 
-struct FetchedRecipeByIngredients: Codable, Identifiable, Hashable{
+struct FetchedRecipeByIngredients: Codable, Identifiable, Hashable {
     let id: Int
     let title: String
     let image: String
     let missedIngredients: [MissedIngredients]
     let usedIngredients: [UsedIngredients]
+    
+    enum whichIngredient {
+        case missed
+        case used
+    }
     
     func missedIngredientsCount() -> Int {
         missedIngredients.count
@@ -78,6 +83,24 @@ struct FetchedRecipeByIngredients: Codable, Identifiable, Hashable{
     func usedIngredientsCount() -> Int {
         usedIngredients.count
     }
+    
+    func getArrayIntoStringForm(which: whichIngredient) -> String {
+        var stringArray: [String] = []
+        
+        switch which {
+        case .missed:
+            stringArray = missedIngredients.map { $0.name }
+            
+        case .used:
+            stringArray = usedIngredients.map { $0.name }
+            
+        }
+        
+        return GetStringFromArray.withWhiteSpace(array: stringArray).getString
+
+    }
+    
+    
 }
 
 struct MissedIngredients: Codable, Hashable {

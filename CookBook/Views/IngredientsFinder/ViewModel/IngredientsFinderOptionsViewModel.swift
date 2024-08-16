@@ -52,21 +52,6 @@ class IngredientsFinderOptionsViewModel: ObservableObject {
     let apiManager = APIManager(urlSession: .init(configuration: .default))
 
     
-    init(){
-        Task{
-            print("Fetching Recipes By Ingredients")
-            var res = try? await apiManager.fetchRecipeByIngredients(
-                ingredients: "apples,flour,sugar"
-            )
-            
-            print("Got the Recipe Data by Ingredients -> \(res ?? [])")
-            print(
-                "Count of Missed Ingredients -> \(res?[0].missedIngredientsCount() )"
-            )
-        }
-    }
-    
-    
     @MainActor
     func startFetching(query: String,
                        searchMethod: SearchMethods) async {

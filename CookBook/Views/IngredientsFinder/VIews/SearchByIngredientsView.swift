@@ -15,8 +15,11 @@ struct SearchByIngredientsView: View {
     
     @Environment(\.dismiss) var dismissView
     
+    @ObservedObject var vm = SearchByIngredientsViewModel()
+    
     @State var ingredient: String = ""
     @State var isSearchingStarted: Bool = false
+    
     
     @State var ingredients: [String] = []
     var body: some View {
@@ -32,6 +35,10 @@ struct SearchByIngredientsView: View {
                                         .foregroundStyle(.akGreen)
                                         .fontWeight(.bold)
                                         .imageScale(.large)
+                                        .onTapGesture {
+                                            isSearchingStarted = false
+                                            vm.recipeData = []
+                                        }
                                 }
                                 
                                 TextField("Type Ingredients", text: $ingredient)
@@ -43,6 +50,17 @@ struct SearchByIngredientsView: View {
                                 {
                                     
                                     Button {
+                                        let ingredientsString = GetStringFromArray.withoutWhiteSpace(
+                                            Array: ingredients
+                                        )
+                                            .getString
+                                        withAnimation(.smooth) {
+                                            isSearchingStarted = true
+
+                                        }
+                                        Task{
+                                            await vm.fetchRecipe(with: ingredientsString)
+                                        }
                                         
                                     } label: {
                                         Image(systemName: "magnifyingglass")
@@ -64,42 +82,67 @@ struct SearchByIngredientsView: View {
                         .padding(.horizontal, 20)
                         //                    .padding(.top, 120)
                         
-                        VStack(alignment: .leading){
-                            VStack(alignment: .center){
-                                GeometryReader { geometry in
-                                    TagLayoutView(
-                                        ingredients,
-                                        tagFont: UIFont
-                                            .systemFont(
-                                                ofSize: 18
-                                            ),
-                                        padding: 30,
-                                        parentWidth: geometry.size.width
-                                    ) { tag in
-                                        Text(tag)
-                                            .font(.custom("Poppins-Medium", size: 13))
-                                            .padding(EdgeInsets(top: 8, leading: 17, bottom: 8, trailing: 17))
-                                            .foregroundColor(Color.white)
-                                            .background(Color.akGreen)
-                                            .clipShape(RoundedRectangle(cornerRadius: 18))
-                                            .onTapGesture {
-                                                ingredients.removeAll { s in
-                                                    s == tag
+                        if !isSearchingStarted {
+                            VStack(alignment: .leading){
+                                VStack(alignment: .center){
+                                    GeometryReader { geometry in
+                                        TagLayoutView(
+                                            ingredients,
+                                            tagFont: UIFont
+                                                .systemFont(
+                                                    ofSize: 18
+                                                ),
+                                            padding: 30,
+                                            parentWidth: geometry.size.width
+                                        ) { tag in
+                                            Text(tag)
+                                                .font(.custom("Poppins-Medium", size: 13))
+                                                .padding(EdgeInsets(top: 8, leading: 17, bottom: 8, trailing: 17))
+                                                .foregroundColor(Color.white)
+                                                .background(Color.akGreen)
+                                                .clipShape(RoundedRectangle(cornerRadius: 18))
+                                                .onTapGesture {
+                                                    ingredients.removeAll { s in
+                                                        s == tag
+                                                    }
                                                 }
-                                            }
+                                            
+                                        }.padding(.all, 16)
                                         
-                                    }.padding(.all, 16)
+                                    }
                                     
                                 }
+                                .padding(.horizontal, 20)
+                                
+                                
+                                
                                 
                             }
-                            .padding(.horizontal, 20)
-                            
-                            
-                            
-                            
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }else{
+                            VStack{
+                                if let recipeData = vm.recipeData {
+                                    
+                                    ForEach(recipeData, id: \.self) { data in
+                                        RecipeCellVIewLarge(data: data)
+                                    }
+                                    
+                                    if recipeData.isEmpty {
+                                        ProgressView()
+                                            .padding(.top, 60)
+                                    }else{
+                                        Text("Could not find :(")
+                                            .padding(.top, 60)
+                                    }
+                                }else{
+                                    ProgressView()
+                                        .padding(.top, 60)
+                                }
+                            }
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        
+                     
                     }
                     
                     
