@@ -123,16 +123,18 @@ struct SearchByIngredientsView: View {
                             VStack{
                                 if let recipeData = vm.recipeData {
                                     
-                                    ForEach(recipeData, id: \.self) { data in
-                                        RecipeCellVIewLarge(data: data)
-                                    }
+                                   
                                     
-                                    if recipeData.isEmpty {
+                                    if vm.isLoading {
                                         ProgressView()
                                             .padding(.top, 60)
-                                    }else{
+                                    }else if recipeData.isEmpty{
                                         Text("Could not find :(")
                                             .padding(.top, 60)
+                                    }else{
+                                        ForEach(recipeData, id: \.self) { data in
+                                            RecipeCellVIewLarge(data: data)
+                                        }
                                     }
                                 }else{
                                     ProgressView()

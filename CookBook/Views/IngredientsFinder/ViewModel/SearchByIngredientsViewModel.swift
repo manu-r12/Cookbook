@@ -16,22 +16,18 @@ class SearchByIngredientsViewModel: ObservableObject {
     
     
     
+    
     @MainActor
     func fetchRecipe(with ingredients: String) async {
         
         do{
-            print("Fetching Recipe By Ingredients_______________")
             isLoading = true
-            let res = try await apiManager.fetchRecipeByIngredients(
+            let data = try await apiManager.fetchRecipeByIngredients(
                 ingredients: ingredients
             )
             
-            recipeData = res
+            recipeData = data
             isLoading = false
-            
-            print("*********************************************************** Got the data ***********************************************************")
-            print("Data ==> \(res ?? [])")
-
             
         }catch{
             isLoading = false
