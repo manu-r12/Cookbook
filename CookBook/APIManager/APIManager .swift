@@ -8,21 +8,12 @@
 import Foundation
 
 
-fileprivate func makeurlComponents(endpoint: API_ENDPOINTS) -> URLComponents? {
-    
-    guard let urlComponents = URLComponents(
-        string: endpoint.url) else {
-        return nil
-    }
-    
-    return urlComponents
-}
 
 // MARK: APIManager
 /// responsible for handling all api related calles (for example: recipe api)
 class APIManager {
     
-    var urlSession: URLSession
+    let urlSession: URLSession
     
     init(urlSession: URLSession) {
         self.urlSession = urlSession
@@ -34,16 +25,13 @@ class APIManager {
                           searchMethod: SearchMethods) async throws -> FetchedItem
     
     {
-        guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
-        
-        
+                
         
         guard let url = try UrlComponentsData.fetchRecipeData(
-            apikey: apiKey,
             query: query,
             number: numberOfRes,
             searchMeh: searchMethod
-        ).getUrl(endpoint: .GET_RECIPE_INFO) else {throw URLError(.badURL)}
+        ).getUrl() else {throw URLError(.badURL)}
         
         
         let (data, res) = try await urlSession.data(from: url)
@@ -62,16 +50,34 @@ class APIManager {
     }
     
     
+    func fetchRecipeById(id: Int) async throws -> FetchedRecipe? {
+        
+        
+        guard let url = try UrlComponentsData.fetchRecipeById(id: id).getUrl() else {throw URLError(.badURL)}
+        
+        let (data, res) = try await urlSession.data(from: url)
+        
+        guard let httpResponse = res as? HTTPURLResponse, httpResponse.statusCode == 200  else {
+            throw URLError(.badServerResponse)
+            
+        }
+        
+        let fetchedRecipeData = try JSONDecoder().decode(
+            FetchedRecipe.self,
+            from: data
+        )
+        
+        return fetchedRecipeData
+        
+    }
+    
     
     // MARK: Fetch Ingredients By Recipe Id
     func fetchIngredientsByRecipeId(id: Int) async throws -> FetchedIngredientsByRecipeID? {
         
-        guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
         
         
-        guard let url = try UrlComponentsData.fetchRecipeDataById(apikey: apiKey).getUrl(
-            endpoint: .GET_INGREDIENTS_BY_RECIPE_ID(id: id)
-        ) else {throw URLError(.badURL)}
+        guard let url = try UrlComponentsData.fetchRecipesIngredientsById(id: id).getUrl() else {throw URLError(.badURL)}
         
         
         let (data, res) = try await URLSession.shared.data(
@@ -95,11 +101,8 @@ class APIManager {
     
     func fetchInstructionsForARecipe(id: Int) async throws -> [RecipeInstrcutions]? {
         
-        guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
         
-        guard let url = try UrlComponentsData.fetchRecipeIntsructions(apikey: apiKey).getUrl(
-            endpoint: .GET_INSTRUCTIONS(id: id)
-        ) else {throw URLError(.badURL)}
+        guard let url = try UrlComponentsData.fetchRecipeIntsructions(id: id).getUrl() else {throw URLError(.badURL)}
         
         
         let (data, res) = try await URLSession.shared.data(
@@ -117,7 +120,7 @@ class APIManager {
     }
     
     
-    //MARK: Generic Function
+//MARK: Generic Function
 //    func fetchRecipeByIngredients<T : Codable>(modelType: T, id: Int) async throws ->  T? {
 //        
 //        guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
@@ -142,13 +145,10 @@ class APIManager {
     
     func fetchRecipeByIngredients(ingredients: String) async throws -> [FetchedRecipeByIngredients]? {
         
-        guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
         
         guard let url = try UrlComponentsData.fetchRecipeDatabyIngredients(
-            apikey: apiKey,
             ingredients: ingredients
-        ).getUrl(endpoint: .GET_RECIPE_BY_INGREDIENTS)
-         else {throw URLError(.badURL)}
+        ).getUrl() else {throw URLError(.badURL)}
         
         
         let (data, res) = try await URLSession.shared.data(

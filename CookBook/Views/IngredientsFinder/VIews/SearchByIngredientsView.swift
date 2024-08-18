@@ -9,7 +9,7 @@ import SwiftUI
 import TagLayoutView
 
 
-// we are gonna make a tag list layoput view
+
 
 struct SearchByIngredientsView: View {
     
@@ -19,6 +19,19 @@ struct SearchByIngredientsView: View {
     
     @State var ingredient: String = ""
     @State var isSearchingStarted: Bool = false
+    
+    func getRecipeById(id: Int) async {
+        do {
+            print("fetching")
+            let res = try await APIManager(urlSession: .init(configuration: .default)).fetchRecipeById(
+                id: id
+            )
+            print("Done Fetching - \(res ?? nil)")
+            
+        }catch{
+            print("Error in fetching ...", (error.localizedDescription))
+        }
+    }
     
     
     @State var ingredients: [String] = []
@@ -133,7 +146,11 @@ struct SearchByIngredientsView: View {
                                             .padding(.top, 60)
                                     }else{
                                         ForEach(recipeData, id: \.self) { data in
-                                            RecipeCellVIewLarge(data: data)
+                                            NavigationLink(value: data) {
+                                                RecipeCellVIewLarge(data: data)
+                                                 
+                                                    .tint(.white)
+                                            }
                                         }
                                     }
                                 }else{
@@ -150,6 +167,11 @@ struct SearchByIngredientsView: View {
                     
                 }
             }
+            .navigationDestination(for: FetchedRecipeByIngredients.self, destination: { data in
+//                RecipeDetailsByIdView(recipeId: data.id)
+//                    .navigationBarBackButtonHidden()
+
+            })
             .padding(.top, 30)
             .navigationTitle("Search By Ingredients")
             .navigationBarTitleDisplayMode(.inline)
@@ -159,8 +181,9 @@ struct SearchByIngredientsView: View {
                         dismissView()
                     } label: {
                         Text("Back")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.akGreen)
                             .font(.custom("Poppins-Medium", size: 15))
+                            
 
                         
                     }

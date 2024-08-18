@@ -14,6 +14,9 @@ class RecipeDetailsViewModel: ObservableObject {
     let apiManager = APIManager(urlSession: .init(configuration: .default))
     @Published var isIngredientsFetching: Bool = false
     @Published var isInstructionsFetching: Bool = false
+    @Published var isRecipeFetching: Bool = false
+    
+    @Published var fetchedRecipeDataById: FetchedRecipe?
     
     @Published var instructions: [RecipeInstrcutions] = []
 
@@ -51,6 +54,24 @@ class RecipeDetailsViewModel: ObservableObject {
             print(
                 "Error in fetching Instuctions by a recipe id - \(error.localizedDescription)"
             )
+        }
+    }
+    
+    
+    @MainActor
+    func getRecipeById(id: Int) async {
+        do{
+            isRecipeFetching = true
+            print("Fetching Recipe Data.....")
+            let data = try await apiManager.fetchRecipeById(id: id)
+            fetchedRecipeDataById = data
+            isRecipeFetching = false
+        }catch{
+            isRecipeFetching = false
+            print(
+                "Error in fetching recipe data by a recipe id - \(error.localizedDescription)"
+            )
+            Logger().error("Error in fetching recipe data by a recipe id - \(error.localizedDescription)")
         }
     }
 }
