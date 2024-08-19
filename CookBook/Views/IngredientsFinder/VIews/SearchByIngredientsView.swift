@@ -148,9 +148,9 @@ struct SearchByIngredientsView: View {
                                         ForEach(recipeData, id: \.self) { data in
                                             NavigationLink(value: data) {
                                                 RecipeCellVIewLarge(data: data)
-                                                 
-                                                    .tint(.white)
+                                             
                                             }
+                                            .tint(.white)
                                         }
                                     }
                                 }else{
@@ -168,8 +168,8 @@ struct SearchByIngredientsView: View {
                 }
             }
             .navigationDestination(for: FetchedRecipeByIngredients.self, destination: { data in
-//                RecipeDetailsByIdView(recipeId: data.id)
-//                    .navigationBarBackButtonHidden()
+                RecipeDetailsByIdView(recipeId: data.id)
+                    .navigationBarBackButtonHidden()
 
             })
             .padding(.top, 30)
