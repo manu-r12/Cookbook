@@ -84,6 +84,10 @@ struct FetchedRecipeByIngredients: Codable, Identifiable, Hashable {
         usedIngredients.count
     }
     
+    /// takes ingredient type(1. missing ing. , 2. used ing...)
+    /// and returns the string based on it
+    /// > # Example
+    /// > if you chose missed then it will return a new string of missing ingredients
     func getArrayIntoStringForm(which: whichIngredient) -> String {
         var stringArray: [String] = []
         

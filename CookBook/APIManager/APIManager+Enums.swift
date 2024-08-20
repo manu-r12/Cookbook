@@ -62,6 +62,8 @@ enum UrlComponentsData {
     case fetchRecipeIntsructions(id: Int)
     case fetchRecipeDatabyIngredients(ingredients: String)
     
+    
+    
     // this fucntion is used for returning url for api call
     func getUrl() throws -> URL? {
         var urlQueryItems: [URLQueryItem]
