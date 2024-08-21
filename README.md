@@ -1,4 +1,4 @@
-Cookbook (currently working on it)
+Cookbook AI
 
 Cookbook is an iOS application that assists users in finding recipes based on their available ingredients. Users can save and share their recipes with others.
 
