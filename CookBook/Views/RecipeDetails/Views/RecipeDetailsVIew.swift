@@ -15,6 +15,16 @@ struct RecipeDetailsVIew: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var vm = RecipeDetailsViewModel()
     
+    @State var isRecipeBookmarked: Bool = false
+
+    @MainActor
+    func isBookmarked() async  {
+        let val = await Bookmarks
+            .isRecipeBookmarked(documentId: String(recipeData.id))
+        isRecipeBookmarked = val
+    }
+ 
+    
     var body: some View {
         VStack{
             ScrollView {
@@ -27,7 +37,7 @@ struct RecipeDetailsVIew: View {
                                 .resizable()
                                 .scaledToFill()
                         }
-                        .frame(height: 300)
+                        .frame(width: 400,height: 300)
                         .clipShape(RoundedRectangle(cornerRadius: 28))
                         
                         
@@ -43,7 +53,7 @@ struct RecipeDetailsVIew: View {
                                         .imageScale(.large)
                                         .foregroundStyle(.akGreen)
                                         .background(
-                                            Circle().fill(Color.black).frame(
+                                            Circle().fill(Color.white).frame(
                                                 width: 42,
                                                 height: 42
                                             )
@@ -68,9 +78,14 @@ struct RecipeDetailsVIew: View {
                         VStack{
                             
                             Button {
-                                
+                                Task{
+                                    await vm
+                                        .uploadBookmarkedRecipe(
+                                            recipe: recipeData
+                                        )
+                                }
                             } label: {
-                                Image(systemName: "heart")
+                                Image(systemName: isRecipeBookmarked ? "heart.fill" : "heart")
                                     .imageScale(.large)
                             }
                             .tint(.akGreen)
@@ -244,6 +259,7 @@ struct RecipeDetailsVIew: View {
             }
             .onAppear(perform: {
                 Task{
+                    await isBookmarked()
                     await vm.getIngredientByRecipeId(id: recipeData.id)
                     await vm.getRecipeInstrucions(id: recipeData.id)
                 }

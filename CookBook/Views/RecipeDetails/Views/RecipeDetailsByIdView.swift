@@ -69,6 +69,12 @@ struct RecipeDetailsByIdView: View {
                             VStack{
                                 
                                 Button {
+                                    Task{
+                                        await vm
+                                            .uploadBookmarkedRecipe(
+                                                recipe: recipeData
+                                            )
+                                    }
                                     
                                 } label: {
                                     Image(systemName: "heart")

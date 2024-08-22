@@ -7,6 +7,7 @@
 
 import Foundation
 import OSLog
+import Firebase
 
 class RecipeDetailsViewModel: ObservableObject {
   
@@ -22,21 +23,20 @@ class RecipeDetailsViewModel: ObservableObject {
 
     @Published var ingredients: FetchedIngredientsByRecipeID?
     
+    
+    
     @MainActor
     func getIngredientByRecipeId(id: Int) async {
         do{
             isIngredientsFetching = true
-            print("Fetching Ingredients.....")
             let data = try await apiManager.fetchIngredientsByRecipeId(id: id)
             ingredients = data
-            print("Fetched the data => \(data?.ingredients ?? [])")
             isIngredientsFetching = false
         }catch{
             isIngredientsFetching = false
             print(
                 "Error in fetching ingredients by a recipe id - \(error.localizedDescription)"
             )
-            Logger().error("Error in fetching ingredients by a recipe id - \(error.localizedDescription)")
         }
     }
     
@@ -44,10 +44,8 @@ class RecipeDetailsViewModel: ObservableObject {
     func getRecipeInstrucions(id : Int) async {
         do{
             isInstructionsFetching = true
-            print("Fetching Instuctions.....")
             let data = try await apiManager.fetchInstructionsForARecipe(id: id)
             instructions = data ?? []
-            print("Fetched the data => \(data ?? [])")
             isInstructionsFetching = false
         }catch{
             isInstructionsFetching = false
@@ -62,7 +60,6 @@ class RecipeDetailsViewModel: ObservableObject {
     func getRecipeById(id: Int) async {
         do{
             isRecipeFetching = true
-            print("Fetching Recipe Data.....")
             let data = try await apiManager.fetchRecipeById(id: id)
             fetchedRecipeDataById = data
             isRecipeFetching = false
@@ -71,7 +68,31 @@ class RecipeDetailsViewModel: ObservableObject {
             print(
                 "Error in fetching recipe data by a recipe id - \(error.localizedDescription)"
             )
-            Logger().error("Error in fetching recipe data by a recipe id - \(error.localizedDescription)")
+        }
+    }
+    
+    
+
+    
+    
+     func uploadBookmarkedRecipe(recipe: FetchedRecipe) async {
+        
+        guard let user = AuthenticationManager.shared.userSession else {
+            print("Could not the get user session data")
+            return
+        }
+        
+        guard let encoded_recipeData = try? Firestore.Encoder().encode(recipe) else {return}
+        do {
+            try await Firestore
+                .firestore()
+                .collection("bookmarks")
+                .document("\(recipe.id)")
+                .setData(encoded_recipeData)
+            print("Saved the bookmarked recipe successfully✅")
+            
+        }catch{
+            print("Error occured in saving the data", error.localizedDescription)
         }
     }
 }
