@@ -10,7 +10,7 @@ import OSLog
 import Firebase
 
 class RecipeDetailsViewModel: ObservableObject {
-  
+    
     
     let apiManager = APIManager(urlSession: .init(configuration: .default))
     @Published var isIngredientsFetching: Bool = false
@@ -20,7 +20,7 @@ class RecipeDetailsViewModel: ObservableObject {
     @Published var fetchedRecipeDataById: FetchedRecipe?
     
     @Published var instructions: [RecipeInstrcutions] = []
-
+    
     @Published var ingredients: FetchedIngredientsByRecipeID?
     
     
@@ -72,27 +72,42 @@ class RecipeDetailsViewModel: ObservableObject {
     }
     
     
-
     
     
-     func uploadBookmarkedRecipe(recipe: FetchedRecipe) async {
-        
+    
+    func uploadBookmarkedRecipe(recipe: FetchedRecipe) async {
         guard let user = AuthenticationManager.shared.userSession else {
-            print("Could not the get user session data")
+            print("Could not get the user session data")
             return
         }
         
-        guard let encoded_recipeData = try? Firestore.Encoder().encode(recipe) else {return}
+        let db = Firestore.firestore()
+        
+        // Encode the recipe
+        guard let encodedRecipeData = try? Firestore.Encoder().encode(recipe) else {
+            print("Failed to encode recipe data")
+            return
+        }
+        
+        let ref = db.collection("bookmarks").document(user.uid)
+        
         do {
-            try await Firestore
-                .firestore()
-                .collection("bookmarks")
-                .document("\(recipe.id)")
-                .setData(encoded_recipeData)
-            print("Saved the bookmarked recipe successfully✅")
-            
-        }catch{
-            print("Error occured in saving the data", error.localizedDescription)
+            // Check if the document exists
+            let document = try await ref.getDocument()
+            if document.exists {
+                // If the document exists, update it
+                try await ref.updateData([
+                    "recipes": FieldValue.arrayUnion([encodedRecipeData])
+                ])
+            } else {
+                // If the document doesn't exist, create it
+                try await ref.setData([
+                    "recipes": [encodedRecipeData]
+                ])
+            }
+            print("Recipe successfully uploaded!")
+        } catch {
+            print("Failed to upload recipe: \(error)")
         }
     }
 }

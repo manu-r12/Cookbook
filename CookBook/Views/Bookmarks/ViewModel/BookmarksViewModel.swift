@@ -1,37 +1,43 @@
-//
-//  BookmarksViewModel.swift
-//  CookBook
-//
-//  Created by Manu on 2024-08-22.
-//
-
 import Foundation
 import Firebase
 import FirebaseFirestore
+import FirebaseFirestoreSwift
+
 class BookmarksViewModel: ObservableObject {
     @Published var bookmarks: [FetchedRecipe] = []
-    @Published var isFetching : Bool = false
+    @Published var isFetching: Bool = false
     
     let db = Firestore.firestore()
     
     @MainActor
     func getBookmarks() async {
-        let bookmarksCollection = db.collection("bookmarks")
+        
+        guard let user = AuthenticationManager.shared.userSession else {
+            print("Could not get the user session data")
+            return
+        }
+        
+        let userBookmarksDocument = db.collection("bookmarks").document(user.uid)
         
         do {
             isFetching = true
-            let snapshot = try await bookmarksCollection.getDocuments()
-            self.bookmarks = try snapshot.documents.compactMap { document in
-                try document.data(as: FetchedRecipe.self)
+            
+            // Fetch the specific user's bookmarks document
+            let document = try await userBookmarksDocument.getDocument()
+            
+            if let data = document.data(), let recipesData = data["recipes"] as? [[String: Any]] {
+                let decoder = Firestore.Decoder()
+                self.bookmarks = try recipesData.map { try decoder.decode(FetchedRecipe.self, from: $0) }
+            } else {
+                print("No bookmarks found for the user.")
+                self.bookmarks = []
             }
             
             isFetching = false
-
-        }catch{
+            
+        } catch {
             isFetching = false
-
-            print("Error in fetching bookmarks \(error.localizedDescription)")
+            print("Error in fetching bookmarks: \(error.localizedDescription)")
         }
-        
     }
 }

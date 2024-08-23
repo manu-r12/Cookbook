@@ -15,6 +15,7 @@ struct RecipeBookView: View {
     
     @State var searchText: String = ""
     
+    @State var isAddRecipeViewOpen = false
  
   
     
@@ -38,8 +39,13 @@ struct RecipeBookView: View {
                     }
                 })
                 
-                FloatingButton(icon: "plus")
+                FloatingButton(action: {
+                    isAddRecipeViewOpen.toggle()
+                }, icon: "plus")
             }
+            .fullScreenCover(isPresented: $isAddRecipeViewOpen, content: {
+                AddRecipeDetailsView()
+            })
             .ignoresSafeArea([.container])
     }
 }

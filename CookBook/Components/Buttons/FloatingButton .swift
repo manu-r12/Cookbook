@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct FloatingButton: View {
-//    let action: () -> Void
+    let action: () -> Void
     let icon: String
     var body: some View {
         VStack {
@@ -10,14 +10,14 @@ struct FloatingButton: View {
             HStack {
                 Spacer()
                 Button(action: {
-                
+                    action()
                 }) {
                     Image(systemName: icon)
                         .font(.system(size: 25))
                         .foregroundColor(.white)
                 }
                 .frame(width: 60, height: 60)
-                .background(.akBg)
+                .background(.akGreen)
                 .cornerRadius(30)
                 .shadow(radius: 10)
                 .offset(x: -25, y: -100)
@@ -29,5 +29,5 @@ struct FloatingButton: View {
 
 
 #Preview {
-    FloatingButton(icon: "plus")
+    FloatingButton(action: {print("Got pressed")}, icon: "plus")
 }

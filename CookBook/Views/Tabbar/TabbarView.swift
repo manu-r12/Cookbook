@@ -38,7 +38,7 @@ struct TabbarView: View {
                     .tag(SelectedTabs.Settings)
             }
             .padding(.top, 10)
-            .tint(.white)
+            .tint(.akGreen)
             .ignoresSafeArea()
      
     }

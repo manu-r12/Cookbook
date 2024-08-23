@@ -8,6 +8,7 @@
 import Kingfisher
 import SwiftUI
 
+import FirebaseAuth
 struct RecipeDetailsVIew: View {
     let recipeData: FetchedRecipe
     
@@ -16,11 +17,14 @@ struct RecipeDetailsVIew: View {
     @ObservedObject var vm = RecipeDetailsViewModel()
     
     @State var isRecipeBookmarked: Bool = false
+    
 
     @MainActor
     func isBookmarked() async  {
         let val = await Bookmarks
-            .isRecipeBookmarked(documentId: String(recipeData.id))
+            .isRecipeBookmarked(
+                recipeId: recipeData.id
+            )
         isRecipeBookmarked = val
     }
  

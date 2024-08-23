@@ -12,7 +12,7 @@ struct BookmarkView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                
+
                 if !vm.isFetching{
                     if !vm.bookmarks.isEmpty{
                     
@@ -20,9 +20,10 @@ struct BookmarkView: View {
                             
                             VStack(){
                                 Text("Bookmarks")
-                                    .font(.custom("Poppins-SemiBold", size: 29))
+                                    .font(.custom("Poppins-Medium", size: 29))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .foregroundStyle(.akGreen)
+                                    .padding(.leading, 10)
                                 
                                 VStack{
                                     HStack(spacing: 20){
@@ -32,7 +33,6 @@ struct BookmarkView: View {
                                             Text("Search your recipe")
                                                 .font(.custom("Poppins-Medium", size: 17))
                                         }
-                                        //                .focused($isEditing)
                                     }
                                     .padding()
                                     .frame(height: 55)
@@ -54,6 +54,7 @@ struct BookmarkView: View {
                             }
 
                         }
+                        .scrollIndicators(.hidden)
                     }else{
                         VStack{
                             Text("No Bookmarks Found")
@@ -82,7 +83,6 @@ struct BookmarkView: View {
                await vm.getBookmarks()
             }
         }
-    
     }
 }
 
