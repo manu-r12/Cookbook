@@ -6,6 +6,9 @@
 //
 
 import Foundation
+//import Algorithms
+
+
 
 
 fileprivate func makeurlComponents(endpoint: API_ENDPOINTS) -> URLComponents? {
@@ -57,18 +60,26 @@ enum API_ENDPOINTS {
 enum UrlComponentsData {
     
     case fetchRecipeData(query: String,number: Int,  searchMeh: SearchMethods)
+    
     case fetchRecipeById(id: Int)
+    
     case fetchRecipesIngredientsById(id: Int)
+    
     case fetchRecipeIntsructions(id: Int)
+    
     case fetchRecipeDatabyIngredients(ingredients: String)
     
+    func getRootOfTheMap(root: Int){
+        
+        return
+    }
     
     
-    // this fucntion is used for returning url for api call
+    //this fucntion is used for returning url for api call
     func getUrl() throws -> URL? {
         var urlQueryItems: [URLQueryItem]
         
-        guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
+        guard let apiKey = ApiConfig.getAPIKey() else {throw URLError(.badURL)}
 
 
         
@@ -97,8 +108,6 @@ enum UrlComponentsData {
                     URLQueryItem(name: "apiKey", value: apiKey),
                     URLQueryItem(name: "titleMatch", value: query),
                     URLQueryItem(name: "number", value: "\(number)"),
-                    
-                    
                 ]
             }
             
@@ -131,6 +140,8 @@ enum UrlComponentsData {
             }
             
             return url
+            
+    
             
             
             

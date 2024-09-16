@@ -6,3 +6,6 @@ struct UserModel: Codable {
     let email: String
     let profileImage: String
 }
+
+
+

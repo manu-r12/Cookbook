@@ -80,7 +80,10 @@ struct BookmarkView: View {
         }
         .onAppear {
             Task{
-               await vm.getBookmarks()
+                if vm.bookmarks.isEmpty {
+                    await vm.getBookmarks()
+                    
+                }
             }
         }
     }

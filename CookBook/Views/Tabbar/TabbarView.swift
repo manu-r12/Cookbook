@@ -31,7 +31,7 @@ struct TabbarView: View {
                     }
                     .tag(SelectedTabs.Bookmark)
                 
-                Text("Settings")
+                SettingsView()
                     .tabItem {
                         Image(systemName: "gear")
                     }

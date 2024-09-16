@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct GetAPIKey {
+struct ApiConfig {
     static func getAPIKey() -> String? {
         guard let apiKey = ConfigLoader.loadConfig()?.SpoonacularAPIKey else {
             return nil

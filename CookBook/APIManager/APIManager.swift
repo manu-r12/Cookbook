@@ -80,9 +80,7 @@ class APIManager {
         guard let url = try UrlComponentsData.fetchRecipesIngredientsById(id: id).getUrl() else {throw URLError(.badURL)}
         
         
-        let (data, res) = try await URLSession.shared.data(
-            from: url
-        )
+        let (data, res) = try await URLSession.shared.data(from: url)
         
         guard let httpResponse = res as? HTTPURLResponse, httpResponse.statusCode == 200  else {
             throw URLError(.badServerResponse)
@@ -119,8 +117,8 @@ class APIManager {
         return fetchedIngredientsData
     }
     
+   // MARK: - Generic Function
     
-//MARK: Generic Function
 //    func fetchRecipeByIngredients<T : Codable>(modelType: T, id: Int) async throws ->  T? {
 //        
 //        guard let apiKey = GetAPIKey.getAPIKey() else {throw URLError(.badURL)}
@@ -131,13 +129,11 @@ class APIManager {
 //        ) else {throw URLError(.badURL)}
 //        
 //        
-//        // can we make it reusable
+//        // can we make it reusable? perhaps in the future
 //        urlComponents.queryItems = [
 //            URLQueryItem(name: "apiKey", value: apiKey),
 //            
 //        ]
-//        
-//        
 //        
 //        return nil
 //    }
