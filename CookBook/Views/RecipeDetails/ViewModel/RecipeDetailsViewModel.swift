@@ -110,4 +110,11 @@ class RecipeDetailsViewModel: ObservableObject {
             print("Failed to upload recipe: \(error)")
         }
     }
+    
+    
+    //TODO: make a function to retrieve all the user created recips
+    
+    func getUserCreatedRecipes() {
+        
+    }
 }
