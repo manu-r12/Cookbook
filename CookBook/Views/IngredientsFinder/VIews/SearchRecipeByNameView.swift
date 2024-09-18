@@ -20,6 +20,8 @@ struct SearchRecipeByNameView: View {
     @ObservedObject var viewModel: IngredientsFinderOptionsViewModel
     @State var showOptions: Bool = true
     
+    @Environment(\.dismiss) var dismissView
+    
     var body: some View {
         NavigationStack{
             ScrollView{
@@ -99,6 +101,19 @@ struct SearchRecipeByNameView: View {
                     
                 }
             }
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismissView()
+                    } label: {
+                        Text("Back")
+                            .font(.custom("Poppins-Regular", size: 17))
+                    }
+
+                    
+
+                }
+            })
             .navigationDestination(for: FetchedRecipe.self) { recipeInfo in
                 RecipeDetailsVIew(recipeData: recipeInfo)
                     .navigationBarBackButtonHidden()

@@ -108,6 +108,8 @@ struct IngredientsFInderOptionsView: View {
         )
         .fullScreenCover(isPresented: $isSearchViewOpen, content: {
             SearchRecipeByNameView(viewModel: vm)
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
         })
         .fullScreenCover(isPresented: $isCameraOpen, content: {
             IngredientsFinderVCWrapper

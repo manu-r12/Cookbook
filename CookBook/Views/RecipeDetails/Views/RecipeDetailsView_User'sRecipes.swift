@@ -10,7 +10,7 @@ import SwiftUI
 
 import FirebaseAuth
 struct RecipeDetailsView_UserRecipes: View {
-    let recipeData: FetchedRecipe
+    let recipeData: RecipeModel
     
     
     @Environment(\.dismiss) var dismiss
@@ -20,14 +20,14 @@ struct RecipeDetailsView_UserRecipes: View {
     
     
     @MainActor
-    func isBookmarked() async  {
-        let val = await Bookmarks
-            .isRecipeBookmarked(
-                recipeId: recipeData.id
-            )
-        isRecipeBookmarked = val
-    }
-    
+//    func isBookmarked() async  {
+//        let val = await Bookmarks
+//            .isRecipeBookmarked(
+//                recipeId: recipeData.id
+//            )
+//        isRecipeBookmarked = val
+//    }
+//    
     
     var body: some View {
         VStack{
@@ -37,7 +37,7 @@ struct RecipeDetailsView_UserRecipes: View {
                     ZStack(alignment: .topLeading) {
                         
                         VStack {
-                            KFImage(URL(string: recipeData.image))
+                            KFImage(URL(string: recipeData.imageUrl))
                                 .resizable()
                                 .scaledToFill()
                         }
@@ -74,7 +74,7 @@ struct RecipeDetailsView_UserRecipes: View {
                 VStack {
                     HStack{
                         VStack{
-                            Text(recipeData.title)
+                            Text(recipeData.name)
                                 .font(.custom("Poppins-Medium", size: 22))
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -82,12 +82,12 @@ struct RecipeDetailsView_UserRecipes: View {
                         VStack{
                             
                             Button {
-                                Task{
-                                    await vm
-                                        .uploadBookmarkedRecipe(
-                                            recipe: recipeData
-                                        )
-                                }
+//                                Task{
+//                                    await vm
+//                                        .uploadBookmarkedRecipe(
+//                                            recipe: recipeData
+//                                        )
+//                                }
                             } label: {
                                 Image(systemName: isRecipeBookmarked ? "heart.fill" : "heart")
                                     .imageScale(.large)
@@ -104,7 +104,8 @@ struct RecipeDetailsView_UserRecipes: View {
                         HStack{
                             HStack{
                                 Image(systemName: "clock")
-                                Text("\(recipeData.readyInMinutes) min")                            .font(.custom("Poppins-Regular", size: 15))
+                                Text("\(recipeData.cookingTime) min")
+                                    .font(.custom("Poppins-Regular", size: 15))
                             }
                             
                         }
@@ -118,7 +119,7 @@ struct RecipeDetailsView_UserRecipes: View {
                             .font(.custom("Poppins-Medium", size: 18))
                         
                         VStack{
-                            Text(recipeData.summary)
+                            Text("Not Avaiable Right Now!!")
                                 .font(.custom("Poppins-Regular", size: 15))
                         }
                         .padding()
@@ -139,80 +140,10 @@ struct RecipeDetailsView_UserRecipes: View {
                         Text("Ingredients")
                             .font(.custom("Poppins-Medium", size: 18))
                         
-                        
+                        // ingredients show
                         VStack(spacing: 10){
                             
-                            if vm.isIngredientsFetching {
-                                VStack{
-                                    HStack{
-                                        Text("Fetching....")
-                                        
-                                    }
-                                }
-                                .padding(20)
-                                .frame(maxWidth: .infinity,alignment: .leading)
-                                .background(.akBg)
-                                .clipShape(RoundedRectangle(cornerRadius: 14))
-                            }else{
-                                
-                                if let ingredients = vm.ingredients {
-                                    ForEach(
-                                        ingredients.ingredients,
-                                        id: \.self) { ingredient in
-                                            VStack{
-                                                HStack{
-                                                    HStack {
-                                                        VStack{
-                                                            KFImage(
-                                                                URL(
-                                                                    string: getImageUrlOfIngredient(
-                                                                        imageName: ingredient.image
-                                                                    )
-                                                                )
-                                                            )
-                                                            .onFailureImage(.remove)
-                                                            .placeholder({
-                                                                ProgressView()
-                                                            })
-                                                            .resizable()
-                                                            .scaledToFill()
-                                                            .clipShape(Circle())
-                                                            
-                                                        }.frame(
-                                                            width: 35,
-                                                            height: 35
-                                                        )
-                                                        Text("\(capitalizedString(ingredient.name))")
-                                                            .font(.custom("Poppins-Regular", size: 15))
-                                                        
-                                                        
-                                                    }
-                                                    
-                                                    Spacer()
-                                                    Text("\(String(format: "%.1f", ingredient.amount.us.value)) \(ingredient.amount.us.unit)")
-                                                        .font(.custom("Poppins-Regular", size: 15))
-                                                    
-                                                }
-                                            }
-                                            .padding(17)
-                                            .frame(maxWidth: .infinity,alignment: .leading)
-                                            .background(.akBg)
-                                            .clipShape(RoundedRectangle(cornerRadius: 14))
-                                        }
-                                    
-                                    
-                                }else {
-                                    VStack{
-                                        HStack{
-                                            Text("Sorry Couldn't find any Ingredients")
-                                        }
-                                    }
-                                    .padding(20)
-                                    .frame(maxWidth: .infinity,alignment: .leading)
-                                    .background(.akBg)
-                                    .clipShape(RoundedRectangle(cornerRadius: 14))
-                                }
-                            }
+                         
                         }
                         .padding(.top, 10)
                         
@@ -263,9 +194,7 @@ struct RecipeDetailsView_UserRecipes: View {
             }
             .onAppear(perform: {
                 Task{
-                    await isBookmarked()
-                    await vm.getIngredientByRecipeId(id: recipeData.id)
-                    await vm.getRecipeInstructions(id: recipeData.id)
+                    try await vm.getUserCreatedRecipes(recipeID: recipeData.id)
                 }
             })
             .scrollIndicators(.hidden)
@@ -291,13 +220,14 @@ struct RecipeDetailsView_UserRecipes: View {
 #Preview {
     RecipeDetailsView_UserRecipes(
         recipeData: .init(
-            id: 2,
-            title: "Chicken Curry",
-            image:
-                "https://myfoodstory.com/wp-content/uploads/2020/10/Dhaba-Style-Chicken-Curry-2-500x375.jpg",
-            dishTypes: ["mddddddsain", "non-veg main itemddd", "dinner"],
-            servings: 3,
-            readyInMinutes: 12,
-            summary: "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs might be a good recipe to expand your main course repertoire.Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs might be a good recipe to expand your main course repertoire.Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs might be a good recipe to expand your main course repertoire."
-        ))
+            id: UUID.init(uuidString: "sasda")!,
+            name: "Manu",
+            imageUrl: "kjnaks",
+            ingredients: [],
+            instructions: "asdas",
+            category: [],
+            preprationTime: "as",
+            cookingTime: "da"
+        )
+    )
 }

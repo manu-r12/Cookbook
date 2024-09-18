@@ -20,6 +20,7 @@ struct RecipeBookView: View {
   
     
     var body: some View {
+        NavigationStack {
             ZStack{
                 ScrollView{
                     //Header
@@ -43,10 +44,15 @@ struct RecipeBookView: View {
                     isAddRecipeViewOpen.toggle()
                 }, icon: "plus")
             }
+            .navigationDestination(for: RecipeModel.self, destination: { recipe in
+                RecipeDetailsView_UserRecipes(recipeData: recipe)
+                    .navigationBarBackButtonHidden()
+            })
             .fullScreenCover(isPresented: $isAddRecipeViewOpen, content: {
                 AddRecipeDetailsView()
             })
             .ignoresSafeArea([.container])
+        }
     }
 }
 

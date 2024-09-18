@@ -16,6 +16,7 @@ class RecipeDetailsViewModel: ObservableObject {
     private let db = Firestore.firestore()
     let user = AuthenticationManager.shared.userSession
     
+    
     @MainActor
     func getIngredientByRecipeId(id: Int) async {
         isIngredientsFetching = true
@@ -82,25 +83,34 @@ class RecipeDetailsViewModel: ObservableObject {
         }
     }
     
-//    func getUserCreatedRecipes(documentID: String, recipeID: Int) async throws -> Recipe? {
-          // the document is same as userid means it is userID
-//        let docRef = db.collection("recipes").document(documentID)
-//        
-//        do {
-//            let document = try await docRef.getDocument()
-//            guard let recipeDocument = try document.data(as: RecipeDocumentModel.self) else {
-//                print("Document not found or failed to decode.")
-//                return nil
-//            }
-//            
-//            return recipeDocument.recipes.first(where: { $0.id == recipeID }) ?? {
-//                print("No such recipe found in the document.")
-//                return nil
-//            }()
-//            
-//        } catch {
-//            print("Error fetching document: \(error)")
-//            throw error
-//        }
-//    }
+    func getUserCreatedRecipes(recipeID: UUID) async throws -> RecipeModel? {
+        
+        guard let userId = AuthenticationManager.shared.userSession?.uid else {
+            print("User session not available")
+            return nil
+        }
+//        for testing purpose
+//        let recipeID = UUID(uuidString: "9F89360C-DBCA-4A18-96D4-1E52A8DAB97F")
+        let docRef = db.collection("recipes").document(userId)
+        
+        do {
+            let document = try await docRef.getDocument()
+            guard let recipeDocument = try? document.data(as: RecipeItems.self) else {
+                print("Document not found or failed to decode.")
+                return nil
+            }
+            
+            let data = recipeDocument.recipesArray.first(where: { $0.id == recipeID }) ?? {
+                print("No such recipe found in the document.")
+                return nil
+            }()
+            
+            
+            return data
+            
+        } catch {
+            print("Error fetching document: \(error)")
+            throw error
+        }
+    }
 }
