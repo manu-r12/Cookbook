@@ -1,16 +1,8 @@
-//
-//  RecipeDetailsVIewModel.swift
-//  CookBook
-//
-//  Created by Manu on 2024-08-07.
-//
-
 import Foundation
 import OSLog
 import Firebase
 
 class RecipeDetailsViewModel: ObservableObject {
-    
     
     let apiManager = APIManager(urlSession: .init(configuration: .default))
     @Published var isIngredientsFetching: Bool = false
@@ -18,72 +10,54 @@ class RecipeDetailsViewModel: ObservableObject {
     @Published var isRecipeFetching: Bool = false
     
     @Published var fetchedRecipeDataById: FetchedRecipe?
-    
     @Published var instructions: [RecipeInstrcutions] = []
-    
     @Published var ingredients: FetchedIngredientsByRecipeID?
     
-    
+    private let db = Firestore.firestore()
+    let user = AuthenticationManager.shared.userSession
     
     @MainActor
     func getIngredientByRecipeId(id: Int) async {
-        do{
-            isIngredientsFetching = true
+        isIngredientsFetching = true
+        defer { isIngredientsFetching = false }  // Ensures flag reset
+        do {
             let data = try await apiManager.fetchIngredientsByRecipeId(id: id)
             ingredients = data
-            isIngredientsFetching = false
-        }catch{
-            isIngredientsFetching = false
-            print(
-                "Error in fetching ingredients by a recipe id - \(error.localizedDescription)"
-            )
+        } catch {
+            print("Error fetching ingredients by recipe ID: \(error.localizedDescription)")
         }
     }
     
     @MainActor
-    func getRecipeInstrucions(id : Int) async {
-        do{
-            isInstructionsFetching = true
+    func getRecipeInstructions(id: Int) async {
+        isInstructionsFetching = true
+        defer { isInstructionsFetching = false }
+        do {
             let data = try await apiManager.fetchInstructionsForARecipe(id: id)
             instructions = data ?? []
-            isInstructionsFetching = false
-        }catch{
-            isInstructionsFetching = false
-            print(
-                "Error in fetching Instuctions by a recipe id - \(error.localizedDescription)"
-            )
+        } catch {
+            print("Error fetching instructions by recipe ID: \(error.localizedDescription)")
         }
     }
-    
     
     @MainActor
     func getRecipeById(id: Int) async {
-        do{
-            isRecipeFetching = true
+        isRecipeFetching = true
+        defer { isRecipeFetching = false }
+        do {
             let data = try await apiManager.fetchRecipeById(id: id)
             fetchedRecipeDataById = data
-            isRecipeFetching = false
-        }catch{
-            isRecipeFetching = false
-            print(
-                "Error in fetching recipe data by a recipe id - \(error.localizedDescription)"
-            )
+        } catch {
+            print("Error fetching recipe by ID: \(error.localizedDescription)")
         }
     }
     
-    
-    
-    
-    
     func uploadBookmarkedRecipe(recipe: FetchedRecipe) async {
         guard let user = AuthenticationManager.shared.userSession else {
-            print("Could not get the user session data")
+            print("User session not available")
             return
         }
         
-        let db = Firestore.firestore()
-        
-        // Encode the recipe
         guard let encodedRecipeData = try? Firestore.Encoder().encode(recipe) else {
             print("Failed to encode recipe data")
             return
@@ -92,15 +66,12 @@ class RecipeDetailsViewModel: ObservableObject {
         let ref = db.collection("bookmarks").document(user.uid)
         
         do {
-            // Check if the document exists
             let document = try await ref.getDocument()
             if document.exists {
-                // If the document exists, update it
                 try await ref.updateData([
                     "recipes": FieldValue.arrayUnion([encodedRecipeData])
                 ])
             } else {
-                // If the document doesn't exist, create it
                 try await ref.setData([
                     "recipes": [encodedRecipeData]
                 ])
@@ -111,10 +82,25 @@ class RecipeDetailsViewModel: ObservableObject {
         }
     }
     
-    
-    //TODO: make a function to retrieve all the user created recips
-    
-    func getUserCreatedRecipes() {
-        
-    }
+//    func getUserCreatedRecipes(documentID: String, recipeID: Int) async throws -> Recipe? {
+          // the document is same as userid means it is userID
+//        let docRef = db.collection("recipes").document(documentID)
+//        
+//        do {
+//            let document = try await docRef.getDocument()
+//            guard let recipeDocument = try document.data(as: RecipeDocumentModel.self) else {
+//                print("Document not found or failed to decode.")
+//                return nil
+//            }
+//            
+//            return recipeDocument.recipes.first(where: { $0.id == recipeID }) ?? {
+//                print("No such recipe found in the document.")
+//                return nil
+//            }()
+//            
+//        } catch {
+//            print("Error fetching document: \(error)")
+//            throw error
+//        }
+//    }
 }

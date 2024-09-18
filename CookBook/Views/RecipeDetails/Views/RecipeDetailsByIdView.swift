@@ -252,7 +252,7 @@ struct RecipeDetailsByIdView: View {
                 .onAppear(perform: {
                     Task{
                         await vm.getIngredientByRecipeId(id: recipeData.id)
-                        await vm.getRecipeInstrucions(id: recipeData.id)
+                        await vm.getRecipeInstructions(id: recipeData.id)
                     }
                 })
                 .scrollIndicators(.hidden)

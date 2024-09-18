@@ -265,7 +265,7 @@ struct RecipeDetailsView_UserRecipes: View {
                 Task{
                     await isBookmarked()
                     await vm.getIngredientByRecipeId(id: recipeData.id)
-                    await vm.getRecipeInstrucions(id: recipeData.id)
+                    await vm.getRecipeInstructions(id: recipeData.id)
                 }
             })
             .scrollIndicators(.hidden)

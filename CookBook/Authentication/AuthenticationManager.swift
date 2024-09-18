@@ -10,6 +10,7 @@ import FirebaseAuth
 import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseAuth
 
 enum errors: Error{
     case singUpError
