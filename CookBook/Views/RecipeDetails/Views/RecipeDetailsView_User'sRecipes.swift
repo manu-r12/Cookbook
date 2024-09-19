@@ -18,16 +18,15 @@ struct RecipeDetailsView_UserRecipes: View {
     
     @State var isRecipeBookmarked: Bool = false
     
-    
+    // todo: this is gonna fetch the value from new catogory (Bookmarks for user created recipe)
     @MainActor
-//    func isBookmarked() async  {
-//        let val = await Bookmarks
-//            .isRecipeBookmarked(
-//                recipeId: recipeData.id
-//            )
-//        isRecipeBookmarked = val
-//    }
-//    
+    func isBookmarked() async  {
+        let val = await Bookmarks
+            .isRecipeBookmarked(
+                recipeId: 2           )
+        isRecipeBookmarked = val
+    }
+    
     
     var body: some View {
         VStack{
@@ -143,6 +142,30 @@ struct RecipeDetailsView_UserRecipes: View {
                         // ingredients show
                         VStack(spacing: 10){
                             
+                            ForEach(
+                                recipeData.ingredients,
+                                id: \.self) { ingredient in
+                                    VStack{
+                                        HStack{
+                                            HStack {
+                                                
+                                                Text("\(capitalizedString(ingredient.nameOfIngredient))")
+                                                    .font(.custom("Poppins-Regular", size: 15))
+                                                
+                                                
+                                            }
+                                            
+                                            Spacer()
+                                            Text("\(ingredient.quantity)")
+                                                .font(.custom("Poppins-Regular", size: 15))
+                                            
+                                        }
+                                    }
+                                    .padding(17)
+                                    .frame(maxWidth: .infinity,alignment: .leading)
+                                    .background(.akBg)
+                                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                                }
                          
                         }
                         .padding(.top, 10)
@@ -159,21 +182,13 @@ struct RecipeDetailsView_UserRecipes: View {
                         
                         VStack(){
                             VStack(alignment: .leading){
-                                if vm.isInstructionsFetching{
-                                    Text("Fetching...")
-                                    
-                                }else{
-                                    if !vm.instructions.isEmpty {
-                                        ForEach(vm.instructions, id: \.self) { instruction in
-                                            ForEach(instruction.steps, id: \.self) { step in
-                                                Text(step.step)
-                                                    .font(.custom("Poppins-Regular", size: 15))
-                                                
-                                            }
-                                        }
+                                // todo: we already have the instructions we do not need to fetch any more
+                    
+                                    if !recipeData.instructions.isEmpty {
+                                        Text(recipeData.instructions)
                                     }else{
                                         Text("Sorry Couldn't find any instructions")
-                                    }
+                                    
                                 }
                             }
                             .padding(20)
