@@ -113,4 +113,57 @@ class RecipeDetailsViewModel: ObservableObject {
             throw error
         }
     }
+    
+    
+    
+    private func deleteRecipeItem(recipeID: UUID) async throws {
+        guard let user = user else {
+            print("User session not available")
+            return
+        }
+        
+        let documentRef = db.collection("recipes").document(user.uid)
+        
+        do {
+            // Fetch the document asynchronously
+            let document = try await documentRef.getDocument()
+            
+            if let data = document.data(), let recipesData = data["recipesArray"] as? [[String: Any]] {
+                // Decode the array of dictionaries into RecipeModel objects
+                let decoder = JSONDecoder()
+                let recipes = try recipesData.map { dict -> RecipeModel in
+                    let jsonData = try JSONSerialization.data(withJSONObject: dict)
+                    return try decoder.decode(RecipeModel.self, from: jsonData)
+                }
+                
+                // Find the recipe by recipeID
+                if let recipeToRemove = recipes.first(where: { $0.id == recipeID }) {
+                    // Convert recipeToRemove back to a dictionary for Firestore
+                    let encoder = JSONEncoder()
+                    let recipeToRemoveData = try JSONSerialization.jsonObject(with: encoder.encode(recipeToRemove))
+                    
+                    // Update Firestore to remove the recipe
+                    try await documentRef.updateData([
+                        "recipesArray": FieldValue.arrayRemove([recipeToRemoveData])
+                    ])
+                    
+                    print("Recipe successfully removed!")
+                } else {
+                    print("Recipe with the given recipeId not found.")
+                }
+            }
+        } catch {
+            print("Error fetching or updating document: \(error.localizedDescription)")
+        }
+    }
+    
+    func deleteRecipe(id: UUID) async {
+        do {
+            try await deleteRecipeItem(recipeID: id)
+        }catch{
+            print(error.localizedDescription)
+        }
+    }
+    
+
 }

@@ -12,6 +12,7 @@ import FirebaseAuth
 struct RecipeDetailsView_UserRecipes: View {
     let recipeData: RecipeModel
     
+    @State private var showAlert: Bool = false
     
     @Environment(\.dismiss) var dismiss
     @ObservedObject var vm = RecipeDetailsViewModel()
@@ -46,29 +47,68 @@ struct RecipeDetailsView_UserRecipes: View {
                         .frame(width: 400,height: 300)
                         .clipShape(RoundedRectangle(cornerRadius: 28))
                         
-                        
-                        Button(
-                            action: {
-                                print("Hello..")
-                                dismiss()
-                            },
-                            label: {
-                                VStack {
-                                    
-                                    Image(systemName: "chevron.left")
-                                        .imageScale(.large)
-                                        .foregroundStyle(.akGreen)
-                                        .background(
-                                            Circle().fill(Color.white).frame(
-                                                width: 42,
-                                                height: 42
+                        VStack{
+                            
+                            Button(
+                                action: {
+                                    print("Hello..")
+                                    dismiss()
+                                },
+                                label: {
+                                    VStack {
+                                        
+                                        Image(systemName: "chevron.left")
+                                            .imageScale(.large)
+                                            .foregroundStyle(.akGreen)
+                                            .background(
+                                                Circle().fill(Color.white).frame(
+                                                    width: 42,
+                                                    height: 42
+                                                )
                                             )
-                                        )
+                                    }
+                                    .padding(.vertical, 70)
+                                    .padding(.horizontal, 40)
+                                    
+                                })
+                        }
+                        
+                        VStack{
+                            Button(
+                                action: {
+                                    print("Deleting this....")
+                                    showAlert.toggle()
+                                },
+                                label: {
+                                    VStack {
+                                        
+                                        Image(systemName: "trash.fill")
+                                            .imageScale(.large)
+                                            .foregroundStyle(.akGreen)
+                                            .background(
+                                                Circle().fill(Color.white).frame(
+                                                    width: 42,
+                                                    height: 42
+                                                )
+                                            )
+                                    }
+                                    
+                                    
+                                })
+                        }
+                        .alert("Delete this recipe", isPresented: $showAlert) {
+                            Button("Delete", role: .destructive) {
+                                print("Okay")
+                                Task{
+                                    await vm.deleteRecipe(id: recipeData.id)
                                 }
-                                .padding(.vertical, 70)
-                                .padding(.horizontal, 40)
-                                
-                            })
+                                dismiss()
+                            }
+                            Button("Cancel", role: .cancel) {}
+                        } message: {
+                            Text("Do you want to remove this recipe from your book?")
+                        }
+                        .offset(x: 340, y: 250)
                     }
                 }
                 
@@ -243,7 +283,8 @@ struct RecipeDetailsView_UserRecipes: View {
             id: UUID.init(uuidString: "3351150E-C443-49E9-934F-6223752F999F"
 )!,
             name: "Manu",
-            imageUrl: "kjnaks",
+            imageUrl: "https://firebasestorage.googleapis.com:443/v0/b/anya-s-kitchen.appspot.com/o/recipe_images%2FFC449B0F-185B-4CED-A5FB-AF7F962563C6?alt=media&token=da553c30-82ac-4ccc-8b3f-ca5472cd3f3a"
+,
             ingredients: [],
             instructions: "asdas", Note:
                 "",
