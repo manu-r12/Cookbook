@@ -75,6 +75,6 @@ To get started with **Cookbook AI**, follow these steps:
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/yourusername/cookbook-ai.git
-2. **Opne the project**
+2. **Open the project**
    ```bash
     open CookbookAI.xcodeproj
