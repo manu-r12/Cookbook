@@ -73,6 +73,7 @@ struct AddRecipeDetailsView: View {
     @State var nameOfIngredient: String = ""
     @State var ingredients: [Ingredients] = []
     @State var instructionsText: String = ""
+    @State var note: String = ""
     @State var categoryInput: String = ""
     @State var preprationTime: String = ""
     @State var cookingTime: String = ""
@@ -87,6 +88,7 @@ struct AddRecipeDetailsView: View {
     @State private var isImagePickerPresented: Bool = false
     @State private var selectedImage: UIImage?
     @State private var isImageGallaryOpen: Bool = false
+    @State private var isAddNoteOpen: Bool = false
     
     
     @Environment(\.dismiss) var dimissView
@@ -126,7 +128,8 @@ struct AddRecipeDetailsView: View {
                                         instructions:   instructionsText,
                                         category:       category,
                                         preprationTime: preprationTime,
-                                        cookingTime:    cookingTime
+                                        cookingTime:    cookingTime,
+                                        note:           note
                                                                     )
                                     
                                     dismissView()
@@ -321,13 +324,39 @@ struct AddRecipeDetailsView: View {
                                 
                             }
                             .padding()
+                            
+                            //Add a note
+                            
+                            VStack(alignment: .leading, spacing: 15){
+                                Text("Add Note")
+                                    .font(.custom("Poppins-Regular", size: 18))
+                                
+                                
+                                Text(note.isEmpty ? "My mother makes this ": note)
+                                    .font(.custom("Poppins-Regular", size: 18))
+                                    .padding()
+                                    .foregroundStyle(Color(.systemGray2))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(Color(.akBg))
+                                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                                    .onTapGesture {
+                                        isAddNoteOpen.toggle()
+                                    }
+                                
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            
+                            
                             // Add Instructions
                             VStack(alignment: .leading, spacing: 15){
                                 Text("Add Instructions")
                                     .font(.custom("Poppins-Regular", size: 18))
                                 
                                 
-                                Text("Tap to add instructions..")
+                                Text(
+                                    instructionsText.isEmpty ? "Tap to add instructions.." : instructionsText
+                                )
                                     .font(.custom("Poppins-Regular", size: 18))
                                     .padding()
                                     .foregroundStyle(Color(.systemGray2))
@@ -403,6 +432,10 @@ struct AddRecipeDetailsView: View {
                 }
             }
             .photosPicker(isPresented: $isImageGallaryOpen, selection: $viewModel.pickedItem)
+            .sheet(isPresented: $isAddNoteOpen, content: {
+                AddNoteView(text: $note)
+                
+            })
             .sheet(isPresented: $isInstructionsInputOpen, content: {
                 AddInstructionsSheetView(text: $instructionsText)
                 

@@ -131,7 +131,7 @@ class AddRecipeViewModel: ObservableObject, AddRecipePhotoDelegate {
     
     @MainActor
     func uploadRecipe(name: String, ingredients: [Ingredients], instructions: String, category: [String], preprationTime:
-                      String, cookingTime: String) async throws {
+                      String, cookingTime: String, note: String) async throws {
         
         guard let uid = currentUser?.uid else {
             print("Couldn't get the uid")
@@ -143,7 +143,17 @@ class AddRecipeViewModel: ObservableObject, AddRecipePhotoDelegate {
             return
         }
         
-        let recipe = RecipeModel(id: UUID(), name: name, imageUrl: imageUrl, ingredients: ingredients, instructions: instructions, category: category, preprationTime: preprationTime, cookingTime: cookingTime)
+        let recipe = RecipeModel(
+            id: UUID(),
+            name: name,
+            imageUrl: imageUrl,
+            ingredients: ingredients,
+            instructions: instructions,
+            Note: note,
+            category: category,
+            preprationTime: preprationTime,
+            cookingTime: cookingTime
+        )
         
         guard let recipeData = try? Firestore.Encoder().encode(recipe) else {return}
         

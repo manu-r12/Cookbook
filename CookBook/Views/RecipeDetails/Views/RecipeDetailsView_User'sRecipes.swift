@@ -19,15 +19,18 @@ struct RecipeDetailsView_UserRecipes: View {
     @State var isRecipeBookmarked: Bool = false
     
     // todo: this is gonna fetch the value from new catogory (Bookmarks for user created recipe)
+    // steps: if the property does not exist create it
+    // otherwise update it with the new value(that property is the array)
+    
     @MainActor
-    func isBookmarked() async  {
-        let val = await Bookmarks
-            .isRecipeBookmarked(
-                recipeId: 2           )
-        isRecipeBookmarked = val
-    }
+//    func isBookmarked() async  {
+//        let val = await Bookmarks
+//            .isRecipeBookmarked(
+//                recipeId: 2           )
+//        isRecipeBookmarked = val
+//    }
     
-    
+
     var body: some View {
         VStack{
             ScrollView {
@@ -222,7 +225,9 @@ struct RecipeDetailsView_UserRecipes: View {
     
     
     private func capitalizedString(_ string: String) -> String {
+        
         return string.capitalized // Capitalizes the first letter of each word
+        
     }
     
     private func getImageUrlOfIngredient(imageName: String) -> String{
@@ -235,11 +240,13 @@ struct RecipeDetailsView_UserRecipes: View {
 #Preview {
     RecipeDetailsView_UserRecipes(
         recipeData: .init(
-            id: UUID.init(uuidString: "sasda")!,
+            id: UUID.init(uuidString: "3351150E-C443-49E9-934F-6223752F999F"
+)!,
             name: "Manu",
             imageUrl: "kjnaks",
             ingredients: [],
-            instructions: "asdas",
+            instructions: "asdas", Note:
+                "",
             category: [],
             preprationTime: "as",
             cookingTime: "da"

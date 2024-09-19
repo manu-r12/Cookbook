@@ -17,6 +17,7 @@ struct RecipeModel: Codable, Identifiable, Hashable {
     let imageUrl: String
     let ingredients: [Ingredients]
     let instructions: String
+    let Note: String
     let category: [String]
     let preprationTime: String
     let cookingTime: String

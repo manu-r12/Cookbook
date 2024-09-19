@@ -125,7 +125,7 @@ struct RecipeBookCard: View {
 
 #Preview {
     RecipeBookCard(
-        recipeData: [.init(id: UUID(), name: "Curry", imageUrl: "https://lanesbbq.com/cdn/shop/articles/pow-pow-chicken-lollipops.jpg?v=1674056829&width=1500", ingredients: [.init(quantity: "3", nameOfIngredient: "3")], instructions: "wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd", category: ["Dinner", "Main"], preprationTime: "12", cookingTime: "12")],
+        recipeData: [.init(id: UUID(), name: "Curry", imageUrl: "https://lanesbbq.com/cdn/shop/articles/pow-pow-chicken-lollipops.jpg?v=1674056829&width=1500", ingredients: [.init(quantity: "3", nameOfIngredient: "3")], instructions: "wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd wwdd", Note: "", category: ["Dinner", "Main"], preprationTime: "12", cookingTime: "12")],
         category: .all
     )
 }
