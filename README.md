@@ -60,7 +60,7 @@ Built an intuitive and interactive UI using SwiftUI, including custom views and 
 - **KingFisher**  
  for image loading and caching.
 
-- **Firebase**  
+- **Firebase SDK**  
   Employed for user authentication, real-time data storage (Firestore), and analytics to enhance the app experience.
   
 ## 🛠️ API and other stuff Used  
