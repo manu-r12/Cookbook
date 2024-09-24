@@ -1,6 +1,15 @@
+
+
 import Foundation
 import OSLog
 import Firebase
+
+
+enum BookmarkMethod {
+    case SearchedRecipe
+    case UserCreated
+}
+
 
 class RecipeDetailsViewModel: ObservableObject {
     
@@ -16,7 +25,7 @@ class RecipeDetailsViewModel: ObservableObject {
     private let db = Firestore.firestore()
     let user = AuthenticationManager.shared.userSession
     
-    
+    //MARK: Get the ingredients by the recipe Id
     @MainActor
     func getIngredientByRecipeId(id: Int) async {
         isIngredientsFetching = true
@@ -29,6 +38,7 @@ class RecipeDetailsViewModel: ObservableObject {
         }
     }
     
+    //MARK: Get the instructions by the recipe Id
     @MainActor
     func getRecipeInstructions(id: Int) async {
         isInstructionsFetching = true
@@ -41,6 +51,7 @@ class RecipeDetailsViewModel: ObservableObject {
         }
     }
     
+    //MARK: Get the whole recipe by id
     @MainActor
     func getRecipeById(id: Int) async {
         isRecipeFetching = true
@@ -53,7 +64,8 @@ class RecipeDetailsViewModel: ObservableObject {
         }
     }
     
-    func uploadBookmarkedRecipe(recipe: FetchedRecipe) async {
+    //MARK: Bookmark the recipe
+     func uploadBookmarkedRecipe<T: Codable>(recipe: T, _ bookmarkMethod: BookmarkMethod) async {
         guard let user = AuthenticationManager.shared.userSession else {
             print("User session not available")
             return
@@ -62,35 +74,58 @@ class RecipeDetailsViewModel: ObservableObject {
         guard let encodedRecipeData = try? Firestore.Encoder().encode(recipe) else {
             print("Failed to encode recipe data")
             return
-        }
+        } 
         
         let ref = db.collection("bookmarks").document(user.uid)
         
-        do {
-            let document = try await ref.getDocument()
-            if document.exists {
-                try await ref.updateData([
-                    "recipes": FieldValue.arrayUnion([encodedRecipeData])
-                ])
-            } else {
-                try await ref.setData([
-                    "recipes": [encodedRecipeData]
-                ])
+        
+        switch bookmarkMethod {
+        case .SearchedRecipe:
+            do {
+                let document = try await ref.getDocument()
+                if document.exists {
+                    try await ref.updateData([
+                        "recipes": FieldValue.arrayUnion([encodedRecipeData])
+                    ])
+                } else {
+                    try await ref.setData([
+                        "recipes": [encodedRecipeData]
+                    ])
+                }
+                print("Recipe successfully uploaded!")
+            } catch {
+                print("Failed to upload recipe: \(error)")
             }
-            print("Recipe successfully uploaded!")
-        } catch {
-            print("Failed to upload recipe: \(error)")
+        case .UserCreated:
+            do {
+                let document = try await ref.getDocument()
+                if document.exists {
+                    try await ref.updateData([
+                        "userCreatedRecipes": FieldValue.arrayUnion([encodedRecipeData])
+                    ])
+                } else {
+                    try await ref.setData([
+                        "userCreatedRecipes": [encodedRecipeData]
+                    ])
+                }
+                print("Recipe successfully uploaded!")
+            } catch {
+                print("Failed to upload recipe: \(error)")
+            }
         }
+        
+     
     }
     
+    
+    //MARK: Get the user created recipes by the document id(i used user id for this)
     func getUserCreatedRecipes(recipeID: UUID) async throws -> RecipeModel? {
         
         guard let userId = AuthenticationManager.shared.userSession?.uid else {
             print("User session not available")
             return nil
         }
-//        for testing purpose
-//        let recipeID = UUID(uuidString: "9F89360C-DBCA-4A18-96D4-1E52A8DAB97F")
+
         let docRef = db.collection("recipes").document(userId)
         
         do {

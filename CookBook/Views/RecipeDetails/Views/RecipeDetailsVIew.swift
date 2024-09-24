@@ -85,7 +85,7 @@ struct RecipeDetailsVIew: View {
                                 Task{
                                     await vm
                                         .uploadBookmarkedRecipe(
-                                            recipe: recipeData
+                                            recipe: recipeData, .SearchedRecipe
                                         )
                                 }
                             } label: {

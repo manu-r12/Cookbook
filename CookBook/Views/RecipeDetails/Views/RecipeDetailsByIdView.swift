@@ -72,7 +72,7 @@ struct RecipeDetailsByIdView: View {
                                     Task{
                                         await vm
                                             .uploadBookmarkedRecipe(
-                                                recipe: recipeData
+                                                recipe: recipeData, .UserCreated
                                             )
                                     }
                                     

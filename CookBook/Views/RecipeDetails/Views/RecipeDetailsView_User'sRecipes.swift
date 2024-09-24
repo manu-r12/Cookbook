@@ -124,12 +124,13 @@ struct RecipeDetailsView_UserRecipes: View {
                         VStack{
                             
                             Button {
-//                                Task{
-//                                    await vm
-//                                        .uploadBookmarkedRecipe(
-//                                            recipe: recipeData
-//                                        )
-//                                }
+                                Task{
+                                    await vm
+                                        .uploadBookmarkedRecipe(
+                                            recipe: recipeData, .UserCreated
+                                            
+                                        )
+                                }
                             } label: {
                                 Image(systemName: isRecipeBookmarked ? "heart.fill" : "heart")
                                     .imageScale(.large)
@@ -161,7 +162,7 @@ struct RecipeDetailsView_UserRecipes: View {
                             .font(.custom("Poppins-Medium", size: 18))
                         
                         VStack{
-                            Text("Not Avaiable Right Now!!")
+                            Text(recipeData.Note)
                                 .font(.custom("Poppins-Regular", size: 15))
                         }
                         .padding()

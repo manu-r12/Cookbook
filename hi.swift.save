@@ -1,0 +1,9 @@
+nonisolated func getLogId(_ hashValue: Log, _ commitHash: SysCommit)
+-> Result<Log, CommitHash> {
+
+
+// it should not return false vale with returning type 
+guard let Hash = hasher.getInlineCompiler(id: hashValue.workingThread.id) else{
+return Result<Log(NotFound.value)>
+
+}

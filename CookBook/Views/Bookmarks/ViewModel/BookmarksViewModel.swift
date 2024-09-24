@@ -3,15 +3,19 @@ import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+struct FetchedBookmarks: Codable {
+    let recipes: [FetchedRecipe]
+    let userCreatedRecipes: [RecipeModel]
+}
+
 class BookmarksViewModel: ObservableObject {
-    @Published var bookmarks: [FetchedRecipe] = []
+    @Published var bookmarks: FetchedBookmarks?
     @Published var isFetching: Bool = false
     
-    let db = Firestore.firestore()
+    private let db = Firestore.firestore()
     
     @MainActor
     func getBookmarks() async {
-        
         guard let user = AuthenticationManager.shared.userSession else {
             print("Could not get the user session data")
             return
@@ -25,13 +29,13 @@ class BookmarksViewModel: ObservableObject {
             // Fetch the specific user's bookmarks document
             let document = try await userBookmarksDocument.getDocument()
             
-            if let data = document.data(), let recipesData = data["recipes"] as? [[String: Any]] {
-                let decoder = Firestore.Decoder()
-                self.bookmarks = try recipesData.map { try decoder.decode(FetchedRecipe.self, from: $0) }
-            } else {
-                print("No bookmarks found for the user.")
-                self.bookmarks = []
-            }
+            // Attempt to decode the document into FetchedBookmarks
+            let data = try document.data(as: FetchedBookmarks.self)
+            self.bookmarks = data
+            
+            
+            print(")
+
             
             isFetching = false
             

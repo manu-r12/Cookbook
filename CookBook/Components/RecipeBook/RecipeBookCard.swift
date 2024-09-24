@@ -37,7 +37,7 @@ struct RecipeBookCard: View {
                             VStack(alignment: .leading, spacing: 10){
                                 Text(data.name)
                                     .font(.custom("Poppins-Medium", size: 17))
-                                Text(data.instructions)
+                                Text(data.Note)
                                     .font(.custom("Poppins-Regular", size: 14))
                                     .foregroundStyle(Color(.systemGray))
                                     .multilineTextAlignment(.leading)
