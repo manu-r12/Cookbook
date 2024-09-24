@@ -29,7 +29,8 @@ class BookmarksViewModel: ObservableObject {
             // Fetch the specific user's bookmarks document
             let document = try await userBookmarksDocument.getDocument()
             
-            // Attempt to decode the document into FetchedBookmarks
+            //TODO: we need to take care of the returning type
+            // it may cause some crashing
             let data = try document.data(as: FetchedBookmarks.self)
             self.bookmarks = data
             
