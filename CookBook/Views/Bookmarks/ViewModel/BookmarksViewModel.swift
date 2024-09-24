@@ -34,7 +34,7 @@ class BookmarksViewModel: ObservableObject {
             self.bookmarks = data
             
             
-            print(")
+            print("Got the bookmarks data ", data)
 
             
             isFetching = false

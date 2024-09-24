@@ -14,7 +14,7 @@ struct BookmarkView: View {
             VStack{
 
                 if !vm.isFetching{
-                    if !vm.bookmarks.isEmpty{
+                    if vm.bookmarks != nil {
                     
                         ScrollView {
                             
@@ -44,7 +44,7 @@ struct BookmarkView: View {
                             .padding(.bottom, 14)
                             
                             VStack(spacing: 15){
-                                ForEach(vm.bookmarks, id:
+                                ForEach(vm.bookmarks?.recipes ?? [], id:
                                             \.self) { recipe in
                                     NavigationLink(value: recipe) {
                                         RecipeRowCellView(recipeData: recipe)
@@ -80,7 +80,7 @@ struct BookmarkView: View {
         }
         .onAppear {
             Task{
-                if vm.bookmarks.isEmpty {
+                if vm.bookmarks == nil {
                     await vm.getBookmarks()
                     
                 }
