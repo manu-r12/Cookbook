@@ -45,6 +45,7 @@ class AuthenticationManager: ObservableObject, AuthenticationDelegate {
     }
     
     // shared instance of this class / Singelton
+    // TODO: consider researching about singletons whether they should be ise
     
     static let shared = AuthenticationManager()
     
