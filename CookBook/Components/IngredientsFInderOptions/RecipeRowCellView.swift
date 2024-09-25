@@ -13,7 +13,7 @@ struct RecipeRowCellView: View {
         VStack(alignment: .leading){
             HStack(spacing: 10){
                 VStack{
-                    RecipeCircleImage(imageUrl: recipeData.image    )
+                    RecipeCircleImage(imageUrl: recipeData.image)
                 }
                 .frame(width: 50, height: 50)
                 
@@ -60,6 +60,64 @@ struct RecipeRowCellView: View {
         .clipShape(RoundedRectangle(cornerRadius: 18))
     }
 }
+
+
+struct RecipeCellView_UsersRecipes: View {
+    let recipeData: RecipeModel
+    var body: some View {
+        VStack(alignment: .leading){
+            HStack(spacing: 10){
+                VStack{
+                    RecipeCircleImage(imageUrl: recipeData.imageUrl)
+                }
+                .frame(width: 50, height: 50)
+                
+                VStack(alignment: .leading){
+                    Text("\(recipeData.name)")
+                        .font(.custom("Poppins-Medium", size: 16))
+                    
+                    
+                    HStack{
+                        ForEach(
+                            Array(recipeData.category.enumerated()),
+                            id: \.offset
+                        ) { idx, item in
+                            if idx < 4 {
+                                
+                                Text("\(recipeData.category[idx])")
+                                    .font(.custom("Poppins-Regular", size: 12))
+                                    .frame(height: 10)
+                                    .clipped()
+                                
+                                
+                            }
+                        }
+                    }
+                }
+                .frame(width: 225, alignment: .leading)
+                
+                VStack{
+                    VStack(spacing: 10){
+                        Image(systemName: "clock")
+                        Text("\(recipeData.preprationTime) min")
+                            .font(.custom("Poppins-Regular", size: 13))
+                        
+                    }
+                    
+                }
+                .frame(width: 62)
+                
+            }
+        }
+        .padding(12)
+        .frame(width: 370, height: 85 ,alignment: .leading)
+        .background(.akBg)
+        .clipShape(RoundedRectangle(cornerRadius: 18))
+    }
+}
+
+
+
 
 #Preview {
     RecipeRowCellView(

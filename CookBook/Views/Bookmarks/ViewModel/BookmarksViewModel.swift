@@ -4,8 +4,9 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct FetchedBookmarks: Codable {
-    let recipes: [FetchedRecipe]
-    let userCreatedRecipes: [RecipeModel]
+    // either of this value can be null
+    let recipes: [FetchedRecipe]?
+    let userCreatedRecipes: [RecipeModel]?
 }
 
 class BookmarksViewModel: ObservableObject {

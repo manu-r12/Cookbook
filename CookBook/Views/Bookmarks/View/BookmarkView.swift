@@ -52,6 +52,22 @@ struct BookmarkView: View {
                                     }
                                 }
                             }
+                            
+                            
+                            VStack(){
+                                Text("Your Own Recipes")
+                                    .font(.custom("Poppins-Medium", size: 29))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .foregroundStyle(.akGreen)
+                                    .padding(.leading, 10)
+
+                            // let's
+                            }
+                            
+                            //TODO: add the ui to show the
+                            
+                            
+                            
 
                         }
                         .scrollIndicators(.hidden)
