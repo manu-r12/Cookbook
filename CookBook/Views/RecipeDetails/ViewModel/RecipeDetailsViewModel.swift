@@ -11,6 +11,12 @@ enum BookmarkMethod {
 }
 
 
+enum DeleteRecipeMethod {
+    case FromRecipeBook
+    case FromeBookmark
+}
+
+
 class RecipeDetailsViewModel: ObservableObject {
     
     let apiManager = APIManager(urlSession: .init(configuration: .default))
@@ -150,6 +156,11 @@ class RecipeDetailsViewModel: ObservableObject {
     }
     
     
+    private func deleteRecipeItemFromBookmark(recipeID: UUID) async throws {
+        
+    }
+    
+    
     
     private func deleteRecipeItem(recipeID: UUID) async throws {
         guard let user = user else {
@@ -192,9 +203,17 @@ class RecipeDetailsViewModel: ObservableObject {
         }
     }
     
-    func deleteRecipe(id: UUID) async {
+    func deleteRecipe(id: UUID, from: DeleteRecipeMethod) async {
         do {
-            try await deleteRecipeItem(recipeID: id)
+            switch from {
+            case .FromRecipeBook:
+                
+                try await deleteRecipeItem(recipeID: id)
+                
+            case .FromeBookmark:
+                print("Nothing Right Now!!")
+            }
+          
         }catch{
             print(error.localizedDescription)
         }

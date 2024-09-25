@@ -100,7 +100,11 @@ struct RecipeDetailsView_UserRecipes: View {
                             Button("Delete", role: .destructive) {
                                 print("Okay")
                                 Task{
-                                    await vm.deleteRecipe(id: recipeData.id)
+                                    await vm
+                                        .deleteRecipe(
+                                            id: recipeData.id,
+                                            from: .FromRecipeBook
+                                        )
                                 }
                                 dismiss()
                             }
