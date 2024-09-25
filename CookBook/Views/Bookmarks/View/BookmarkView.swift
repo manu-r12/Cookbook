@@ -53,20 +53,38 @@ struct BookmarkView: View {
                                 }
                             }
                             
-                            
-                            VStack(){
-                                Text("Your Own Recipes")
-                                    .font(.custom("Poppins-Medium", size: 29))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .foregroundStyle(.akGreen)
-                                    .padding(.leading, 10)
+                            if let userCreatedRecipes = vm.bookmarks?.userCreatedRecipes {
+                                VStack{
+                                    
+                                    VStack(){
+                                        Text("Your Own Recipes")
+                                            .font(.custom("Poppins-Medium", size: 29))
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            .foregroundStyle(.akGreen)
+                                            .padding(.leading, 10)
 
-                            // let's
+                                    // let's
+                                    }
+                                    
+                                    //TODO: add the ui to show the
+                                    
+                                    VStack(spacing: 15){
+                                        ForEach(
+                                            userCreatedRecipes,
+                                            id:
+                                                    \.self
+    ) { recipe in
+                                            NavigationLink(value: recipe) {
+                                                RecipeCellView_UsersRecipes(recipeData: recipe)
+                                                    .tint(.primary)
+                                            }
+                                        }
+                                    }
+                                    
+                                    
+                                }
+                                .padding(.top, 10)
                             }
-                            
-                            //TODO: add the ui to show the
-                            
-                            
                             
 
                         }
@@ -85,6 +103,10 @@ struct BookmarkView: View {
                     }
                 }
             }
+            .navigationDestination(for: RecipeModel.self, destination: { recipe in
+                RecipeDetailsView_UserRecipes(recipeData: recipe)
+                    .navigationBarBackButtonHidden()
+            })
             .navigationDestination(for: FetchedRecipe.self, destination: { recipe in
                 RecipeDetailsVIew(recipeData: recipe)
                     .navigationBarBackButtonHidden()
