@@ -8,9 +8,21 @@
 import Foundation
 import Firebase
 
+
+// better use it on generic function
+
+
 struct Bookmarks {
     
+    
+    enum RecipeType {
+        case UserCreated(recipeId: UUID)
+        case SearchedRecipes(recipeId: Int)
+    }
+
+    //Problem: one is type of UUID and one is Int
     static func isRecipeBookmarked(recipeId: Int) async -> Bool {
+        
         let db = Firestore.firestore()
         
         guard let user = Auth.auth().currentUser else {
@@ -37,5 +49,8 @@ struct Bookmarks {
             return false
         }
     }
+    
+    
+
 }
 

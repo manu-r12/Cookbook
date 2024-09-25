@@ -18,18 +18,15 @@ struct RecipeDetailsView_UserRecipes: View {
     @ObservedObject var vm = RecipeDetailsViewModel()
     
     @State var isRecipeBookmarked: Bool = false
-    
-    // todo: this is gonna fetch the value from new catogory (Bookmarks for user created recipe)
-    // steps: if the property does not exist create it
-    // otherwise update it with the new value(that property is the array)
+ 
     
     @MainActor
-//    func isBookmarked() async  {
-//        let val = await Bookmarks
-//            .isRecipeBookmarked(
-//                recipeId: 2           )
-//        isRecipeBookmarked = val
-//    }
+    func isBookmarked() async  {
+        let val = await Bookmarks
+            .isRecipeBookmarked(
+                recipeId: 2)
+        isRecipeBookmarked = val
+    }
     
 
     var body: some View {
