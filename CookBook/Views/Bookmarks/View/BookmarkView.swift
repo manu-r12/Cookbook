@@ -71,9 +71,7 @@ struct BookmarkView: View {
                                     VStack(spacing: 15){
                                         ForEach(
                                             userCreatedRecipes,
-                                            id:
-                                                    \.self
-    ) { recipe in
+                                            id: \.self ) { recipe in
                                             NavigationLink(value: recipe) {
                                                 RecipeCellView_UsersRecipes(recipeData: recipe)
                                                     .tint(.primary)
@@ -85,8 +83,7 @@ struct BookmarkView: View {
                                 }
                                 .padding(.top, 10)
                             }
-                            
-
+                           
                         }
                         .scrollIndicators(.hidden)
                     }else{
